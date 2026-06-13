@@ -1,0 +1,21 @@
+{
+  "random_seed": 42,
+  "cv_folds": 10,
+  "test_size": 0.15,
+  "max_tfidf_features": 50000,
+  "tfidf_ngram_range": [
+    1,
+    2
+  ],
+  "sentiment_runs": 5,
+  "topn_skus": 20,
+  "enable_distilbert": false,
+  "prefer_gpu": true,
+  "enable_smote": true,
+  "enable_calibration": true,
+  "figure_dpi": 300,
+  "figure_formats": [
+    "pdf",
+    "png"
+  ]
+}

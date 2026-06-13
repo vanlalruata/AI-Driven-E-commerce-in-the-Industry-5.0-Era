@@ -1,159 +1,257 @@
-# E-commerce Sentiment Analysis and Sales Insights
+# E-commerce Sentiment Analysis and Sales Insights — Industry 5.0
 
 ## Overview
-This project provides an end‑to‑end, reproducible pipeline to:
-- Train and evaluate a text‑based sentiment classifier on Amazon product reviews (TF‑IDF + Logistic Regression).
-- Load and standardize multiple e‑commerce sales CSV exports, then generate exploratory analytics and visualizations (top SKUs, region revenue, MRP dispersion, channel profitability).
-- Integrate sales with review aggregates by ASIN to create SKU/ASIN insight summaries.
+This project provides an end-to-end, reproducible pipeline for:
+- **Multi-model comparative sentiment classification** on Amazon product reviews (Logistic Regression, SVM, Naive Bayes, Random Forest, XGBoost, optional DistilBERT).
+- **Robust model evaluation** with k-fold cross-validation, ROC-AUC, PR-AUC, calibration analysis, error analysis, and McNemar's statistical test.
+- **Class imbalance handling** via SMOTE, class weighting, random oversampling/undersampling, and SMOTE+Tomek Links.
+- **Sales analytics** with statistical significance testing (Gini coefficient, HHI, Lorenz curves, ANOVA, Kruskal-Wallis, t-tests).
+- **Data linkage auditing** — ASIN matching verification between review and sales datasets.
+- **Integrated review–sales analysis** with SKU/ASIN sentiment summaries.
 
-The primary entry point is `ecommerce_sentimental_analysis_prediction/amazon_ecom_analysis_integrated_full.py`. Running it produces cleaned datasets, plots, reports, and a JSON pipeline summary under `outputs_integrated_full/`.
+The pipeline is **menu-driven** via `main.py`, allowing individual components to be run independently or as a full pipeline.
 
 ## Key Features
-- Robust CSV loading with safe fallbacks; automatic date parsing.
-- Review preprocessing with neutral review filtering and label generation (positive/negative).
-- Repeatable sentiment experiments across multiple random splits with mean ± std metrics saved to disk.
-- Sales CSV auto‑standardization for common fields (SKU, ASIN, Amount, Qty, regions).
-- Channel profitability comparison and MRP dispersion visualization across marketplaces.
-- Top SKU and regional revenue breakdowns with per‑order stats.
-- Integrated review–sales join on ASIN with SKU mapping.
+- **Comparative model benchmarking**: 5 classical ML models + optional transformer, all trained on the same TF-IDF representation for fair comparison.
+- **Stratified 10-fold cross-validation** with mean ± std metrics per model.
+- **Publication-quality figures** (PDF + PNG) for all analysis types.
+- **Per-model result directories**: Every model's metrics, figures, and artifacts are stored in a dedicated named directory.
+- **Statistical rigor**: ANOVA/Kruskal-Wallis for MRP, t-tests for profitability, Gini/HHI for revenue concentration.
+- **Data quality audit**: ASIN overlap analysis, SKU coverage, temporal alignment checks.
+- **Class imbalance experiments**: Systematic comparison of 6 strategies with focus on minority-class recall.
 
 ## Requirements
 - Python 3.8+
-- Packages: `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `joblib`
+- Core packages: `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `joblib`, `scipy`
+- Additional: `xgboost`, `imbalanced-learn`
+- Optional (for DistilBERT): `transformers`, `torch`
 
 Install via pip:
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn joblib
+pip install pandas numpy matplotlib seaborn scikit-learn joblib scipy xgboost imbalanced-learn
+# Optional for DistilBERT:
+pip install transformers torch
 ```
 
-## Project Structure (relevant parts)
-- `ecommerce_sentimental_analysis_prediction/`
-  - `amazon_ecom_analysis_integrated_full.py` — main integrated pipeline (sentiment + sales + integration).
-  - Other helpers and notebooks may exist (e.g., `tfidf_lr_sentiment.py`, `dataset_inspector.py`, `plotting.ipynb`) but are not required for the main run.
-
-## Input Data
-- Reviews CSV: Expected Amazon review schema (typical columns include `Id, ProductId, UserId, ProfileName, HelpfulnessNumerator, HelpfulnessDenominator, Score, Time, Summary, Text`).
-  - The script tolerates subsets; key columns used are `Text`, `Score`, `Time`.
-  - Unix epoch seconds in `Time` are auto‑parsed when numeric.
-- Sales folder: A directory containing one or more CSV files. The script auto‑detects columns and standardizes names.
-  - Heuristics map columns to: `SKU`, `ASIN`, `Amount`, `Qty`, `Date`, shipping `region` (derived from `ship-state` or `ship-country`).
-  - Amount/QTY columns are cleaned to numeric (handles currency symbols, commas, etc.).
-
-## Outputs
-All artifacts are written to `outputs_integrated_full/`:
-- Data/export CSVs
-  - `merged_sales.csv` — concatenated, standardized sales data.
-  - `reviews_preprocessed.csv` — cleaned reviews with labels and normalized text.
-  - `sentiment_classification_report.csv` — detailed classification report (last run).
-  - `sentiment_experiment_stats.csv` — mean ± std for macro metrics across runs.
-  - `sentiment_experiment_per_class_stats.csv` — per‑class aggregated stats.
-  - `channel_profitability.csv` — mean of detected profitability‑like columns.
-  - `mrp_dispersion_stats.csv` — descriptive stats of MRP‑like fields by channel/store.
-  - `top_skus.csv` — top SKUs by revenue.
-  - `top_skus_stats.csv` — per‑order revenue/qty stats for top SKUs.
-  - `sales_by_region.csv` — revenue aggregated by region.
-  - `sales_region_stats.csv` — per‑region mean/std and counts.
-  - `sales_overall_stats.csv` — overall amount/qty stats.
-  - `asin_sku_sentiment_summary.csv` — ASIN↔SKU map joined with review aggregates.
-  - `pipeline_summary.json` — compact summary of the entire run.
-- Plots and reports
-  - `confusion_matrix.pdf` — confusion matrix for the last sentiment run.
-  - `channel_profitability.pdf` — bar chart of mean profitability across detected channels.
-  - `mrp_dispersion.pdf` — boxplot of MRP dispersion across channels.
-  - `top_skus.pdf` — bar chart of top SKUs by revenue.
-  - `sales_experiment_report.txt` — text summary of core sales stats.
-  - `sentiment_experiment_report.txt` — text summary with mean ± std metrics and per‑class table.
-
-Note: Some comments in the script mention `.svg`; the current implementation saves `.pdf` for figures.
-
-## How It Works (high level)
-1. Reviews
-   - `load_reviews()` reads and parses review timestamps.
-   - `preprocess_reviews()` normalizes text, filters out neutral scores (Score == 3), and creates `sent_label` (positive ≥4, negative ≤2).
-   - `train_sentiment_tfidf_lr_runs()` runs N experiments (default 5): TF‑IDF (1–2 grams, up to 50k features) + Logistic Regression. It records accuracy, precision, recall, f1 (macro) and per‑class stats; saves a confusion matrix and model artifacts (`tfidf_vectorizer.joblib`, `tfidf_lr_model.joblib`) from the last run.
-2. Sales
-   - `load_and_standardize_sales()` loads all CSVs in the sales folder, auto‑maps common column names, parses dates, cleans `Amount` and `Qty`, derives `region`, and saves `merged_sales.csv`.
-   - `compute_channel_profitability()` scans for columns named like `shiprocket`/`increff` and computes mean values, saving CSV and a bar chart if found.
-   - `mrp_dispersion()` identifies MRP‑like columns (mentions of `mrp`, `amazon mrp`, or marketplace names) and produces a boxplot and stats.
-   - `top_skus_and_region()` exports top SKUs by revenue and region revenue charts.
-   - `sales_experiments()` writes overall amount/qty stats, per‑region stats, top‑SKU per‑order stats, and a textual summary.
-3. Integration
-   - `integrate_reviews_sales_sentiment()` joins review aggregates (count, mean score) with sales ASIN↔SKU mapping and exports `asin_sku_sentiment_summary.csv`.
-4. Summary
-   - `pipeline_summary.json` aggregates key counts and experiment summaries.
+## Project Structure
+```
+industry5.0_ecommerce_sentimental_prediction/
+├── main.py                          # Menu-driven entry point
+├── config.py                        # Centralized configuration
+├── modules/
+│   ├── __init__.py
+│   ├── data_loader.py               # Data loading & preprocessing
+│   ├── sentiment_models.py          # All ML model training (LR, SVM, NB, RF, XGBoost)
+│   ├── transformer_models.py        # DistilBERT (optional)
+│   ├── model_evaluation.py          # CV, ROC-AUC, PR-AUC, calibration, error analysis
+│   ├── class_imbalance.py           # SMOTE, class weighting, resampling strategies
+│   ├── statistical_tests.py         # Gini, HHI, ANOVA, Kruskal-Wallis, t-tests
+│   ├── sales_analytics.py           # Sales analysis with descriptive statistics
+│   ├── data_audit.py                # ASIN matching & data consistency checks
+│   └── visualization.py             # All plotting functions (publication quality)
+├── results/                         # Organized output root (auto-created)
+│   ├── models/
+│   │   ├── logistic_regression/     # Per-model: metrics/ figures/ artifacts/
+│   │   ├── svm/
+│   │   ├── naive_bayes/
+│   │   ├── random_forest/
+│   │   ├── xgboost/
+│   │   └── distilbert/              # Optional
+│   ├── comparative/                 # Cross-model comparison tables & plots
+│   ├── statistical_tests/           # All stat test outputs
+│   ├── data_audit/                  # ASIN matching & data quality reports
+│   └── sales_analytics/             # Sales outputs
+├── amazon_ecom_analysis_integrated_full.py  # Legacy script (preserved)
+├── tfidf_lr_sentiment.py                    # Legacy script (preserved)
+├── amazon_ecom_analysis.py                  # Legacy script (preserved)
+├── dataset_inspector.py                     # Legacy script (preserved)
+```
 
 ## Quick Start
-Example command (Windows paths shown):
+
+### Interactive Menu Mode
 ```bash
-python ecommerce_sentimental_analysis_prediction/amazon_ecom_analysis_integrated_full.py \
-  --reviews "H:/Datasets/ecommerce/ecommerce_review/Reviews.csv" \
-  --sales_folder "H:/Datasets/ecommerce/ecommerce_sale" \
-  --sentiment_runs 5 \
-  --max_tfidf_features 50000 \
-  --topn_skus 20
+python main.py --reviews "H:/Datasets/ecommerce/ecommerce_review/Reviews.csv" --sales_folder "H:/Datasets/ecommerce/ecommerce_sale"
 ```
-Minimal required arguments:
+This opens an interactive menu:
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline        ║
+╠═══════════════════════════════════════════════════════════════════╣
+║   1.  Data Loading & Preprocessing                                ║
+║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
+║   3.  Sentiment Model Training (All Classical Models)             ║
+║   4.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   5.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   6.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   7.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   8.  Statistical Tests (Gini, HHI, ANOVA, t-tests)              ║
+║   9.  Integration: Reviews ↔ Sales Linkage                        ║
+║  10.  Generate Comparative Model Report                           ║
+║  11.  Run Full Pipeline (All of the above)                        ║
+║   0.  Exit                                                        ║
+╚═══════════════════════════════════════════════════════════════════╝
+```
+
+### Non-Interactive Mode (Full Pipeline)
 ```bash
-python ecommerce_sentimental_analysis_prediction/amazon_ecom_analysis_integrated_full.py \
-  --reviews <path/to/Reviews.csv> \
-  --sales_folder <path/to/sales_csv_folder>
+python main.py --reviews "path/to/Reviews.csv" --sales_folder "path/to/sales/" --run 11
 ```
 
-## Command‑line Arguments
-- `--reviews` (str, required): Path to Amazon `Reviews.csv`.
-- `--sales_folder` (str, required): Folder containing one or more sales CSV files.
-- `--sentiment_runs` (int, default=5): Number of repeated train/test runs for sentiment evaluation.
-- `--max_tfidf_features` (int, default=50000): TF‑IDF vocabulary cap.
-- `--topn_skus` (int, default=20): Number of top SKUs to include in per‑SKU stats.
+### Run a Specific Step
+```bash
+python main.py --run 3   # Train all models only
+python main.py --run 5   # Run evaluation only (auto-loads data + trains if needed)
+python main.py --run 8   # Run statistical tests only
+```
 
-## Data Assumptions and Heuristics
-- Column auto‑mapping is heuristic. If your CSVs use unusual headers, consider renaming columns to include recognizable tokens (e.g., `sku`, `asin`, `amount`, `qty`, `date`, `ship-state`, `ship-country`).
-- Amount and MRP fields are cleaned by removing non‑numeric characters and coercing to numeric.
-- Regions are derived from shipping state or country; if both are absent, region aggregation will be skipped.
-- For sentiment, neutral reviews (Score == 3) are dropped to create a binary problem (positive vs negative).
+## Command-line Arguments
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `--reviews` | str | `H:/Datasets/...` | Path to Amazon `Reviews.csv` |
+| `--sales_folder` | str | `H:/Datasets/...` | Folder containing sales CSV files |
+| `--run` | int | None | Run specific menu option non-interactively |
 
-## Reusing the Trained Model
-After a run, you can load the vectorizer and model to score new text:
+Additional configuration (CV folds, TF-IDF features, model hyperparameters, etc.) can be modified in `config.py`.
+
+## Output Structure
+Each model's results are organized in a consistent directory hierarchy:
+```
+results/models/<model_name>/
+├── metrics/
+│   ├── classification_report.csv
+│   ├── per_class_metrics.csv
+│   ├── cv_fold_scores.csv
+│   ├── cv_summary.csv
+│   ├── roc_auc.csv
+│   ├── pr_auc.csv
+│   ├── brier_score.csv
+│   ├── calibration_data.csv
+│   ├── misclassified_samples.csv
+│   └── error_analysis_summary.json
+├── figures/
+│   ├── confusion_matrix_<model>.pdf/png
+│   ├── error_analysis_<model>.pdf/png
+│   ├── roc_curve.pdf/png
+│   ├── pr_curve.pdf/png
+│   └── calibration_curve.pdf/png
+└── artifacts/
+    ├── model.joblib
+    ├── vectorizer.joblib
+    └── training_config.json
+```
+
+Comparative and cross-cutting results are in:
+```
+results/
+├── comparative/
+│   ├── model_comparison_table.csv
+│   ├── cv_comparison_table.csv
+│   ├── comprehensive_comparison.csv
+│   ├── imbalance_experiment_table.csv
+│   ├── mcnemar_pvalues.csv
+│   ├── roc_curves_overlay.pdf/png
+│   ├── pr_curves_overlay.pdf/png
+│   ├── calibration_curves.pdf/png
+│   └── cv_boxplot_*.pdf/png
+├── statistical_tests/
+│   ├── revenue_concentration.csv
+│   ├── lorenz_curve_*.pdf/png
+│   ├── mrp_dispersion_test.csv
+│   ├── mrp_pairwise_comparisons.csv
+│   └── channel_profitability_test.csv
+├── data_audit/
+│   ├── data_linkage_audit.txt
+│   ├── data_audit.json
+│   ├── asin_overlap.pdf/png
+│   ├── matched_asins.csv
+│   ├── reviews_only_asins.csv
+│   └── sales_only_asins.csv
+└── sales_analytics/
+    ├── merged_sales.csv
+    ├── top_skus.csv / top_skus_stats.csv
+    ├── sales_by_region.csv / sales_region_stats.csv
+    ├── channel_profitability_descriptive.csv
+    └── mrp_dispersion_stats.csv
+```
+
+## Models Compared
+| Model | Type | Class Weight | Key Feature |
+|-------|------|-------------|-------------|
+| Logistic Regression | Linear | Balanced | Interpretable baseline |
+| SVM (LinearSVC) | Linear | Balanced | Calibrated via CalibratedClassifierCV |
+| Multinomial Naive Bayes | Probabilistic | — | Fast, generative model |
+| Random Forest | Ensemble | Balanced | Non-linear, feature importance |
+| XGBoost | Boosting | scale_pos_weight | State-of-art gradient boosting |
+| DistilBERT | Transformer | — | Lightweight deep learning (optional) |
+
+## Evaluation Methods
+- **Stratified 10-Fold Cross-Validation** with per-fold metrics
+- **ROC-AUC** with overlay curves for all models
+- **PR-AUC** (critical for imbalanced classes)
+- **Calibration Curves** (reliability diagrams) with Brier scores
+- **Error Analysis** — patterns in misclassified samples
+- **McNemar's Test** — pairwise statistical comparison between models
+
+## Class Imbalance Strategies
+| Strategy | Method | Expected Effect |
+|----------|--------|----------------|
+| Baseline | No handling | Current approach |
+| Class Weighting | `class_weight='balanced'` | Penalize majority class errors more |
+| SMOTE | Synthetic oversampling | Generate synthetic minority samples |
+| Random Oversampling | Duplicate minority | Simple replication |
+| Random Undersampling | Reduce majority | May lose information |
+| SMOTE + Tomek Links | Combined | Often best for NLP tasks |
+
+## Statistical Tests
+| Test | Applied To | Purpose |
+|------|-----------|---------|
+| Gini Coefficient | SKU/Region revenue | Measure concentration inequality |
+| Lorenz Curve | Revenue distribution | Visualize concentration |
+| HHI | Revenue distribution | Market concentration index |
+| ANOVA / Kruskal-Wallis | MRP across marketplaces | Test pricing differences |
+| Welch's t-test / Mann-Whitney | Channel profitability | Compare Shiprocket vs INCREFF |
+| Shapiro-Wilk | Pre-test | Normality assumption check |
+| Levene's Test | Pre-test | Variance homogeneity check |
+
+## Configuration
+Edit `config.py` to modify:
+- File paths and output directories
+- Random seed, CV folds, test size
+- TF-IDF hyperparameters
+- DistilBERT settings (enable/disable, max samples, epochs)
+- Figure DPI and formats
+- Model color palette for plots
+
+## Reusing Trained Models
 ```python
 import joblib
 from pathlib import Path
 
-out = Path("outputs_integrated_full")
-vect = joblib.load(out/"tfidf_vectorizer.joblib")
-clf = joblib.load(out/"tfidf_lr_model.joblib")
+model_dir = Path("results/models/logistic_regression/artifacts")
+vect = joblib.load(model_dir / "vectorizer.joblib")
+clf = joblib.load(model_dir / "model.joblib")
 
-texts = [
-    "Great fit and quality, highly recommend!",
-    "Terrible stitching and arrived broken.",
-]
+texts = ["Great product, highly recommend!", "Terrible quality, waste of money."]
 X = vect.transform(texts)
 preds = clf.predict(X)
 print(list(zip(texts, preds)))
 ```
 
-## Troubleshooting
-- Empty outputs or many NaNs:
-  - Check that `--sales_folder` contains CSV files and columns map correctly. Inspect `merged_sales.csv` to confirm mappings.
-- No channel profitability output:
-  - Ensure your dataset contains columns with names including `shiprocket` or `increff`.
-- No MRP plots:
-  - Ensure sales CSVs have MRP‑like columns (`mrp`, marketplace names like `flipkart`, `myntra`, `amazon mrp`, etc.).
-- Poor sentiment accuracy:
-  - Increase `--max_tfidf_features`, try more runs via `--sentiment_runs`, or inspect `reviews_preprocessed.csv` for class balance and text quality.
-
-## Reproducibility Notes
-- Random seeds for train/test splits are deterministic per run index (base 42 + i), enabling comparable repeated runs while still sampling different splits.
-- Figures are saved in `.pdf` format for quality and portability.
+## Legacy Scripts
+The original scripts are preserved and still functional:
+- `amazon_ecom_analysis_integrated_full.py` — original integrated pipeline
+- `tfidf_lr_sentiment.py` — standalone TF-IDF + LR sentiment
+- `amazon_ecom_analysis.py` — original e-commerce analysis
+- `dataset_inspector.py` — dataset inspection utility
 
 ## License
-Specify your project license here (e.g., MIT, Apache‑2.0). If omitted, all rights reserved by default.
+MIT License
 
 ## Acknowledgments
-- Built with `scikit-learn`, `pandas`, `numpy`, `seaborn`, and `matplotlib`.
-- Amazon Reviews dataset format inspired by common Kaggle distributions of `Reviews.csv`.
-
-## Maintainers
-- Add maintainer names/contacts here.
+- Built with `scikit-learn`, `pandas`, `numpy`, `seaborn`, `matplotlib`, `xgboost`, `imbalanced-learn`
+- Amazon Reviews dataset format inspired by common Kaggle distributions
 
 ## Changelog
-- Initial integrated pipeline: sentiment + sales standardization + integration + reporting (current version).
+- **v2.0**: Complete modular rewrite with multi-model comparison, cross-validation, statistical tests, class imbalance handling, data audit, and menu-driven interface.
+- **v1.0**: Initial integrated pipeline (sentiment + sales + reporting).

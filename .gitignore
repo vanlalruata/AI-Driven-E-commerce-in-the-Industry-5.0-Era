@@ -25,6 +25,18 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+**/*.csv
+*.csv
+**/**/**/**/*.joblib
+*.joblib
+*.safetensors
+*.bin
+*.pdf
+
+outputs/
+outputs_integrated_full/
+
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -50,6 +62,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+
 
 # Translations
 *.mo

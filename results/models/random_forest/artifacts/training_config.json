@@ -1,0 +1,21 @@
+{
+  "model_name": "random_forest",
+  "accuracy": 0.9373676670089891,
+  "precision_macro": 0.9558492735039616,
+  "recall_macro": 0.8046833569330958,
+  "f1_macro": 0.8585563539366394,
+  "per_class": {
+    "negative": {
+      "precision": 0.9788091523660947,
+      "recall": 0.6118153746140095,
+      "f1": 0.752975297529753,
+      "support": 12306
+    },
+    "positive": {
+      "precision": 0.9328893946418286,
+      "recall": 0.997551339252182,
+      "f1": 0.9641374103435258,
+      "support": 66567
+    }
+  }
+}

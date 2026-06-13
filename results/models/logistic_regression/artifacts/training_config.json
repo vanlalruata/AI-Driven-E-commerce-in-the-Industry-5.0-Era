@@ -1,0 +1,21 @@
+{
+  "model_name": "logistic_regression",
+  "accuracy": 0.9559671877575343,
+  "precision_macro": 0.8993565587739385,
+  "recall_macro": 0.9478816857530629,
+  "f1_macro": 0.9212716382364972,
+  "per_class": {
+    "negative": {
+      "precision": 0.8108678820299852,
+      "recall": 0.9361287176986836,
+      "f1": 0.8690076566212801,
+      "support": 12306
+    },
+    "positive": {
+      "precision": 0.9878452355178919,
+      "recall": 0.9596346538074422,
+      "f1": 0.9735356198517141,
+      "support": 66567
+    }
+  }
+}

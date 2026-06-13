@@ -1,0 +1,21 @@
+{
+  "asin_overlap": {
+    "review_unique_asins": 72005,
+    "sales_unique_asins": 7190,
+    "matched_asins": 0,
+    "reviews_only_asins": 72005,
+    "sales_only_asins": 7190,
+    "match_rate_reviews": 0.0,
+    "match_rate_sales": 0.0
+  },
+  "sku_coverage": {
+    "total_unique_skus": 7195,
+    "skus_with_matching_reviews": 0,
+    "sku_coverage_rate": 0.0
+  },
+  "temporal_overlap": {
+    "review_date_min": "1999-10-08 00:00:00",
+    "review_date_max": "2012-10-26 00:00:00",
+    "review_date_range_days": 4767
+  }
+}

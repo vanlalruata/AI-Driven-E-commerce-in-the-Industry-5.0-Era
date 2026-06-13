@@ -1,0 +1,26 @@
+============================================================
+DATA LINKAGE AUDIT REPORT
+============================================================
+
+1. ASIN OVERLAP
+   Review ASINs:        72,005
+   Sales ASINs:          7,190
+   Matched:                  0
+   Match Rate (R):       0.00%
+   Match Rate (S):       0.00%
+
+2. SKU COVERAGE
+   Total SKUs:          7195
+   SKUs with reviews:   0
+   Coverage rate:       0.00%
+
+3. TEMPORAL OVERLAP
+   review_date_min: 1999-10-08 00:00:00
+   review_date_max: 2012-10-26 00:00:00
+   review_date_range_days: 4767
+
+============================================================
+NOTE: This audit should be reviewed to verify that the review
+products and sales products originate from the same commercial
+environment and product catalogue.
+============================================================

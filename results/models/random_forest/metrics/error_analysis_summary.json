@@ -1,0 +1,7 @@
+{
+  "total_test": 78873,
+  "total_errors": 5031,
+  "error_rate": 0.06378608649347685,
+  "avg_correct_length": 422.708323176512,
+  "avg_error_length": 534.3679189028027
+}
