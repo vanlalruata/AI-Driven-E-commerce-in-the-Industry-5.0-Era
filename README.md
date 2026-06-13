@@ -1,10 +1,12 @@
 # E-commerce Sentiment Analysis and Sales Insights — Industry 5.0
 
 ## Overview
+
 This project provides an end-to-end, reproducible pipeline for:
-- **Multi-model comparative sentiment classification** on Amazon product reviews (Logistic Regression, SVM, Naive Bayes, Random Forest, XGBoost, optional DistilBERT).
+
+- **Multi-model comparative sentiment classification** on Amazon product reviews (Logistic Regression, SVM, Naive Bayes, Random Forest, XGBoost, TF-IDF+LR, optional DistilBERT).
 - **Robust model evaluation** with k-fold cross-validation, ROC-AUC, PR-AUC, calibration analysis, error analysis, and McNemar's statistical test.
-- **Class imbalance handling** via SMOTE, class weighting, random oversampling/undersampling, and SMOTE+Tomek Links.
+- **Class imbalance handling** via SMOTE, class weighting, and random oversampling/undersampling.
 - **Sales analytics** with statistical significance testing (Gini coefficient, HHI, Lorenz curves, ANOVA, Kruskal-Wallis, t-tests).
 - **Data linkage auditing** — ASIN matching verification between review and sales datasets.
 - **Integrated review–sales analysis** with SKU/ASIN sentiment summaries.
@@ -12,21 +14,24 @@ This project provides an end-to-end, reproducible pipeline for:
 The pipeline is **menu-driven** via `main.py`, allowing individual components to be run independently or as a full pipeline.
 
 ## Key Features
-- **Comparative model benchmarking**: 5 classical ML models + optional transformer, all trained on the same TF-IDF representation for fair comparison.
+
+- **Comparative model benchmarking**: 6 classical ML models + optional transformer, all trained on the same TF-IDF representation for fair comparison.
 - **Stratified 10-fold cross-validation** with mean ± std metrics per model.
 - **Publication-quality figures** (PDF + PNG) for all analysis types.
 - **Per-model result directories**: Every model's metrics, figures, and artifacts are stored in a dedicated named directory.
 - **Statistical rigor**: ANOVA/Kruskal-Wallis for MRP, t-tests for profitability, Gini/HHI for revenue concentration.
 - **Data quality audit**: ASIN overlap analysis, SKU coverage, temporal alignment checks.
-- **Class imbalance experiments**: Systematic comparison of 6 strategies with focus on minority-class recall.
+- **Class imbalance experiments**: Systematic comparison of 5 strategies with focus on minority-class recall.
 
 ## Requirements
+
 - Python 3.8+
 - Core packages: `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `joblib`, `scipy`
 - Additional: `xgboost`, `imbalanced-learn`
 - Optional (for DistilBERT): `transformers`, `torch`
 
 Install via pip:
+
 ```bash
 pip install pandas numpy matplotlib seaborn scikit-learn joblib scipy xgboost imbalanced-learn
 # Optional for DistilBERT:
@@ -34,6 +39,7 @@ pip install transformers torch
 ```
 
 ## Project Structure
+
 ```
 industry5.0_ecommerce_sentimental_prediction/
 ├── main.py                          # Menu-driven entry point
@@ -70,42 +76,51 @@ industry5.0_ecommerce_sentimental_prediction/
 ## Quick Start
 
 ### Interactive Menu Mode
+
 ```bash
 python main.py --reviews "H:/Datasets/ecommerce/ecommerce_review/Reviews.csv" --sales_folder "H:/Datasets/ecommerce/ecommerce_sale"
 ```
+
 This opens an interactive menu:
+
 ```
 ╔═══════════════════════════════════════════════════════════════════╗
-║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline        ║
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline         ║
 ╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
 ║   1.  Data Loading & Preprocessing                                ║
 ║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
 ║   3.  Sentiment Model Training (All Classical Models)             ║
-║   4.  Sentiment Model Training (DistilBERT — Optional)            ║
-║   5.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
-║   6.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
-║   7.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
-║   8.  Statistical Tests (Gini, HHI, ANOVA, t-tests)              ║
-║   9.  Integration: Reviews ↔ Sales Linkage                        ║
-║  10.  Generate Comparative Model Report                           ║
-║  11.  Run Full Pipeline (All of the above)                        ║
+║   4.  Sentiment Model Training (TF-IDF+LR)                        ║
+║   5.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   6.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   7.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   8.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   9.  Statistical Tests (Gini, HHI, ANOVA, t-tests)               ║
+║  10.  Integration: Reviews ↔ Sales Linkage                        ║
+║  11.  Generate Comparative Model Report                           ║
+║  12.  Run Full Pipeline (All of the above)                        ║
 ║   0.  Exit                                                        ║
+║                                                                   ║
 ╚═══════════════════════════════════════════════════════════════════╝
 ```
 
 ### Non-Interactive Mode (Full Pipeline)
+
 ```bash
-python main.py --reviews "path/to/Reviews.csv" --sales_folder "path/to/sales/" --run 11
+python main.py --reviews "path/to/Reviews.csv" --sales_folder "path/to/sales/" --run 12
 ```
 
 ### Run a Specific Step
+
 ```bash
 python main.py --run 3   # Train all models only
-python main.py --run 5   # Run evaluation only (auto-loads data + trains if needed)
-python main.py --run 8   # Run statistical tests only
+python main.py --run 6   # Run evaluation only (auto-loads data + trains if needed)
+python main.py --run 9   # Run statistical tests only
 ```
 
 ## Command-line Arguments
+
 | Argument | Type | Default | Description |
 |----------|------|---------|-------------|
 | `--reviews` | str | `H:/Datasets/...` | Path to Amazon `Reviews.csv` |
@@ -115,7 +130,9 @@ python main.py --run 8   # Run statistical tests only
 Additional configuration (CV folds, TF-IDF features, model hyperparameters, etc.) can be modified in `config.py`.
 
 ## Output Structure
+
 Each model's results are organized in a consistent directory hierarchy:
+
 ```
 results/models/<model_name>/
 ├── metrics/
@@ -142,6 +159,7 @@ results/models/<model_name>/
 ```
 
 Comparative and cross-cutting results are in:
+
 ```
 results/
 ├── comparative/
@@ -176,8 +194,10 @@ results/
 ```
 
 ## Models Compared
+
 | Model | Type | Class Weight | Key Feature |
 |-------|------|-------------|-------------|
+| TF-IDF+LR | Linear | — | Proposed model, optimized (unbalanced) |
 | Logistic Regression | Linear | Balanced | Interpretable baseline |
 | SVM (LinearSVC) | Linear | Balanced | Calibrated via CalibratedClassifierCV |
 | Multinomial Naive Bayes | Probabilistic | — | Fast, generative model |
@@ -186,6 +206,7 @@ results/
 | DistilBERT | Transformer | — | Lightweight deep learning (optional) |
 
 ## Evaluation Methods
+
 - **Stratified 10-Fold Cross-Validation** with per-fold metrics
 - **ROC-AUC** with overlay curves for all models
 - **PR-AUC** (critical for imbalanced classes)
@@ -194,6 +215,7 @@ results/
 - **McNemar's Test** — pairwise statistical comparison between models
 
 ## Class Imbalance Strategies
+
 | Strategy | Method | Expected Effect |
 |----------|--------|----------------|
 | Baseline | No handling | Current approach |
@@ -201,9 +223,9 @@ results/
 | SMOTE | Synthetic oversampling | Generate synthetic minority samples |
 | Random Oversampling | Duplicate minority | Simple replication |
 | Random Undersampling | Reduce majority | May lose information |
-| SMOTE + Tomek Links | Combined | Often best for NLP tasks |
 
 ## Statistical Tests
+
 | Test | Applied To | Purpose |
 |------|-----------|---------|
 | Gini Coefficient | SKU/Region revenue | Measure concentration inequality |
@@ -215,7 +237,9 @@ results/
 | Levene's Test | Pre-test | Variance homogeneity check |
 
 ## Configuration
+
 Edit `config.py` to modify:
+
 - File paths and output directories
 - Random seed, CV folds, test size
 - TF-IDF hyperparameters
@@ -224,6 +248,7 @@ Edit `config.py` to modify:
 - Model color palette for plots
 
 ## Reusing Trained Models
+
 ```python
 import joblib
 from pathlib import Path
@@ -239,19 +264,24 @@ print(list(zip(texts, preds)))
 ```
 
 ## Legacy Scripts
+
 The original scripts are preserved and still functional:
+
 - `amazon_ecom_analysis_integrated_full.py` — original integrated pipeline
 - `tfidf_lr_sentiment.py` — standalone TF-IDF + LR sentiment
 - `amazon_ecom_analysis.py` — original e-commerce analysis
 - `dataset_inspector.py` — dataset inspection utility
 
 ## License
+
 MIT License
 
 ## Acknowledgments
+
 - Built with `scikit-learn`, `pandas`, `numpy`, `seaborn`, `matplotlib`, `xgboost`, `imbalanced-learn`
 - Amazon Reviews dataset format inspired by common Kaggle distributions
 
 ## Changelog
+
 - **v2.0**: Complete modular rewrite with multi-model comparison, cross-validation, statistical tests, class imbalance handling, data audit, and menu-driven interface.
 - **v1.0**: Initial integrated pipeline (sentiment + sales + reporting).

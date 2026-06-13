@@ -3,7 +3,7 @@
 modules/class_imbalance.py
 Systematic experiments comparing class imbalance handling strategies.
 Strategies: Baseline, Class Weighting, SMOTE, Random Oversampling,
-            Random Undersampling, SMOTE + Tomek Links.
+            Random Undersampling.
 """
 
 import json
