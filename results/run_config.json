@@ -16,6 +16,7 @@
   "figure_dpi": 300,
   "figure_formats": [
     "pdf",
-    "png"
+    "png",
+    "eps"
   ]
 }

@@ -1,0 +1,308 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin=1.0in}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tfrupee}
+\usepackage{longtable}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\definecolor{commentcolor}{rgb}{0.1, 0.5, 0.1}
+\definecolor{updatecolor}{rgb}{0.0, 0.0, 0.8}
+
+\newcommand{\comment}[1]{\vspace{12pt}\noindent\colorbox{gray!10}{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{\color{commentcolor}\itshape #1}}\vspace{6pt}}
+\newcommand{\response}{\vspace{6pt}\noindent\textbf{Response: }}
+\newcommand{\update}[1]{\textcolor{updatecolor}{#1}}
+
+\title{\textbf{Response to Reviewer Comments}}
+% \author{\textbf{Manuscript ID}: AI-Driven E-commerce in the Industry 5.0 Era \\
+% \textbf{Title}: AI-Driven E-commerce in the Industry 5.0 Era: Ethical, Regulatory, and Empirical Decision Support Insights for India}
+% \date{\today}
+
+\begin{document}
+
+\maketitle
+
+\noindent\textbf{Manuscript ID}: SBR-D-26-00443 \\
+\textbf{Title}: AI-Driven E-commerce in the Industry 5.0 Era: Ethical, Regulatory, and Empirical Decision Support Insights for India   
+
+\section*{General Response}
+We would like to express our sincere gratitude to the editor and both Reviewer \#1 and Reviewer \#2 for their constructive feedback, detailed criticisms, and highly valuable suggestions. The recommendations have significantly helped in strengthening the theoretical, methodological, and empirical contributions of our paper.
+
+In this revision, we have addressed all the concerns raised by both reviewers. In accordance with the user instructions and journal guidelines, all changes in the revised manuscript are highlighted in \update{blue}.
+
+Below are our point-by-point responses to each reviewer's comments, outlining the specific actions taken and where they can be found in the revised manuscript.
+
+\newpage
+\section*{Point-by-Point Responses to Reviewer \#1}
+
+\comment{\textbf{Comment 1: Limited Citation Base and Lack of Support for Claims} \\
+A major concern is that the manuscript requires a much stronger citation base. The current reference list is too limited for the breadth of topics covered. The paper addresses AI in e-commerce, Industry 5.0, sentiment analysis, dynamic pricing, data protection regulation, human-in-the-loop AI, algorithmic fairness, recommender systems, fulfilment analytics, and predictive decision support, but it cites only a small number of sources. This weakens the theoretical foundation and makes several claims appear under-supported. The introduction should cite more foundational and recent literature on AI adoption in e-commerce, digital retail transformation, etc.}
+
+\response
+We agree with the reviewer that a broader and stronger citation base is critical to ground our multidisciplinary work. In the revised manuscript, we have expanded our references, from a minimal list to a comprehensive bibliography, now 37 appropriate bibliography. These address:
+\begin{itemize}
+    \item AI-driven marketing and chatbot experiences (e.g., Bansal et al., 2026; Rahman, 2026; Balogun et al., 2026).
+    \item Recommender systems and dynamic pricing (e.g., Zhou \& Xiong, 2023; He et al., 2025; Chenavaz \& Dimitrov, 2025; Nowak \& Pawłowska-Nowak, 2024).
+    \item Industry 5.0 principles and human-centered AI (e.g., Tóth et al., 2023; Martini et al., 2024; Mentzas et al., 2024).
+    \item Regulatory governance and the Indian DPDP Act of 2023 (e.g., Sundara \& Narendran, 2023; Naithani, 2024; Tandon \& Gupta, 2025).
+    \item \update{Theoretical frameworks and Indian digital policies, including Chen et al. (2022) and Barney (1991) for Resource-Based View (RBV), Davis (1989) and Zhu \& Abd Rozan (2026) for TAM, Tornatzky et al. (1990) for TOE, Mahajan et al. (2023) for Stakeholder Theory, Hirsch (1975) for Institutional Theory, and NITI Aayog (2026) for the strategic roadmap of Viksit Bharat@2047.}
+\end{itemize}
+Specifically, as requested, we have integrated and critically analyzed recent trust and AI perception studies (Phan et al., 2025a; Phan et al., 2025b; Phan et al., 2026) in both Section 2 (Related Works) and Section 5 (Ethical and Governance Discussion).
+
+\comment{\textbf{Comment 2: Lack of Grounding in Established Theories} \\
+The paper reads more like a technical analytics project report than a fully developed research article with a robust theoretical contribution. The paper lacks anchoring in established theories (such as TAM, RBV, TOE, etc.).}
+
+\response
+To address this crucial point, we have reframed the manuscript as a rigorous academic research article grounded in established theories. We added a new subsection \textbf{Theoretical Foundations} (Section 2.1) that anchors our dual-empirical framework in five established organizational and technology adoption theories, citing relevant foundational studies: Barney (1991) for the Resource-Based View (RBV), Tornatzky et al. (1990) for the TOE framework, Davis (1989) for the TAM framework, Mahajan et al. (2023) for Stakeholder Theory, and Hirsch (1975) for Institutional Theory:
+\begin{enumerate}
+    \item \textbf{Resource-Based View (RBV) \& Dynamic Capabilities}: Framing the AI pipelines and real-time sentiment/sales models as firm-specific dynamic capabilities that enable platforms to sense consumer shifts and seize market pricing opportunities (citing Barney, 1991; Chen et al., 2022).
+    \item \textbf{Technology-Organization-Environment (TOE) Framework}: Structuring the evaluation of model choices (accuracy vs. interpretability and compute constraints) and the compliance pressures of the environmental regulatory landscape (DPDP Act) (citing Tornatzky et al., 1990; Zhu \& Abd Rozan, 2026).
+    \item \textbf{Technology Acceptance Model (TAM)}: Anchoring consumer trust, chatbot authenticity, warmth, and risk perceptions in the adoption of AI interfaces (citing Davis, 1989; Phan et al., 2025a; Zhu \& Abd Rozan, 2026).
+    \item \textbf{Stakeholder Theory}: Discussing AI governance not as a cost-minimization tool but as an auditing system balancing the interests of consumers, platform sellers, and regulatory fiduciaries (citing Mahajan et al., 2023).
+    \item \textbf{Institutional Theory}: Framing DPDP compliance as a coercive institutional pressure driving formal data audits (citing Hirsch, 1975).
+\end{enumerate}
+The revised text in Section 2.1 is highlighted in blue in the manuscript.
+
+\comment{\textbf{Comment 3: Absence of Clearly Articulated Research Questions and Hypotheses} \\
+The manuscript requires clearly articulated research questions and hypotheses to guide the empirical and regulatory analysis.}
+
+\response
+We have formulated three explicit Research Questions (RQs) and associated Hypotheses (Hs) at the end of Section 1 (Introduction) to structure and guide our empirical investigations:
+\begin{itemize}
+    \item \update{\textbf{RQ1 (Sentiment Modeling \& Imbalance)}: How do lightweight classical machine learning models compare to deep transformer architectures in predicting consumer sentiment from product reviews, and how do class-balancing techniques affect minority negative-class recall?}
+    \begin{itemize}
+        \item \update{\textit{H1a}: Classical models (SVM, TF-IDF+LR) achieve holdout classification accuracy comparable to deep transformers (DistilBERT) while requiring significantly lower computational and energy resources, supporting Industry 5.0 sustainability goals.}
+        \item \update{\textit{H1b}: Incorporating class-balancing techniques (e.g., SMOTE, class weighting) significantly improves minority class (negative sentiment) recall, enhancing early-warning capabilities.}
+    \end{itemize}
+    \item \update{\textbf{RQ2 (Sales Operations \& Pricing)}: What are the geographic and SKU-level revenue concentrations in emerging digital retail environments, and do Maximum Retail Prices (MRPs) vary significantly across different digital marketplaces?}
+    \begin{itemize}
+        \item \update{\textit{H2a}: E-commerce transactional sales exhibit high concentration at both the SKU and regional levels, which can be measured using Gini coefficients and the Herfindahl-Hirschman Index (HHI).}
+        \item \update{\textit{H2b}: Maximum Retail Prices (MRPs) across digital marketplaces exhibit statistically significant dispersion, reflecting channel-specific pricing dynamics.}
+    \end{itemize}
+    \item \update{\textbf{RQ3 (Governance \& DPDP)}: How can disjoint sentiment and transactional datasets be audited to satisfy data protection principles (DPDP Act 2023) and human-in-the-loop oversight?}
+    \begin{itemize}
+        \item \update{\textit{H3a}: A data linkage audit exposes metadata and temporal mismatches in secondary datasets, illustrating the necessity of strict data provenance and purpose limitation controls for data fiduciaries under the DPDP Act.}
+    \end{itemize}
+\end{itemize}
+
+\comment{\textbf{Comment 4: Data Integration, Catalog Linkage, and Empirical Validity} \\
+The integration between the Amazon reviews dataset (secondary data) and the Indian e-commerce transactional sales data is unclear. How do these datasets connect? If they are disjoint, linking them directly raises severe validity and scientific integrity concerns.}
+
+\response
+We thank the reviewer for raising this critical point, which goes to the heart of empirical research validity. Rather than asserting a false integration, we conducted a rigorous \textbf{Data Linkage and Catalog Audit} and transparently report that the two datasets are indeed disjoint. The audit revealed:
+\begin{itemize}
+    \item A unique ASIN match rate of exactly \textbf{0.00\%} (72005 unique ASINs in reviews vs. 7190 unique ASINs in sales).
+    \item A ten-year temporal gap (reviews cover October 1999 to October 2012, whereas sales cover May 2022).
+\end{itemize}
+We have updated the manuscript (Abstract, Sections 1, 3.2, 4.6, and 7) to state this limitation explicitly. We now analyze these datasets as \textbf{parallel empirical components}: the review corpus is used to benchmark NLP sentiment pipelines, while the transactional sales dataset provides a localized case study of sales concentration and cross-marketplace pricing. This avoids unsupported causal claims (e.g., sentiment lagging sales) and models them as separate decision-support modules in a unified Industry 5.0 architecture. \update{This disjoint relationship and catalog discrepancy are visually demonstrated in the newly added Venn diagram (Figure 13) in Section 4.6 of the revised manuscript.}
+
+\comment{\textbf{Comment 5: Sentiment Model Benchmarking and Sensitivity under Class Imbalance} \\
+The TF-IDF+LR model is a simple baseline. The paper should evaluate and benchmark other standard models (such as Naive Bayes, Random Forest, XGBoost, Support Vector Machines) and deep learning models (such as transformers). Furthermore, e-commerce review datasets are heavily imbalanced (mostly positive). A model that fails to detect negative reviews is useless as an early-warning system. Sensitivity tests and class-balancing experiments must be provided.}
+
+\response
+To address this, we expanded our NLP modeling and benchmarking. We preprocessed 525,814 reviews and trained seven sentiment models. The revised Section 4.1 contains \textbf{Table 4}, which reports holdout accuracy, macro F1, negative-class recall, 10-fold cross-validation scores, Brier score (for probability calibration), and McNemar's pairwise significance tests. \update{Furthermore, to establish the comparative context and novelty, we added a State-of-the-Art comparison table (\textbf{Table 5}) benchmarking our results against eight prominent studies (Zhang et al., 2015; Fang \& Zhan, 2015; Ali et al., 2024; Sorour et al., 2024; Duru \& Sunar, 2025; Mamyrbayev et al., 2026; Daraghmi \& Zyadeh, 2026; Khan et al., 2026), comparing dataset scopes, accuracies, and algorithmic time complexities.}
+\begin{itemize}
+    \item The deep DistilBERT model achieved the highest macro F1 (95.60\%) and negative recall (92.18\%) but requires high compute energy.
+    \item The classical SVM (LinearSVC) achieved a high holdout accuracy of 96.53\% and F1-macro of 93.29\% with a Brier score of 0.0270, proving to be a highly sustainable, Green AI alternative.
+    \item To address class imbalance, we conducted sensitivity experiments in Section 4.2 using five balancing techniques: Baseline, SMOTE, Class Weighting, Random Oversampling, and Random Undersampling. We present these in \textbf{Table 6}. Implementing SMOTE on TF-IDF+LR boosted minority negative recall from \update{84.80\% to 91.68\%}, with only a minor accuracy reduction (from \update{96.19\% to 95.78\%}), providing robust early-warning capability.
+    \item \update{\textbf{Experimental Setup}: We added Subsection 3.5 detailing our standardized hardware and software configuration (Intel Core i9-10900K CPU, 16 GB DDR4 RAM, 512 GB SSD, NVIDIA GeForce RTX 3060 8 GB GPU, Windows 11 Pro, Python 3.14). We explicitly clarify that all sentiment models benchmarked in this study were trained and validated on this identical setup, ensuring empirical and resource-efficiency consistency.}
+\end{itemize}
+\update{To support these findings, we have incorporated several diagnostic figures in Sections 4.1 and 4.2 of the revised manuscript: Figure 2 (Confusion Matrix for TF-IDF+LR), Figure 3 (ROC and PR Curves overlay for all classifiers), Figure 4 (reliability diagram for probability calibration), Figure 7 (10-fold cross-validation performance boxplots), Figure 5 (McNemar's pairwise significance p-value heatmap), Figure 6 (diagnostic error analysis of our proposed model), and Figure 8 (trade-off curves for class-balancing strategies).}
+
+\comment{\textbf{Comment 6: Lack of Rigorous Statistical Validation of Results} \\
+The paper presents descriptive statistics (e.g., top SKUs, average prices) but lacks formal statistical validation. The authors should calculate concentration metrics (Gini coefficients, HHI) for sales, run formal significance tests (e.g., ANOVA, Kruskal-Wallis) for pricing dispersion across channels, and evaluate channel profitability differences with t-tests or non-parametric tests.}
+
+\response
+We have replaced all descriptive assertions with rigorous statistical tests in Section 4:
+\begin{itemize}
+    \item \textbf{Sales Concentration}: We calculated Gini coefficients and Herfindahl-Hirschman Indices (HHI). SKU sales show high concentration with a Gini of \update{0.6843} (top 10\% SKUs account for 54.3\% of revenue) but a low HHI of \update{0.000829} due to tail size. Regional sales are highly concentrated with a Gini of \update{0.8169} and HHI of \update{0.082636} (top 10\% states generate 61.5\% of sales).
+    \item \textbf{MRP Dispersion significance}: Shapiro-Wilk testing confirmed non-normality, leading us to use the Kruskal-Wallis H-test. The test showed a statistically significant difference in MRP across 10 marketplaces ($H = 17.1753, p = 0.0460$). However, the effect size is negligible ($\epsilon^2 = 0.0003$). Dunn-Bonferroni post-hoc pairwise comparisons showed that only "MRP Old" vs. "Amazon MRP" and "Amazon FBA MRP" were significant ($p_{corr} = 0.0300$), indicating that marketplaces share a highly consistent master catalog.
+    \item \textbf{Channel Profitability}: We analyzed unit profitability for INCREFF (mean profit: \rupee~15.07 $\pm$ \rupee~30.22, $N=10$). Shiprocket's data was entirely missing ($N=0$) in the files, preventing a formal t-test. We report this missing data transparently as a primary dataset limitation in Section 4.4.
+\end{itemize}
+Mathematical formulations for all these metrics are detailed in Section 3.4. \update{To visually validate these statistics, we have added several figures in Sections 4.3, 4.4, and 4.5: Figure 9 (top states and SKUs by revenue), Figure 10 (Lorenz curves representing revenue inequality at SKU and State levels), Figure 11 (MRP distribution boxplots across the 10 Indian marketplaces), and Figure 12 (unit profitability distributions).}
+
+\comment{\textbf{Comment 7: Strengthening Regulatory and DPDP Contribution} \\
+The discussion on the Indian Digital Personal Data Protection (DPDP) Act of 2023 needs to be strengthened. How do these data audits, model parameters, and disjoint datasets relate to compliance, purpose limitation, and consent?}
+
+\response
+We have expanded Section 5 (Ethical, Regulatory, and Governance Discussion) to directly link our empirical findings with the compliance requirements of the DPDP Act. We discuss:
+\begin{itemize}
+    \item \textbf{Consent and Catalogue Mismatch}: How the lack of catalogue overlap (revealed by our audit) presents a regulatory risk under DPDP. Platforms must avoid cross-linking disjoint user profiles across unaligned merchant databases without specific consent.
+    \item \textbf{Privacy-Preserving Engineering Controls}: We outline specific mechanisms including PII obfuscation, data minimization, and automated algorithmic provenance logs.
+    \item \textbf{Trust and authentic chatbot interfaces}: Tying recent trust and authenticity frameworks (Phan et al., 2025a, 2025b) to chatbot interface design, ensuring platforms balance technical accuracy with human warmth and transparent pricing guardrails to prevent technology rejection.
+\end{itemize}
+
+\newpage
+\section*{Point-by-Point Responses to Reviewer \#2}
+
+\comment{\textbf{Comment 1: Study Lacks a Strong Theoretical Foundation} \\
+Although concepts such as Industry 5.0, human-centric AI, and digital governance are discussed, the research is not anchored in established theories such as the Technology Acceptance Model (TAM), Resource-Based View (RBV), Dynamic Capability Theory, Stakeholder Theory, Institutional Theory, or the Technology-Organization-Environment (TOE) framework.}
+
+\response
+As detailed in our response to Reviewer \#1's Comment 2, we have addressed this theoretical gap in full. We added a new subsection \textbf{Theoretical Foundations} (Section 2.1) which anchors the study in all six suggested theoretical frameworks:
+\begin{itemize}
+    \item \update{\textbf{Resource-Based View (RBV) \& Dynamic Capabilities}}: Operationalises sentiment and operations analytics as dynamic firm capabilities to sense shifts and seize market positions (citing \update{Barney, 1991}; Chen et al., 2022).
+    \item \update{\textbf{TOE Framework}}: Frame the model selection trade-offs (lightweight vs. deep architectures) under technical, organizational, and environmental regulatory constraints (citing \update{Tornatzky et al., 1990}; Zhu \& Abd Rozan, 2026).
+    \item \update{\textbf{TAM}}: Underpins the mediation of trust and risk in AI-driven interfaces (citing \update{Davis, 1989}; Phan et al., 2025a; Zhu \& Abd Rozan, 2026).
+    \item \update{\textbf{Stakeholder Theory \& Institutional Theory}}: Ground the regulatory and DPDP requirements as normative and coercive institutional pressures (citing \update{Mahajan et al., 2023; Hirsch, 1975}).
+\end{itemize}
+
+\comment{\textbf{Comment 2: Insufficiently Established Research Gap} \\
+While the authors claim that existing studies fail to integrate sentiment analysis, profitability assessment, and governance considerations, no comprehensive comparison of previous studies or bibliometric evidence is provided to substantiate this claim. Consequently, the identified gap appears largely author-driven.}
+
+\response
+We agree with the reviewer that the research gap should be rigorously derived from existing scholarship. In Section 2.8, we have introduced a comprehensive mapping table (\textbf{Table 1}, highlighted in blue), titled \textit{``Mapping prior literature and theoretical frameworks to identified research gaps''}. This table systematically reviews prior literature across AI Trust, classical ML, Industry 5.0, pricing dispersion, and DPDP governance, explicitly outlining the key contributions of prior work and the specific methodological, empirical, and regulatory limitations that the present study addresses.
+
+\comment{\textbf{Comment 3: Lack of Clearly Articulated Research Questions and Hypotheses} \\
+Although the study outlines its objectives and contributions, it does not formulate specific research questions or testable hypotheses linking sentiment analytics to revenue, profitability, or governance outcomes.}
+
+\response
+We have fully addressed this. As detailed in our response to Reviewer \#1's Comment 3, we have formulated three core Research Questions (RQs) and five testable Hypotheses (H1a, H1b, H2a, H2b, H3a) at the end of Section 1 (Introduction). These map directly to our empirical experiments (sentiment benchmarking, class imbalance, SKU/regional revenue concentration, marketplace price dispersion, and data audits).
+
+\comment{\textbf{Comment 4: Absence of Statistical Validation for the Relationship Between Sentiment and Revenue} \\
+The manuscript repeatedly argues that sentiment acts as an early warning indicator of declining sales; however, no formal statistical analysis (e.g., Granger causality, regression) is conducted to verify this relationship. This makes the conclusions descriptive rather than explanatory.}
+
+\response
+This is an excellent point. The reviewer is conceptually correct that a causal link between sentiment and sales requires formal time-series regression or Granger causality testing. However, our newly conducted \textbf{Data Linkage Audit} (detailed in Section 3.2) revealed that the product catalogues in the reviews and transactional sales datasets share exactly \textbf{0.00\% ASIN overlap} and have a ten-year temporal mismatch (1999--2012 reviews vs. 2022 sales data). 
+
+Therefore, running Granger causality or regression models at the SKU level is mathematically and empirically impossible on these secondary datasets, and doing so would violate scientific integrity. To resolve this, we have:
+\begin{enumerate}
+    \item Explicitly declared this disjoint relationship as a primary empirical limitation in Sections 1, 3.2, 4.6, and 7.
+    \item Reframed the study to treat the datasets as parallel empirical modules rather than claiming direct causal lag linkages. The sentiment engine acts as a decision support pipeline benchmarked on reviews, while the transaction engine evaluates regional concentration and pricing on the sales records.
+\end{enumerate}
+\update{We have also included Figure 13 (Venn diagram of catalog overlap) in Section 4.6 to visually support these findings.}
+
+\comment{\textbf{Comment 5: Dataset Integration and Catalog Alignment} \\
+The study combines Amazon review data with separate e-commerce sales datasets; however, the manuscript does not clearly demonstrate whether the ASIN identifiers are perfectly matched, whether reviews and sales data relate to the same products, or whether they originate from the same commercial environment.}
+
+\response
+We have addressed this concern directly. As detailed in our response to Reviewer \#1's Comment 4 and Reviewer \#2's Comment 4, we have conducted a formal \textbf{Data Linkage and Catalogue Audit} (Section 3.2). We report that the match rate is exactly \textbf{0.00\%} (zero matching ASINs) and that the datasets are temporally separated. We have transparently framed the datasets as parallel, non-linked testbeds to preserve the empirical validity of our findings. \update{The disjoint nature is visually illustrated in the newly added Venn diagram in Figure 13 of the revised manuscript.}
+
+\comment{\textbf{Comment 6: Methodological Novelty and Benchmarking} \\
+The proposed TF-IDF and Logistic Regression framework represents a well-established benchmark approach rather than a novel AI methodology. Furthermore, the study does not compare the performance of the selected model with alternative machine learning or deep learning approaches (SVM, RF, Gradient Boosting, XGBoost, BERT, DistilBERT, etc.).}
+
+\response
+We agree that TF-IDF+LR is a classical method. To justify its suitability, we expanded our NLP methodology and benchmarked seven different sentiment classifiers (ranging from Naive Bayes to deep transformers). In Section 4.1, we present \textbf{Table 4}, which compares holdout accuracy, macro F1, negative class recall, 10-fold cross-validation scores, Brier score (for probability calibration), and McNemar's significance tests. 
+We demonstrate that while DistilBERT yields the highest macro F1 (95.60\%), the lightweight Support Vector Machine (SVM) achieves highly competitive holdout accuracy (96.53\%) and macro F1 (93.29\%) with a low Brier score (0.0270), while requiring a fraction of the compute time. This benchmarking justifies the selection of lightweight models as sustainable ``Green AI'' alternatives for resource-constrained SMEs in Industry 5.0. \update{This expanded benchmarking is supported by several new figures in Section 4.1: Figure 2 (Confusion Matrix), Figure 3 (ROC and PR curves), Figure 4 (reliability curves), Figure 7 (10-fold cross-validation performance boxplots), Figure 5 (McNemar's test heatmap), and Figure 6 (proposed model error diagnostics).}
+
+\update{Furthermore, to address the methodological novelty concern and establish the academic context of our work, we have added a comprehensive State-of-the-Art comparative table (\textbf{Table 5}) in Section 4.1. This table benchmarks our proposed TF-IDF+LR model against eight prominent publications on e-commerce sentiment classification (Zhang et al., 2015; Fang \& Zhan, 2015; Ali et al., 2024; Sorour et al., 2024; Duru \& Sunar, 2025; Mamyrbayev et al., 2026; Daraghmi \& Zyadeh, 2026; Khan et al., 2026), comparing dataset scopes, accuracies, limitations, and training time complexities. We highlight that while deep learning and transformer architectures achieve high performance at a quadratic training time complexity of $O(N \cdot L^2 \cdot D \cdot H)$, our proposed TF-IDF+LR model scales linearly ($O(N \cdot L)$), training in seconds on CPU-only hardware while achieving highly competitive, near-transformer-level accuracy (\update{$96.16\%$}). This combination of linear complexity and high precision constitutes the core operational novelty and computational sustainability (Green AI) of our framework for Industry 5.0 applications.}
+
+\comment{\textbf{Comment 7: Conceptual Incorporation of Industry 5.0 Principles} \\
+Although human-centricity, sustainability, and resilience are frequently discussed in the introduction, discussion, and conclusion sections, these constructs are not operationalized within the methodology or empirically measured.}
+
+\response
+In the revised manuscript, we have operationalized these three core pillars of Industry 5.0:
+\begin{itemize}
+    \item \textbf{Sustainability}: Operationalized by benchmarking the carbon/energy efficiency of lightweight models (SVM, TF-IDF+LR) against GPU-heavy transformers (DistilBERT). The competitive performance of SVM (holdout F1: 93.29\% vs DistilBERT's 95.60\%) makes it a practical, low-carbon candidate for digital platforms.
+    \item \textbf{Human-centricity}: Operationalized through a human-in-the-loop decision structure where automated flags (triggered by SMOTE-balanced negative sentiment recall) alert human managers to perform root-cause analyses, preventing automated seller bans and preserving human agency.
+    \item \textbf{Resilience}: Operationalized by calculating SKU and regional Gini/HHI indices to guide inventory pre-positioning, protecting supply chains against regional supply shocks.
+\end{itemize}
+
+\comment{\textbf{Comment 8: Governance and DPDP Discussion is Normative and Descriptive} \\
+The manuscript provides recommendations related to privacy, transparency, and fairness; however, no empirical evidence is presented regarding privacy concerns, algorithmic bias, consumer trust, fairness outcomes, or governance effectiveness.}
+
+\response
+We have significantly revised Section 5 to link our governance discussion with our empirical findings, moving away from purely normative claims:
+\begin{itemize}
+    \item We link the Data Linkage Audit's findings (0.00\% catalog overlap) directly to compliance under the DPDP Act of 2023, showing that data fiduciaries face serious privacy risks (breaching purpose limitation and consent) if they attempt to merge disjoint consumer profiles.
+    \item We ground consumer trust and algorithmic bias in TAM and stakeholder theories by discussing trust adoption, risk mitigation, and perceived warmth in chatbot interactions based on Phan et al. (2025a, 2025b). We outline concrete dynamic pricing guardrails to prevent algorithmic bias.
+\end{itemize}
+
+\comment{\textbf{Comment 9: Methodological Weaknesses (Cross-Validation, Class Imbalance)} \\
+The model evaluation relies solely on a single 85:15 train-test split without employing k-fold cross-validation or repeated holdout validation. Moreover, class imbalance issues are not adequately addressed despite the substantially lower recall achieved for the negative sentiment class (no SMOTE, class weighting, etc.).}
+
+\response
+We have fully resolved these methodological weaknesses in the revision:
+\begin{itemize}
+    \item \textbf{10-Fold Cross-Validation}: We implemented a 10-fold CV pipeline where the TF-IDF vectorizer is fitted strictly inside the training folds to prevent data leakage. The mean and standard deviation of accuracy, macro F1, and negative recall are reported in \textbf{Table 4}.
+    \item \textbf{Class Imbalance Experiments}: We conducted sensitivity experiments (Section 4.2) comparing five strategies: Baseline, SMOTE, Class Weighting, Random Oversampling, and Random Undersampling. As shown in \textbf{Table 6}, applying SMOTE to the TF-IDF+LR model significantly boosted negative recall from \update{84.80\%} to \update{91.68\%} while preserving macro F1-score at \update{92.31\%}, demonstrating robust early-warning capability.
+\end{itemize}
+\update{These developments are visually represented in Figure 7 (cross-validation stability) and Figure 8 (trade-off curves for class balancing).}
+
+\comment{\textbf{Comment 10: Results Section is Descriptive (No Gini, HHI, ANOVA, or Profitability tests)} \\
+Revenue concentration is discussed through rankings, yet no formal concentration measures (Gini, HHI) are employed. Marketplace pricing differences are illustrated using boxplots without conducting statistical significance tests (ANOVA, Kruskal-Wallis). Profitability comparison between Shiprocket and INCREFF is based solely on averages without supporting tests.}
+
+\response
+As outlined in our response to Reviewer \#1's Comment 6, we have replaced all descriptive rankings with formal statistical validations in Section 4:
+\begin{itemize}
+    \item SKU revenue concentration (Gini: \update{0.6843}, HHI: \update{0.000829}) and regional concentration (Gini: \update{0.8169}, HHI: \update{0.082636}) are computed and discussed.
+    \item Marketplace price dispersion was evaluated using a Kruskal-Wallis H-test ($H = 17.1753, p = 0.0460$, effect size $\epsilon^2 = 0.0003$). Pairwise comparisons with Bonferroni correction showed that only "MRP Old" vs "Amazon MRP" / "Amazon FBA MRP" were significant ($p_{corr} = 0.0300$), indicating master catalogue stability.
+    \item Unit profitability for INCREFF is reported descriptively (mean profit \rupee~15.07 $\pm$ \rupee~30.22). Shiprocket's data were missing ($N=0$), which we explicitly report as a dataset limitation, explaining why formal t-tests could not be computed.
+\end{itemize}
+\update{These statistical metrics are supported by several new visualizations in Section 4: Figure 9 (top distributions), Figure 10 (concentration Lorenz curves), Figure 11 (MRP boxplots across Indian marketplaces), and Figure 12 (unit profitability distributions).}
+
+\comment{\textbf{Comment 11: Manuscript is Not Appropriate in Current Form} \\
+Collectively, these limitations weaken the empirical strength of the manuscript and suggest the need for stronger theoretical grounding, rigorous statistical validation, comparative model analysis, and more robust empirical testing before publication.}
+
+\response
+We believe that our comprehensive revisions—integrating established theoretical frameworks (TAM, RBV, TOE, Stakeholder, Institutional), introducing explicit RQs and Hypotheses, executing a 7-model benchmarking suite with 10-fold CV and class balancing (SMOTE), conducting data linkage and ASIN overlap audits, calculating Gini/HHI concentration, running Kruskal-Wallis price dispersion tests, and expanding the discussion on DPDP compliance and trust—have fully resolved these limitations and significantly enhanced the empirical, theoretical, and regulatory contributions of the manuscript.
+
+\section*{Reference Additions}
+To support the theoretical reframing, expand the literature base, and provide state-of-the-art comparative context, we have added a total of 19 new references to our bibliography and cited them in the manuscript:
+
+\subsection*{Category 1: Trust, Warmth, and Perceptions in AI Systems}
+\begin{enumerate}
+    \item \textbf{Phan et al. (2025a) [13]}: Used to ground the technology acceptance and trust adoption model in AI-driven interfaces.
+    \item \textbf{Phan et al. (2025b) [18]}: Discusses how authenticity and warmth shape trust in chatbot interfaces, protecting against technology rejection.
+    \item \textbf{Phan et al. (2026) [17]}: Examines investor and consumer perceptions of AI risk-taking and automated decision-making.
+\end{enumerate}
+
+\subsection*{Category 2: Theoretical Grounding (RBV, TOE, TAM, and Viksit Bharat@2047)}
+\begin{enumerate}
+    \item \textbf{Chen et al. (2022) [9]}: Establishes the Resource-Based View (RBV) and Dynamic Capabilities in the context of e-commerce AI analytics.
+    \item \textbf{Zhu \& Abd Rozan (2026) [11]}: Outlines the Technology-Organization-Environment (TOE) framework and Technology Acceptance Model (TAM) for AI adoption in digital retail.
+    \item \textbf{{NITI Aayog} (2026) [2]}: Provides the strategic roadmap for Digital Public Infrastructure (DPI) and India's Viksit Bharat@2047 vision.
+    \item \textbf{Barney (1991) [7]}: Establishes the foundational Resource-Based View (RBV) framework, linking firm-specific resource characteristics to sustained competitive advantages.
+    \item \textbf{Davis (1989) [12]}: The seminal study introducing the Technology Acceptance Model (TAM) to evaluate user acceptance based on perceived usefulness and ease of use.
+    \item \textbf{Tornatzky et al. (1990) [10]}: Establishes the Technology-Organization-Environment (TOE) framework, outlining the contextual factors influencing technology adoption.
+    \item \textbf{Mahajan et al. (2023) [14]}: Reviews the development of Stakeholder Theory, supporting AI system alignment with human-centric and multi-stakeholder governance.
+    \item \textbf{Hirsch (1975) [15]}: Groundwork study establishing Institutional Theory to explain how organizations align with external regulatory and coercive environmental pressures.
+\end{enumerate}
+
+\subsection*{Category 3: State-of-the-Art Sentiment Classification Benchmarking}
+\begin{enumerate}
+    \item \textbf{Zhang et al. (2015) [30]}: Landmark study introducing character-level CNNs for Amazon reviews polarity.
+    \item \textbf{Fang \& Zhan (2015) [31]}: Benchmark study comparing Naive Bayes, Random Forest, and SVM on product reviews.
+    \item \textbf{Ali et al. (2024) [32]}: Comparative study benchmarking CNN, SVM, and BERT on Amazon product categories.
+    \item \textbf{Sorour et al. (2024) [33]}: Hybrid deep learning study proposing a word embedding-based CNN-LSTM framework on customer reviews.
+    \item \textbf{Duru \& Sunar (2025) [34]}: Study comparing pre-transformer models (Stacked LSTM, CNN-LSTM) and transformers (BERT, DistilBERT) on Amazon reviews.
+    \item \textbf{Mamyrbayev et al. (2026) [35]}: Proposes a Luong-Attention-based Bi-LSTM model for e-commerce review classification.
+    \item \textbf{Daraghmi \& Zyadeh (2026) [36]}: Benchmark study evaluating Random Forest, SVM, CNN, LSTM, and RoBERTa on Amazon food and mobile reviews.
+    \item \textbf{Khan et al. (2026) [37]}: Hybrid study comparing classical ML with BiLSTM and BERT on Amazon Alexa customer reviews.
+\end{enumerate}
+
+% \newpage
+% \section*{Table of Revisions in main.tex}
+% \begin{longtable}{p{2.5cm} p{6cm} p{6.5cm}}
+% \toprule
+% \textbf{Section} & \textbf{Reviewer Point Addressed} & \textbf{Summary of Manuscript Changes} \\
+% \midrule
+% Title \& Abstract & Title focus, theoretical grounding, data audit transparency & Updated title to reflect empirical/decision support focus. Abstract rewritten to include exact model accuracy, Gini indices, Kruskal-Wallis results, and ASIN overlap audit rate. \\
+% \midrule
+% 1. Introduction & Theoretical framing, Research Questions, Hypotheses, Data Audit & Introduced RQ1-RQ3 and H1a-H3a. Integrated India-specific ONDC, UPI, and Viksit Bharat policy context. Stated the disjoint dataset findings up front. \\
+% \midrule
+% 2. Related Works & Lack of theoretical grounding, insufficient citation base & Added Section 2.1 (Theoretical Foundations) covering TAM, RBV, TOE, Stakeholder, and Institutional theories. Reviewed and cited the three suggested trust papers. Added Table 1 mapping literature to gaps. \\
+% \midrule
+% 3. Methodology & Mathematical formulations, audit procedures, pipeline design & Documented the catalogue overlap audit metrics. Added mathematical formulations for Gini, HHI, Kruskal-Wallis H, and Welch's t. Detailed the cross-validation and leakage prevention protocol. \\
+% \midrule
+% 4. Results & Benchmark comparison, sensitivity tests, statistical tests & Inserted Table 4 (7-model comparison including DistilBERT), Table 5 (8-model SOTA comparison), and Table 6 (5-class-balancing strategies). Reported exact SKU/regional Gini coefficients, Kruskal-Wallis H and post-hoc p-values, and INCREFF/Shiprocket data limits. \\
+% \midrule
+% 5. Ethical \& Gov. & Indian DPDP Act compliance, trust and chatbot authenticity & Connected data catalogue mismatch with DPDP purpose limitation. Discussed authenticity and warmth in chatbot design to manage risk and build trust. \\
+% \midrule
+% 6. Recs \& Concl. & Practical operationalisation, research limitations & Aligned strategic recommendations with SKU Gini stocking and Kruskal-Wallis catalogue pricing. Highlighted ONDC data standard needs and multilingual expansion as future work. \\
+% \bottomrule
+% \end{longtable}
+
+\end{document}

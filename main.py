@@ -106,6 +106,23 @@ def menu_2_data_audit():
 def menu_3_train_models():
     """Train all classical ML models."""
     _ensure_data_loaded()
+
+    # Check if all classical models are already trained
+    classical_names = ["logistic_regression", "svm", "naive_bayes", "random_forest", "xgboost"]
+    all_trained = True
+    for mname in classical_names:
+        m_dir = RESULTS_ROOT / "models" / mname / "artifacts"
+        if not (m_dir / "model.joblib").exists() or not (m_dir / "training_config.json").exists():
+            all_trained = False
+            break
+
+    if all_trained:
+        print("\n[3] SENTIMENT MODEL TRAINING (Classical)")
+        print("[3] ✓ All classical models loaded from disk (no retraining needed).")
+        _ensure_models_trained()
+        print("[3] ✓ Figures regenerated.")
+        return state.all_model_results
+
     from modules.sentiment_models import train_all_models
 
     print("\n[3] SENTIMENT MODEL TRAINING (Classical)")
@@ -523,7 +540,14 @@ def _ensure_models_trained():
                 mresult["confusion_matrix"] = confusion_matrix(
                     state.y_test, preds, labels=state.labels,
                 )
-            print("[info] All model predictions regenerated.")
+                # Regenerate confusion matrix plots
+                from modules.visualization import plot_confusion_matrix
+                from config import get_model_figures_dir
+                plot_confusion_matrix(
+                    mresult["confusion_matrix"], state.labels,
+                    get_model_figures_dir(mname), mname
+                )
+            print("[info] All model predictions regenerated and confusion matrices plotted.")
 
             from modules.sentiment_models import get_model_registry
             state.model_registry = get_model_registry()

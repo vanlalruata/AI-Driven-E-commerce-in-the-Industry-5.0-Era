@@ -17,7 +17,7 @@ The pipeline is **menu-driven** via `main.py`, allowing individual components to
 
 - **Comparative model benchmarking**: 6 classical ML models + optional transformer, all trained on the same TF-IDF representation for fair comparison.
 - **Stratified 10-fold cross-validation** with mean ± std metrics per model.
-- **Publication-quality figures** (PDF + PNG) for all analysis types.
+- **Publication-quality figures** (PDF + PNG + EPS) for all analysis types.
 - **Per-model result directories**: Every model's metrics, figures, and artifacts are stored in a dedicated named directory.
 - **Statistical rigor**: ANOVA/Kruskal-Wallis for MRP, t-tests for profitability, Gini/HHI for revenue concentration.
 - **Data quality audit**: ASIN overlap analysis, SKU coverage, temporal alignment checks.
@@ -147,11 +147,11 @@ results/models/<model_name>/
 │   ├── misclassified_samples.csv
 │   └── error_analysis_summary.json
 ├── figures/
-│   ├── confusion_matrix_<model>.pdf/png
-│   ├── error_analysis_<model>.pdf/png
-│   ├── roc_curve.pdf/png
-│   ├── pr_curve.pdf/png
-│   └── calibration_curve.pdf/png
+│   ├── confusion_matrix_<model>.pdf/png/eps
+│   ├── error_analysis_<model>.pdf/png/eps
+│   ├── roc_curve.pdf/png/eps
+│   ├── pr_curve.pdf/png/eps
+│   └── calibration_curve.pdf/png/eps
 └── artifacts/
     ├── model.joblib
     ├── vectorizer.joblib
@@ -168,20 +168,20 @@ results/
 │   ├── comprehensive_comparison.csv
 │   ├── imbalance_experiment_table.csv
 │   ├── mcnemar_pvalues.csv
-│   ├── roc_curves_overlay.pdf/png
-│   ├── pr_curves_overlay.pdf/png
-│   ├── calibration_curves.pdf/png
-│   └── cv_boxplot_*.pdf/png
+│   ├── roc_curves_overlay.pdf/png/eps
+│   ├── pr_curves_overlay.pdf/png/eps
+│   ├── calibration_curves.pdf/png/eps
+│   └── cv_boxplot_*.pdf/png/eps
 ├── statistical_tests/
 │   ├── revenue_concentration.csv
-│   ├── lorenz_curve_*.pdf/png
+│   ├── lorenz_curve_*.pdf/png/eps
 │   ├── mrp_dispersion_test.csv
 │   ├── mrp_pairwise_comparisons.csv
 │   └── channel_profitability_test.csv
 ├── data_audit/
 │   ├── data_linkage_audit.txt
 │   ├── data_audit.json
-│   ├── asin_overlap.pdf/png
+│   ├── asin_overlap.pdf/png/eps
 │   ├── matched_asins.csv
 │   ├── reviews_only_asins.csv
 │   └── sales_only_asins.csv

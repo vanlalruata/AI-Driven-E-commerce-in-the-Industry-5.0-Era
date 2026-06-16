@@ -2,7 +2,7 @@
 """
 modules/visualization.py
 Centralized, publication-quality visualization functions.
-All plots use consistent styling, colors, and dual-format saving (PDF + PNG).
+All plots use consistent styling, colors, and multi-format saving (PDF + PNG + EPS).
 """
 
 from pathlib import Path

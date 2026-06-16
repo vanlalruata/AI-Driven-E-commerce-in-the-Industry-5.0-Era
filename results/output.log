@@ -1,0 +1,2256 @@
+C:\Python314\python.exe G:\PycharmProjects\PythonProject\industry5.0_ecommerce_sentimental_prediction\main.py 
+[config] Output directory tree created under G:\PycharmProjects\PythonProject\industry5.0_ecommerce_sentimental_prediction\results
+[config] Run configuration saved to results\run_config.json
+
+╔═══════════════════════════════════════════════════════════════════╗
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline         ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║   1.  Data Loading & Preprocessing                                ║
+║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
+║   3.  Sentiment Model Training (All Classical Models)             ║
+║   4.  Sentiment Model Training (TF-IDF+LR)                        ║
+║   5.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   6.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   7.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   8.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   9.  Statistical Tests (Gini, HHI, ANOVA, t-tests)               ║
+║  10.  Integration: Reviews ↔ Sales Linkage                        ║
+║  11.  Generate Comparative Model Report                           ║
+║  12.  Run Full Pipeline (All of the above)                        ║
+║   0.  Exit                                                        ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Select an option [0-12]: 1
+
+[1] DATA LOADING & PREPROCESSING
+[data_loader] Reviews loaded: (568454, 11)
+[data_loader] Preprocessed reviews saved: (525814, 13)
+[data_loader] Class distribution:
+sent_label
+positive    443777
+negative     82037
+[data_loader] Imbalance ratio: 5.41:1
+[data_loader] Detected sales files: ['amazon_sale_report.csv', 'cloud_warehouse_compersion_chart.csv', 'expense_iigf.csv', 'international_sale_report.csv', 'may-2022.csv', 'plmarch2021.csv', 'sale_report.csv']
+[data_loader] Merged sales rows: 178405
+
+============================================================
+DATASET SUMMARY
+============================================================
+
+Reviews: 525,814 rows × 13 cols
+  Labels: {'positive': 443777, 'negative': 82037}
+  Unique ASINs (ProductId): 72,005
+  Date range: 1999-10-08 00:00:00 → 2012-10-26 00:00:00
+
+Sales: 178,405 rows × 54 cols
+  Unique ASINs: 7,190
+  Unique SKUs: 8,094
+  Amount: mean=648.56, std=281.21
+  Unique regions: 70
+============================================================
+
+[1] ✓ Data loading complete.
+
+
+Press Enter to continue...
+
+╔═══════════════════════════════════════════════════════════════════╗
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline         ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║   1.  Data Loading & Preprocessing                                ║
+║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
+║   3.  Sentiment Model Training (All Classical Models)             ║
+║   4.  Sentiment Model Training (TF-IDF+LR)                        ║
+║   5.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   6.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   7.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   8.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   9.  Statistical Tests (Gini, HHI, ANOVA, t-tests)               ║
+║  10.  Integration: Reviews ↔ Sales Linkage                        ║
+║  11.  Generate Comparative Model Report                           ║
+║  12.  Run Full Pipeline (All of the above)                        ║
+║   0.  Exit                                                        ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Select an option [0-12]: 2
+
+[2] DATA QUALITY AUDIT
+
+============================================================
+ASIN MATCHING & DATA LINKAGE AUDIT
+============================================================
+  Reviews — Unique ASINs (ProductId): 72,005
+  Sales — Unique ASINs: 7,190
+
+  Matched ASINs: 0
+  Reviews-only ASINs: 72,005
+  Sales-only ASINs: 7,190
+  Match rate (reviews): 0.00%
+  Match rate (sales): 0.00%
+[viz] Saved: asin_overlap (pdf, png)
+
+  SKU COVERAGE ANALYSIS
+  ────────────────────────────────────────
+  Total unique SKUs: 7195
+  SKUs with matching reviews: 0
+  SKU coverage rate: 0.00%
+
+  TEMPORAL OVERLAP ANALYSIS
+  ────────────────────────────────────────
+  Reviews date range: 1999-10-08 → 2012-10-26 (4767 days)
+
+[audit] Full audit report saved to results\data_audit
+[2] ✓ Data audit complete.
+
+
+Press Enter to continue...
+
+╔═══════════════════════════════════════════════════════════════════╗
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline         ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║   1.  Data Loading & Preprocessing                                ║
+║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
+║   3.  Sentiment Model Training (All Classical Models)             ║
+║   4.  Sentiment Model Training (TF-IDF+LR)                        ║
+║   5.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   6.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   7.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   8.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   9.  Statistical Tests (Gini, HHI, ANOVA, t-tests)               ║
+║  10.  Integration: Reviews ↔ Sales Linkage                        ║
+║  11.  Generate Comparative Model Report                           ║
+║  12.  Run Full Pipeline (All of the above)                        ║
+║   0.  Exit                                                        ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Select an option [0-12]: 3
+
+[3] SENTIMENT MODEL TRAINING (Classical)
+
+============================================================
+TRAINING ALL CLASSICAL MODELS
+============================================================
+Dataset size: 525,814 samples
+Labels: ['negative', 'positive']
+Class distribution: {'positive': 443777, 'negative': 82037}
+Train: 446,941 | Test: 78,873
+[sentiment_models] TF-IDF matrix shape: (446941, 50000)
+[sentiment_models] Note: XGBoost is forced to CPU to prevent sparse-matrix GPU corruption bug in version 3.2.0.
+
+[sentiment_models] Training Logistic Regression...
+  Accuracy: 0.9441 | Precision(macro): 0.8734 | Recall(macro): 0.9435 | F1(macro): 0.9032
+  negative: P=0.7579 R=0.9426 F1=0.8402 Support=12306
+  positive: P=0.9889 R=0.9443 F1=0.9661 Support=66567
+[viz] Saved: confusion_matrix_logistic_regression (pdf, png)
+[sentiment_models] Results saved for logistic_regression
+
+[sentiment_models] Training SVM (LinearSVC)...
+  Accuracy: 0.9650 | Precision(macro): 0.9407 | Recall(macro): 0.9242 | F1(macro): 0.9322
+  negative: P=0.9062 R=0.8649 F1=0.8851 Support=12306
+  positive: P=0.9752 R=0.9834 F1=0.9793 Support=66567
+[viz] Saved: confusion_matrix_svm (pdf, png)
+[sentiment_models] Results saved for svm
+
+[sentiment_models] Training Multinomial NB...
+  Accuracy: 0.9291 | Precision(macro): 0.9136 | Recall(macro): 0.8026 | F1(macro): 0.8452
+  negative: P=0.8938 R=0.6189 F1=0.7314 Support=12306
+  positive: P=0.9333 R=0.9864 F1=0.9591 Support=66567
+[viz] Saved: confusion_matrix_naive_bayes (pdf, png)
+[sentiment_models] Results saved for naive_bayes
+
+[sentiment_models] Training Random Forest...
+  Accuracy: 0.9374 | Precision(macro): 0.9558 | Recall(macro): 0.8047 | F1(macro): 0.8586
+  negative: P=0.9788 R=0.6118 F1=0.7530 Support=12306
+  positive: P=0.9329 R=0.9976 F1=0.9641 Support=66567
+[viz] Saved: confusion_matrix_random_forest (pdf, png)
+[sentiment_models] Results saved for random_forest
+
+[sentiment_models] Training XGBoost...
+  Accuracy: 0.9236 | Precision(macro): 0.9227 | Recall(macro): 0.7746 | F1(macro): 0.8257
+  negative: P=0.9215 R=0.5580 F1=0.6951 Support=12306
+  positive: P=0.9238 R=0.9912 F1=0.9563 Support=66567
+[viz] Saved: confusion_matrix_xgboost (pdf, png)
+[sentiment_models] Results saved for xgboost
+
+[sentiment_models] Comparison table saved to results\comparative\model_comparison_table.csv
+
+                     accuracy  precision_macro  recall_macro  f1_macro  negative_precision  negative_recall  negative_f1  positive_precision  positive_recall  positive_f1
+model                                                                                                                                                                     
+Logistic Regression  0.944062         0.873383      0.943478  0.903155            0.757873         0.942630     0.840214            0.988894         0.944327     0.966096
+SVM (LinearSVC)      0.964956         0.940711      0.924195  0.932204            0.906181         0.864944     0.885082            0.975241         0.983445     0.979326
+Multinomial NB       0.929063         0.913564      0.802645  0.845247            0.893792         0.618885     0.731358            0.933335         0.986405     0.959136
+Random Forest        0.937368         0.955849      0.804683  0.858556            0.978809         0.611815     0.752975            0.932889         0.997551     0.964137
+XGBoost              0.923624         0.922672      0.774616  0.825727            0.921498         0.558020     0.695111            0.923846         0.991212     0.956344
+[sentiment_models] Note: XGBoost is forced to CPU to prevent sparse-matrix GPU corruption bug in version 3.2.0.
+[3] ✓ All classical models trained.
+
+
+Press Enter to continue...
+
+
+
+
+
+
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline         ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║   1.  Data Loading & Preprocessing                                ║
+║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
+║   3.  Sentiment Model Training (All Classical Models)             ║
+║   4.  Sentiment Model Training (TF-IDF+LR)                        ║
+║   5.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   6.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   7.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   8.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   9.  Statistical Tests (Gini, HHI, ANOVA, t-tests)               ║
+║  10.  Integration: Reviews ↔ Sales Linkage                        ║
+║  11.  Generate Comparative Model Report                           ║
+║  12.  Run Full Pipeline (All of the above)                        ║
+║   0.  Exit                                                        ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Select an option [0-12]: 5
+[info] Data not yet loaded. Loading now...
+
+[1] DATA LOADING & PREPROCESSING
+[data_loader] Reviews loaded: (568454, 11)
+[data_loader] Preprocessed reviews saved: (525814, 13)
+[data_loader] Class distribution:
+sent_label
+positive    443777
+negative     82037
+[data_loader] Imbalance ratio: 5.41:1
+[data_loader] Detected sales files: ['amazon_sale_report.csv', 'cloud_warehouse_compersion_chart.csv', 'expense_iigf.csv', 'international_sale_report.csv', 'may-2022.csv', 'plmarch2021.csv', 'sale_report.csv']
+[data_loader] Merged sales rows: 178405
+
+============================================================
+DATASET SUMMARY
+============================================================
+
+Reviews: 525,814 rows × 13 cols
+  Labels: {'positive': 443777, 'negative': 82037}
+  Unique ASINs (ProductId): 72,005
+  Date range: 1999-10-08 00:00:00 -> 2012-10-26 00:00:00
+
+Sales: 178,405 rows × 54 cols
+  Unique ASINs: 7,190
+  Unique SKUs: 8,094
+  Amount: mean=648.56, std=281.21
+  Unique regions: 70
+============================================================
+
+[1] ✓ Data loading complete.
+
+
+[4] DISTILBERT TRAINING
+[4] No saved DistilBERT model found — training from scratch...
+W0613 08:38:17.811000 3336 torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+
+============================================================
+DISTILBERT TRAINING
+============================================================
+  Train: 446941 | Test: 78873
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  Device: cuda
+Loading weights: 100%|██████████| 100/100 [00:00<00:00, 3783.42it/s, Materializing param=distilbert.transformer.layer.5.sa_layer_norm.weight]
+DistilBertForSequenceClassification LOAD REPORT from: distilbert-base-uncased
+Key                     | Status     | 
+------------------------+------------+-
+vocab_layer_norm.bias   | UNEXPECTED | 
+vocab_transform.bias    | UNEXPECTED | 
+vocab_layer_norm.weight | UNEXPECTED | 
+vocab_transform.weight  | UNEXPECTED | 
+vocab_projector.bias    | UNEXPECTED | 
+classifier.weight       | MISSING    | 
+pre_classifier.bias     | MISSING    | 
+classifier.bias         | MISSING    | 
+pre_classifier.weight   | MISSING    | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  Epoch 1/3 — Batch 50/13967 — Loss: 0.6986
+  Epoch 1/3 — Batch 100/13967 — Loss: 0.6487
+  Epoch 1/3 — Batch 150/13967 — Loss: 0.5742
+  Epoch 1/3 — Batch 200/13967 — Loss: 0.4455
+  Epoch 1/3 — Batch 250/13967 — Loss: 0.4280
+  Epoch 1/3 — Batch 300/13967 — Loss: 0.4020
+  Epoch 1/3 — Batch 350/13967 — Loss: 0.4269
+  Epoch 1/3 — Batch 400/13967 — Loss: 0.4524
+  Epoch 1/3 — Batch 450/13967 — Loss: 0.3014
+  Epoch 1/3 — Batch 500/13967 — Loss: 0.2835
+  Epoch 1/3 — Batch 550/13967 — Loss: 0.3833
+  Epoch 1/3 — Batch 600/13967 — Loss: 0.1375
+  Epoch 1/3 — Batch 650/13967 — Loss: 0.2011
+  Epoch 1/3 — Batch 700/13967 — Loss: 0.1843
+  Epoch 1/3 — Batch 750/13967 — Loss: 0.1301
+  Epoch 1/3 — Batch 800/13967 — Loss: 0.1508
+  Epoch 1/3 — Batch 850/13967 — Loss: 0.1877
+  Epoch 1/3 — Batch 900/13967 — Loss: 0.1169
+  Epoch 1/3 — Batch 950/13967 — Loss: 0.1696
+  Epoch 1/3 — Batch 1000/13967 — Loss: 0.0948
+  Epoch 1/3 — Batch 1050/13967 — Loss: 0.1971
+  Epoch 1/3 — Batch 1100/13967 — Loss: 0.1227
+  Epoch 1/3 — Batch 1150/13967 — Loss: 0.1589
+  Epoch 1/3 — Batch 1200/13967 — Loss: 0.3516
+  Epoch 1/3 — Batch 1250/13967 — Loss: 0.0320
+  Epoch 1/3 — Batch 1300/13967 — Loss: 0.2013
+  Epoch 1/3 — Batch 1350/13967 — Loss: 0.1491
+  Epoch 1/3 — Batch 1400/13967 — Loss: 0.1313
+  Epoch 1/3 — Batch 1450/13967 — Loss: 0.1768
+  Epoch 1/3 — Batch 1500/13967 — Loss: 0.1063
+  Epoch 1/3 — Batch 1550/13967 — Loss: 0.2667
+  Epoch 1/3 — Batch 1600/13967 — Loss: 0.5955
+  Epoch 1/3 — Batch 1650/13967 — Loss: 0.0284
+  Epoch 1/3 — Batch 1700/13967 — Loss: 0.1545
+  Epoch 1/3 — Batch 1750/13967 — Loss: 0.2530
+  Epoch 1/3 — Batch 1800/13967 — Loss: 0.1580
+  Epoch 1/3 — Batch 1850/13967 — Loss: 0.1059
+  Epoch 1/3 — Batch 1900/13967 — Loss: 0.3113
+  Epoch 1/3 — Batch 1950/13967 — Loss: 0.1902
+  Epoch 1/3 — Batch 2000/13967 — Loss: 0.0825
+  Epoch 1/3 — Batch 2050/13967 — Loss: 0.1072
+  Epoch 1/3 — Batch 2100/13967 — Loss: 0.0592
+  Epoch 1/3 — Batch 2150/13967 — Loss: 0.1175
+  Epoch 1/3 — Batch 2200/13967 — Loss: 0.1026
+  Epoch 1/3 — Batch 2250/13967 — Loss: 0.1588
+  Epoch 1/3 — Batch 2300/13967 — Loss: 0.2838
+  Epoch 1/3 — Batch 2350/13967 — Loss: 0.1541
+  Epoch 1/3 — Batch 2400/13967 — Loss: 0.0930
+  Epoch 1/3 — Batch 2450/13967 — Loss: 0.0260
+  Epoch 1/3 — Batch 2500/13967 — Loss: 0.1375
+  Epoch 1/3 — Batch 2550/13967 — Loss: 0.0547
+  Epoch 1/3 — Batch 2600/13967 — Loss: 0.0307
+  Epoch 1/3 — Batch 2650/13967 — Loss: 0.0900
+  Epoch 1/3 — Batch 2700/13967 — Loss: 0.1305
+  Epoch 1/3 — Batch 2750/13967 — Loss: 0.2820
+  Epoch 1/3 — Batch 2800/13967 — Loss: 0.0513
+  Epoch 1/3 — Batch 2850/13967 — Loss: 0.0390
+  Epoch 1/3 — Batch 2900/13967 — Loss: 0.1030
+  Epoch 1/3 — Batch 2950/13967 — Loss: 0.1407
+  Epoch 1/3 — Batch 3000/13967 — Loss: 0.1955
+  Epoch 1/3 — Batch 3050/13967 — Loss: 0.0639
+  Epoch 1/3 — Batch 3100/13967 — Loss: 0.2351
+  Epoch 1/3 — Batch 3150/13967 — Loss: 0.1206
+  Epoch 1/3 — Batch 3200/13967 — Loss: 0.0727
+  Epoch 1/3 — Batch 3250/13967 — Loss: 0.1014
+  Epoch 1/3 — Batch 3300/13967 — Loss: 0.0924
+  Epoch 1/3 — Batch 3350/13967 — Loss: 0.1141
+  Epoch 1/3 — Batch 3400/13967 — Loss: 0.0978
+  Epoch 1/3 — Batch 3450/13967 — Loss: 0.0272
+  Epoch 1/3 — Batch 3500/13967 — Loss: 0.2576
+  Epoch 1/3 — Batch 3550/13967 — Loss: 0.2196
+  Epoch 1/3 — Batch 3600/13967 — Loss: 0.0486
+  Epoch 1/3 — Batch 3650/13967 — Loss: 0.0288
+  Epoch 1/3 — Batch 3700/13967 — Loss: 0.0527
+  Epoch 1/3 — Batch 3750/13967 — Loss: 0.0209
+  Epoch 1/3 — Batch 3800/13967 — Loss: 0.3750
+  Epoch 1/3 — Batch 3850/13967 — Loss: 0.0738
+  Epoch 1/3 — Batch 3900/13967 — Loss: 0.0500
+  Epoch 1/3 — Batch 3950/13967 — Loss: 0.0247
+  Epoch 1/3 — Batch 4000/13967 — Loss: 0.0376
+  Epoch 1/3 — Batch 4050/13967 — Loss: 0.0475
+  Epoch 1/3 — Batch 4100/13967 — Loss: 0.0291
+  Epoch 1/3 — Batch 4150/13967 — Loss: 0.1027
+  Epoch 1/3 — Batch 4200/13967 — Loss: 0.0845
+  Epoch 1/3 — Batch 4250/13967 — Loss: 0.0898
+  Epoch 1/3 — Batch 4300/13967 — Loss: 0.0195
+  Epoch 1/3 — Batch 4350/13967 — Loss: 0.0746
+  Epoch 1/3 — Batch 4400/13967 — Loss: 0.2578
+  Epoch 1/3 — Batch 4450/13967 — Loss: 0.2007
+  Epoch 1/3 — Batch 4500/13967 — Loss: 0.1110
+  Epoch 1/3 — Batch 4550/13967 — Loss: 0.0622
+  Epoch 1/3 — Batch 4600/13967 — Loss: 0.1048
+  Epoch 1/3 — Batch 4650/13967 — Loss: 0.1604
+  Epoch 1/3 — Batch 4700/13967 — Loss: 0.0188
+  Epoch 1/3 — Batch 4750/13967 — Loss: 0.0392
+  Epoch 1/3 — Batch 4800/13967 — Loss: 0.1618
+  Epoch 1/3 — Batch 4850/13967 — Loss: 0.3442
+  Epoch 1/3 — Batch 4900/13967 — Loss: 0.2778
+  Epoch 1/3 — Batch 4950/13967 — Loss: 0.2620
+  Epoch 1/3 — Batch 5000/13967 — Loss: 0.0615
+  Epoch 1/3 — Batch 5050/13967 — Loss: 0.0958
+  Epoch 1/3 — Batch 5100/13967 — Loss: 0.1925
+  Epoch 1/3 — Batch 5150/13967 — Loss: 0.2217
+  Epoch 1/3 — Batch 5200/13967 — Loss: 0.2014
+  Epoch 1/3 — Batch 5250/13967 — Loss: 0.0662
+  Epoch 1/3 — Batch 5300/13967 — Loss: 0.1098
+  Epoch 1/3 — Batch 5350/13967 — Loss: 0.0223
+  Epoch 1/3 — Batch 5400/13967 — Loss: 0.1476
+  Epoch 1/3 — Batch 5450/13967 — Loss: 0.0175
+  Epoch 1/3 — Batch 5500/13967 — Loss: 0.1088
+  Epoch 1/3 — Batch 5550/13967 — Loss: 0.0362
+  Epoch 1/3 — Batch 5600/13967 — Loss: 0.0175
+  Epoch 1/3 — Batch 5650/13967 — Loss: 0.2335
+  Epoch 1/3 — Batch 5700/13967 — Loss: 0.0410
+  Epoch 1/3 — Batch 5750/13967 — Loss: 0.2558
+  Epoch 1/3 — Batch 5800/13967 — Loss: 0.0537
+  Epoch 1/3 — Batch 5850/13967 — Loss: 0.2373
+  Epoch 1/3 — Batch 5900/13967 — Loss: 0.2767
+  Epoch 1/3 — Batch 5950/13967 — Loss: 0.1087
+  Epoch 1/3 — Batch 6000/13967 — Loss: 0.0496
+  Epoch 1/3 — Batch 6050/13967 — Loss: 0.0453
+  Epoch 1/3 — Batch 6100/13967 — Loss: 0.0834
+  Epoch 1/3 — Batch 6150/13967 — Loss: 0.4897
+  Epoch 1/3 — Batch 6200/13967 — Loss: 0.1024
+  Epoch 1/3 — Batch 6250/13967 — Loss: 0.1391
+  Epoch 1/3 — Batch 6300/13967 — Loss: 0.3571
+  Epoch 1/3 — Batch 6350/13967 — Loss: 0.0158
+  Epoch 1/3 — Batch 6400/13967 — Loss: 0.2543
+  Epoch 1/3 — Batch 6450/13967 — Loss: 0.1050
+  Epoch 1/3 — Batch 6500/13967 — Loss: 0.0128
+  Epoch 1/3 — Batch 6550/13967 — Loss: 0.1635
+  Epoch 1/3 — Batch 6600/13967 — Loss: 0.0617
+  Epoch 1/3 — Batch 6650/13967 — Loss: 0.0234
+  Epoch 1/3 — Batch 6700/13967 — Loss: 0.0128
+  Epoch 1/3 — Batch 6750/13967 — Loss: 0.0178
+  Epoch 1/3 — Batch 6800/13967 — Loss: 0.0523
+  Epoch 1/3 — Batch 6850/13967 — Loss: 0.0153
+  Epoch 1/3 — Batch 6900/13967 — Loss: 0.0522
+  Epoch 1/3 — Batch 6950/13967 — Loss: 0.1265
+  Epoch 1/3 — Batch 7000/13967 — Loss: 0.0577
+  Epoch 1/3 — Batch 7050/13967 — Loss: 0.0466
+  Epoch 1/3 — Batch 7100/13967 — Loss: 0.0389
+  Epoch 1/3 — Batch 7150/13967 — Loss: 0.0315
+  Epoch 1/3 — Batch 7200/13967 — Loss: 0.1774
+  Epoch 1/3 — Batch 7250/13967 — Loss: 0.1555
+  Epoch 1/3 — Batch 7300/13967 — Loss: 0.0171
+  Epoch 1/3 — Batch 7350/13967 — Loss: 0.0540
+  Epoch 1/3 — Batch 7400/13967 — Loss: 0.0353
+  Epoch 1/3 — Batch 7450/13967 — Loss: 0.0041
+  Epoch 1/3 — Batch 7500/13967 — Loss: 0.1208
+  Epoch 1/3 — Batch 7550/13967 — Loss: 0.1702
+  Epoch 1/3 — Batch 7600/13967 — Loss: 0.1122
+  Epoch 1/3 — Batch 7650/13967 — Loss: 0.2615
+  Epoch 1/3 — Batch 7700/13967 — Loss: 0.2331
+  Epoch 1/3 — Batch 7750/13967 — Loss: 0.0361
+  Epoch 1/3 — Batch 7800/13967 — Loss: 0.0134
+  Epoch 1/3 — Batch 7850/13967 — Loss: 0.0433
+  Epoch 1/3 — Batch 7900/13967 — Loss: 0.0857
+  Epoch 1/3 — Batch 7950/13967 — Loss: 0.0693
+  Epoch 1/3 — Batch 8000/13967 — Loss: 0.2379
+  Epoch 1/3 — Batch 8050/13967 — Loss: 0.0610
+  Epoch 1/3 — Batch 8100/13967 — Loss: 0.0038
+  Epoch 1/3 — Batch 8150/13967 — Loss: 0.0987
+  Epoch 1/3 — Batch 8200/13967 — Loss: 0.0675
+  Epoch 1/3 — Batch 8250/13967 — Loss: 0.0727
+  Epoch 1/3 — Batch 8300/13967 — Loss: 0.0511
+  Epoch 1/3 — Batch 8350/13967 — Loss: 0.2068
+  Epoch 1/3 — Batch 8400/13967 — Loss: 0.0458
+  Epoch 1/3 — Batch 8450/13967 — Loss: 0.1811
+  Epoch 1/3 — Batch 8500/13967 — Loss: 0.0971
+  Epoch 1/3 — Batch 8550/13967 — Loss: 0.0180
+  Epoch 1/3 — Batch 8600/13967 — Loss: 0.0335
+  Epoch 1/3 — Batch 8650/13967 — Loss: 0.1836
+  Epoch 1/3 — Batch 8700/13967 — Loss: 0.0322
+  Epoch 1/3 — Batch 8750/13967 — Loss: 0.1984
+  Epoch 1/3 — Batch 8800/13967 — Loss: 0.1054
+  Epoch 1/3 — Batch 8850/13967 — Loss: 0.1223
+  Epoch 1/3 — Batch 8900/13967 — Loss: 0.4233
+  Epoch 1/3 — Batch 8950/13967 — Loss: 0.0577
+  Epoch 1/3 — Batch 9000/13967 — Loss: 0.0298
+  Epoch 1/3 — Batch 9050/13967 — Loss: 0.0615
+  Epoch 1/3 — Batch 9100/13967 — Loss: 0.0773
+  Epoch 1/3 — Batch 9150/13967 — Loss: 0.1157
+  Epoch 1/3 — Batch 9200/13967 — Loss: 0.1830
+  Epoch 1/3 — Batch 9250/13967 — Loss: 0.1780
+  Epoch 1/3 — Batch 9300/13967 — Loss: 0.0214
+  Epoch 1/3 — Batch 9350/13967 — Loss: 0.0969
+  Epoch 1/3 — Batch 9400/13967 — Loss: 0.2728
+  Epoch 1/3 — Batch 9450/13967 — Loss: 0.0947
+  Epoch 1/3 — Batch 9500/13967 — Loss: 0.0161
+  Epoch 1/3 — Batch 9550/13967 — Loss: 0.0876
+  Epoch 1/3 — Batch 9600/13967 — Loss: 0.0103
+  Epoch 1/3 — Batch 9650/13967 — Loss: 0.1513
+  Epoch 1/3 — Batch 9700/13967 — Loss: 0.1663
+  Epoch 1/3 — Batch 9750/13967 — Loss: 0.0086
+  Epoch 1/3 — Batch 9800/13967 — Loss: 0.1695
+  Epoch 1/3 — Batch 9850/13967 — Loss: 0.1269
+  Epoch 1/3 — Batch 9900/13967 — Loss: 0.0833
+  Epoch 1/3 — Batch 9950/13967 — Loss: 0.0199
+  Epoch 1/3 — Batch 10000/13967 — Loss: 0.1317
+  Epoch 1/3 — Batch 10050/13967 — Loss: 0.0528
+  Epoch 1/3 — Batch 10100/13967 — Loss: 0.0600
+  Epoch 1/3 — Batch 10150/13967 — Loss: 0.0174
+  Epoch 1/3 — Batch 10200/13967 — Loss: 0.1088
+  Epoch 1/3 — Batch 10250/13967 — Loss: 0.0252
+  Epoch 1/3 — Batch 10300/13967 — Loss: 0.0072
+  Epoch 1/3 — Batch 10350/13967 — Loss: 0.1306
+  Epoch 1/3 — Batch 10400/13967 — Loss: 0.0410
+  Epoch 1/3 — Batch 10450/13967 — Loss: 0.0623
+  Epoch 1/3 — Batch 10500/13967 — Loss: 0.0519
+  Epoch 1/3 — Batch 10550/13967 — Loss: 0.2189
+  Epoch 1/3 — Batch 10600/13967 — Loss: 0.1421
+  Epoch 1/3 — Batch 10650/13967 — Loss: 0.0099
+  Epoch 1/3 — Batch 10700/13967 — Loss: 0.0049
+  Epoch 1/3 — Batch 10750/13967 — Loss: 0.0040
+  Epoch 1/3 — Batch 10800/13967 — Loss: 0.1137
+  Epoch 1/3 — Batch 10850/13967 — Loss: 0.2230
+  Epoch 1/3 — Batch 10900/13967 — Loss: 0.0915
+  Epoch 1/3 — Batch 10950/13967 — Loss: 0.0039
+  Epoch 1/3 — Batch 11000/13967 — Loss: 0.0233
+  Epoch 1/3 — Batch 11050/13967 — Loss: 0.0153
+  Epoch 1/3 — Batch 11100/13967 — Loss: 0.1760
+  Epoch 1/3 — Batch 11150/13967 — Loss: 0.0039
+  Epoch 1/3 — Batch 11200/13967 — Loss: 0.0094
+  Epoch 1/3 — Batch 11250/13967 — Loss: 0.0198
+  Epoch 1/3 — Batch 11300/13967 — Loss: 0.1010
+  Epoch 1/3 — Batch 11350/13967 — Loss: 0.0876
+  Epoch 1/3 — Batch 11400/13967 — Loss: 0.1698
+  Epoch 1/3 — Batch 11450/13967 — Loss: 0.0537
+  Epoch 1/3 — Batch 11500/13967 — Loss: 0.1537
+  Epoch 1/3 — Batch 11550/13967 — Loss: 0.0177
+  Epoch 1/3 — Batch 11600/13967 — Loss: 0.0586
+  Epoch 1/3 — Batch 11650/13967 — Loss: 0.0201
+  Epoch 1/3 — Batch 11700/13967 — Loss: 0.1339
+  Epoch 1/3 — Batch 11750/13967 — Loss: 0.0986
+  Epoch 1/3 — Batch 11800/13967 — Loss: 0.0234
+  Epoch 1/3 — Batch 11850/13967 — Loss: 0.0411
+  Epoch 1/3 — Batch 11900/13967 — Loss: 0.0774
+  Epoch 1/3 — Batch 11950/13967 — Loss: 0.1239
+  Epoch 1/3 — Batch 12000/13967 — Loss: 0.1983
+  Epoch 1/3 — Batch 12050/13967 — Loss: 0.0434
+  Epoch 1/3 — Batch 12100/13967 — Loss: 0.0823
+  Epoch 1/3 — Batch 12150/13967 — Loss: 0.2937
+  Epoch 1/3 — Batch 12200/13967 — Loss: 0.0957
+  Epoch 1/3 — Batch 12250/13967 — Loss: 0.0450
+  Epoch 1/3 — Batch 12300/13967 — Loss: 0.0096
+  Epoch 1/3 — Batch 12350/13967 — Loss: 0.0179
+  Epoch 1/3 — Batch 12400/13967 — Loss: 0.0787
+  Epoch 1/3 — Batch 12450/13967 — Loss: 0.0172
+  Epoch 1/3 — Batch 12500/13967 — Loss: 0.0679
+  Epoch 1/3 — Batch 12550/13967 — Loss: 0.0065
+  Epoch 1/3 — Batch 12600/13967 — Loss: 0.0041
+  Epoch 1/3 — Batch 12650/13967 — Loss: 0.0537
+  Epoch 1/3 — Batch 12700/13967 — Loss: 0.0576
+  Epoch 1/3 — Batch 12750/13967 — Loss: 0.0086
+  Epoch 1/3 — Batch 12800/13967 — Loss: 0.0528
+  Epoch 1/3 — Batch 12850/13967 — Loss: 0.1898
+  Epoch 1/3 — Batch 12900/13967 — Loss: 0.0908
+  Epoch 1/3 — Batch 12950/13967 — Loss: 0.1510
+  Epoch 1/3 — Batch 13000/13967 — Loss: 0.2080
+  Epoch 1/3 — Batch 13050/13967 — Loss: 0.0088
+  Epoch 1/3 — Batch 13100/13967 — Loss: 0.0144
+  Epoch 1/3 — Batch 13150/13967 — Loss: 0.0149
+  Epoch 1/3 — Batch 13200/13967 — Loss: 0.0122
+  Epoch 1/3 — Batch 13250/13967 — Loss: 0.0231
+  Epoch 1/3 — Batch 13300/13967 — Loss: 0.2723
+  Epoch 1/3 — Batch 13350/13967 — Loss: 0.0262
+  Epoch 1/3 — Batch 13400/13967 — Loss: 0.0610
+  Epoch 1/3 — Batch 13450/13967 — Loss: 0.0069
+  Epoch 1/3 — Batch 13500/13967 — Loss: 0.2332
+  Epoch 1/3 — Batch 13550/13967 — Loss: 0.0088
+  Epoch 1/3 — Batch 13600/13967 — Loss: 0.0599
+  Epoch 1/3 — Batch 13650/13967 — Loss: 0.0329
+  Epoch 1/3 — Batch 13700/13967 — Loss: 0.1477
+  Epoch 1/3 — Batch 13750/13967 — Loss: 0.0674
+  Epoch 1/3 — Batch 13800/13967 — Loss: 0.1814
+  Epoch 1/3 — Batch 13850/13967 — Loss: 0.0119
+  Epoch 1/3 — Batch 13900/13967 — Loss: 0.2475
+  Epoch 1/3 — Batch 13950/13967 — Loss: 0.0208
+  Epoch 1/3 — Avg Loss: 0.1284
+  Epoch 2/3 — Batch 50/13967 — Loss: 0.0276
+  Epoch 2/3 — Batch 100/13967 — Loss: 0.1574
+  Epoch 2/3 — Batch 150/13967 — Loss: 0.0132
+  Epoch 2/3 — Batch 200/13967 — Loss: 0.0155
+  Epoch 2/3 — Batch 250/13967 — Loss: 0.0967
+  Epoch 2/3 — Batch 300/13967 — Loss: 0.2395
+  Epoch 2/3 — Batch 350/13967 — Loss: 0.2455
+  Epoch 2/3 — Batch 400/13967 — Loss: 0.1608
+  Epoch 2/3 — Batch 450/13967 — Loss: 0.0689
+  Epoch 2/3 — Batch 500/13967 — Loss: 0.0051
+  Epoch 2/3 — Batch 550/13967 — Loss: 0.0032
+  Epoch 2/3 — Batch 600/13967 — Loss: 0.0064
+  Epoch 2/3 — Batch 650/13967 — Loss: 0.0177
+  Epoch 2/3 — Batch 700/13967 — Loss: 0.0348
+  Epoch 2/3 — Batch 750/13967 — Loss: 0.1606
+  Epoch 2/3 — Batch 800/13967 — Loss: 0.0621
+  Epoch 2/3 — Batch 850/13967 — Loss: 0.0135
+  Epoch 2/3 — Batch 900/13967 — Loss: 0.0949
+  Epoch 2/3 — Batch 950/13967 — Loss: 0.1314
+  Epoch 2/3 — Batch 1000/13967 — Loss: 0.0994
+  Epoch 2/3 — Batch 1050/13967 — Loss: 0.3192
+  Epoch 2/3 — Batch 1100/13967 — Loss: 0.0310
+  Epoch 2/3 — Batch 1150/13967 — Loss: 0.0036
+  Epoch 2/3 — Batch 1200/13967 — Loss: 0.3166
+  Epoch 2/3 — Batch 1250/13967 — Loss: 0.0137
+  Epoch 2/3 — Batch 1300/13967 — Loss: 0.1019
+  Epoch 2/3 — Batch 1350/13967 — Loss: 0.0805
+  Epoch 2/3 — Batch 1400/13967 — Loss: 0.1077
+  Epoch 2/3 — Batch 1450/13967 — Loss: 0.0170
+  Epoch 2/3 — Batch 1500/13967 — Loss: 0.0699
+  Epoch 2/3 — Batch 1550/13967 — Loss: 0.0679
+  Epoch 2/3 — Batch 1600/13967 — Loss: 0.0041
+  Epoch 2/3 — Batch 1650/13967 — Loss: 0.0228
+  Epoch 2/3 — Batch 1700/13967 — Loss: 0.0499
+  Epoch 2/3 — Batch 1750/13967 — Loss: 0.0339
+  Epoch 2/3 — Batch 1800/13967 — Loss: 0.0061
+  Epoch 2/3 — Batch 1850/13967 — Loss: 0.0049
+  Epoch 2/3 — Batch 1900/13967 — Loss: 0.1913
+  Epoch 2/3 — Batch 1950/13967 — Loss: 0.0954
+  Epoch 2/3 — Batch 2000/13967 — Loss: 0.0049
+  Epoch 2/3 — Batch 2050/13967 — Loss: 0.2189
+  Epoch 2/3 — Batch 2100/13967 — Loss: 0.0584
+  Epoch 2/3 — Batch 2150/13967 — Loss: 0.1341
+  Epoch 2/3 — Batch 2200/13967 — Loss: 0.0239
+  Epoch 2/3 — Batch 2250/13967 — Loss: 0.1371
+  Epoch 2/3 — Batch 2300/13967 — Loss: 0.0862
+  Epoch 2/3 — Batch 2350/13967 — Loss: 0.0189
+  Epoch 2/3 — Batch 2400/13967 — Loss: 0.1472
+  Epoch 2/3 — Batch 2450/13967 — Loss: 0.1998
+  Epoch 2/3 — Batch 2500/13967 — Loss: 0.0026
+  Epoch 2/3 — Batch 2550/13967 — Loss: 0.0047
+  Epoch 2/3 — Batch 2600/13967 — Loss: 0.0078
+  Epoch 2/3 — Batch 2650/13967 — Loss: 0.0630
+  Epoch 2/3 — Batch 2700/13967 — Loss: 0.2697
+  Epoch 2/3 — Batch 2750/13967 — Loss: 0.0034
+  Epoch 2/3 — Batch 2800/13967 — Loss: 0.0034
+  Epoch 2/3 — Batch 2850/13967 — Loss: 0.0009
+  Epoch 2/3 — Batch 2900/13967 — Loss: 0.0159
+  Epoch 2/3 — Batch 2950/13967 — Loss: 0.0150
+  Epoch 2/3 — Batch 3000/13967 — Loss: 0.1356
+  Epoch 2/3 — Batch 3050/13967 — Loss: 0.0024
+  Epoch 2/3 — Batch 3100/13967 — Loss: 0.1275
+  Epoch 2/3 — Batch 3150/13967 — Loss: 0.3242
+  Epoch 2/3 — Batch 3200/13967 — Loss: 0.0580
+  Epoch 2/3 — Batch 3250/13967 — Loss: 0.0168
+  Epoch 2/3 — Batch 3300/13967 — Loss: 0.0058
+  Epoch 2/3 — Batch 3350/13967 — Loss: 0.2653
+  Epoch 2/3 — Batch 3400/13967 — Loss: 0.0024
+  Epoch 2/3 — Batch 3450/13967 — Loss: 0.0288
+  Epoch 2/3 — Batch 3500/13967 — Loss: 0.0022
+  Epoch 2/3 — Batch 3550/13967 — Loss: 0.1775
+  Epoch 2/3 — Batch 3600/13967 — Loss: 0.0188
+  Epoch 2/3 — Batch 3650/13967 — Loss: 0.0070
+  Epoch 2/3 — Batch 3700/13967 — Loss: 0.0061
+  Epoch 2/3 — Batch 3750/13967 — Loss: 0.1171
+  Epoch 2/3 — Batch 3800/13967 — Loss: 0.0543
+  Epoch 2/3 — Batch 3850/13967 — Loss: 0.0036
+  Epoch 2/3 — Batch 3900/13967 — Loss: 0.1190
+  Epoch 2/3 — Batch 3950/13967 — Loss: 0.0053
+  Epoch 2/3 — Batch 4000/13967 — Loss: 0.0063
+  Epoch 2/3 — Batch 4050/13967 — Loss: 0.0050
+  Epoch 2/3 — Batch 4100/13967 — Loss: 0.0156
+  Epoch 2/3 — Batch 4150/13967 — Loss: 0.1110
+  Epoch 2/3 — Batch 4200/13967 — Loss: 0.0039
+  Epoch 2/3 — Batch 4250/13967 — Loss: 0.0780
+  Epoch 2/3 — Batch 4300/13967 — Loss: 0.0665
+  Epoch 2/3 — Batch 4350/13967 — Loss: 0.0621
+  Epoch 2/3 — Batch 4400/13967 — Loss: 0.0172
+  Epoch 2/3 — Batch 4450/13967 — Loss: 0.1974
+  Epoch 2/3 — Batch 4500/13967 — Loss: 0.0051
+  Epoch 2/3 — Batch 4550/13967 — Loss: 0.0833
+  Epoch 2/3 — Batch 4600/13967 — Loss: 0.0051
+  Epoch 2/3 — Batch 4650/13967 — Loss: 0.0527
+  Epoch 2/3 — Batch 4700/13967 — Loss: 0.0818
+  Epoch 2/3 — Batch 4750/13967 — Loss: 0.0292
+  Epoch 2/3 — Batch 4800/13967 — Loss: 0.0341
+  Epoch 2/3 — Batch 4850/13967 — Loss: 0.0500
+  Epoch 2/3 — Batch 4900/13967 — Loss: 0.1384
+  Epoch 2/3 — Batch 4950/13967 — Loss: 0.0957
+  Epoch 2/3 — Batch 5000/13967 — Loss: 0.0063
+  Epoch 2/3 — Batch 5050/13967 — Loss: 0.1197
+  Epoch 2/3 — Batch 5100/13967 — Loss: 0.0143
+  Epoch 2/3 — Batch 5150/13967 — Loss: 0.0083
+  Epoch 2/3 — Batch 5200/13967 — Loss: 0.0010
+  Epoch 2/3 — Batch 5250/13967 — Loss: 0.0156
+  Epoch 2/3 — Batch 5300/13967 — Loss: 0.1949
+  Epoch 2/3 — Batch 5350/13967 — Loss: 0.0029
+  Epoch 2/3 — Batch 5400/13967 — Loss: 0.0044
+  Epoch 2/3 — Batch 5450/13967 — Loss: 0.0089
+  Epoch 2/3 — Batch 5500/13967 — Loss: 0.1453
+  Epoch 2/3 — Batch 5550/13967 — Loss: 0.0752
+  Epoch 2/3 — Batch 5600/13967 — Loss: 0.0056
+  Epoch 2/3 — Batch 5650/13967 — Loss: 0.2242
+  Epoch 2/3 — Batch 5700/13967 — Loss: 0.1302
+  Epoch 2/3 — Batch 5750/13967 — Loss: 0.0177
+  Epoch 2/3 — Batch 5800/13967 — Loss: 0.0676
+  Epoch 2/3 — Batch 5850/13967 — Loss: 0.1120
+  Epoch 2/3 — Batch 5900/13967 — Loss: 0.0032
+  Epoch 2/3 — Batch 5950/13967 — Loss: 0.1027
+  Epoch 2/3 — Batch 6000/13967 — Loss: 0.0709
+  Epoch 2/3 — Batch 6050/13967 — Loss: 0.0098
+  Epoch 2/3 — Batch 6100/13967 — Loss: 0.1188
+  Epoch 2/3 — Batch 6150/13967 — Loss: 0.1276
+  Epoch 2/3 — Batch 6200/13967 — Loss: 0.0572
+  Epoch 2/3 — Batch 6250/13967 — Loss: 0.0320
+  Epoch 2/3 — Batch 6300/13967 — Loss: 0.0090
+  Epoch 2/3 — Batch 6350/13967 — Loss: 0.0111
+  Epoch 2/3 — Batch 6400/13967 — Loss: 0.1506
+  Epoch 2/3 — Batch 6450/13967 — Loss: 0.0199
+  Epoch 2/3 — Batch 6500/13967 — Loss: 0.1250
+  Epoch 2/3 — Batch 6550/13967 — Loss: 0.0279
+  Epoch 2/3 — Batch 6600/13967 — Loss: 0.0130
+  Epoch 2/3 — Batch 6650/13967 — Loss: 0.0653
+  Epoch 2/3 — Batch 6700/13967 — Loss: 0.0009
+  Epoch 2/3 — Batch 6750/13967 — Loss: 0.0830
+  Epoch 2/3 — Batch 6800/13967 — Loss: 0.0066
+  Epoch 2/3 — Batch 6850/13967 — Loss: 0.0069
+  Epoch 2/3 — Batch 6900/13967 — Loss: 0.0013
+  Epoch 2/3 — Batch 6950/13967 — Loss: 0.0091
+  Epoch 2/3 — Batch 7000/13967 — Loss: 0.0047
+  Epoch 2/3 — Batch 7050/13967 — Loss: 0.0122
+  Epoch 2/3 — Batch 7100/13967 — Loss: 0.1789
+  Epoch 2/3 — Batch 7150/13967 — Loss: 0.1336
+  Epoch 2/3 — Batch 7200/13967 — Loss: 0.0229
+  Epoch 2/3 — Batch 7250/13967 — Loss: 0.2955
+  Epoch 2/3 — Batch 7300/13967 — Loss: 0.1834
+  Epoch 2/3 — Batch 7350/13967 — Loss: 0.0049
+  Epoch 2/3 — Batch 7400/13967 — Loss: 0.0079
+  Epoch 2/3 — Batch 7450/13967 — Loss: 0.1039
+  Epoch 2/3 — Batch 7500/13967 — Loss: 0.0262
+  Epoch 2/3 — Batch 7550/13967 — Loss: 0.0662
+  Epoch 2/3 — Batch 7600/13967 — Loss: 0.0855
+  Epoch 2/3 — Batch 7650/13967 — Loss: 0.1596
+  Epoch 2/3 — Batch 7700/13967 — Loss: 0.0035
+  Epoch 2/3 — Batch 7750/13967 — Loss: 0.0877
+  Epoch 2/3 — Batch 7800/13967 — Loss: 0.0123
+  Epoch 2/3 — Batch 7850/13967 — Loss: 0.0049
+  Epoch 2/3 — Batch 7900/13967 — Loss: 0.0029
+  Epoch 2/3 — Batch 7950/13967 — Loss: 0.0132
+  Epoch 2/3 — Batch 8000/13967 — Loss: 0.0067
+  Epoch 2/3 — Batch 8050/13967 — Loss: 0.1086
+  Epoch 2/3 — Batch 8100/13967 — Loss: 0.0050
+  Epoch 2/3 — Batch 8150/13967 — Loss: 0.0070
+  Epoch 2/3 — Batch 8200/13967 — Loss: 0.0807
+  Epoch 2/3 — Batch 8250/13967 — Loss: 0.0153
+  Epoch 2/3 — Batch 8300/13967 — Loss: 0.0073
+  Epoch 2/3 — Batch 8350/13967 — Loss: 0.0045
+  Epoch 2/3 — Batch 8400/13967 — Loss: 0.0925
+  Epoch 2/3 — Batch 8450/13967 — Loss: 0.0604
+  Epoch 2/3 — Batch 8500/13967 — Loss: 0.0026
+  Epoch 2/3 — Batch 8550/13967 — Loss: 0.1879
+  Epoch 2/3 — Batch 8600/13967 — Loss: 0.0175
+  Epoch 2/3 — Batch 8650/13967 — Loss: 0.0014
+  Epoch 2/3 — Batch 8700/13967 — Loss: 0.1065
+  Epoch 2/3 — Batch 8750/13967 — Loss: 0.0012
+  Epoch 2/3 — Batch 8800/13967 — Loss: 0.0887
+  Epoch 2/3 — Batch 8850/13967 — Loss: 0.1040
+  Epoch 2/3 — Batch 8900/13967 — Loss: 0.0659
+  Epoch 2/3 — Batch 8950/13967 — Loss: 0.1743
+  Epoch 2/3 — Batch 9000/13967 — Loss: 0.0354
+  Epoch 2/3 — Batch 9050/13967 — Loss: 0.0129
+  Epoch 2/3 — Batch 9100/13967 — Loss: 0.0400
+  Epoch 2/3 — Batch 9150/13967 — Loss: 0.0075
+  Epoch 2/3 — Batch 9200/13967 — Loss: 0.1458
+  Epoch 2/3 — Batch 9250/13967 — Loss: 0.0077
+  Epoch 2/3 — Batch 9300/13967 — Loss: 0.1402
+  Epoch 2/3 — Batch 9350/13967 — Loss: 0.0384
+  Epoch 2/3 — Batch 9400/13967 — Loss: 0.0760
+  Epoch 2/3 — Batch 9450/13967 — Loss: 0.0021
+  Epoch 2/3 — Batch 9500/13967 — Loss: 0.0052
+  Epoch 2/3 — Batch 9550/13967 — Loss: 0.0111
+  Epoch 2/3 — Batch 9600/13967 — Loss: 0.0064
+  Epoch 2/3 — Batch 9650/13967 — Loss: 0.0691
+  Epoch 2/3 — Batch 9700/13967 — Loss: 0.1509
+  Epoch 2/3 — Batch 9750/13967 — Loss: 0.1844
+  Epoch 2/3 — Batch 9800/13967 — Loss: 0.0168
+  Epoch 2/3 — Batch 9850/13967 — Loss: 0.0112
+  Epoch 2/3 — Batch 9900/13967 — Loss: 0.0183
+  Epoch 2/3 — Batch 9950/13967 — Loss: 0.0053
+  Epoch 2/3 — Batch 10000/13967 — Loss: 0.0049
+  Epoch 2/3 — Batch 10050/13967 — Loss: 0.0039
+  Epoch 2/3 — Batch 10100/13967 — Loss: 0.0037
+  Epoch 2/3 — Batch 10150/13967 — Loss: 0.1110
+  Epoch 2/3 — Batch 10200/13967 — Loss: 0.0057
+  Epoch 2/3 — Batch 10250/13967 — Loss: 0.0015
+  Epoch 2/3 — Batch 10300/13967 — Loss: 0.0511
+  Epoch 2/3 — Batch 10350/13967 — Loss: 0.2113
+  Epoch 2/3 — Batch 10400/13967 — Loss: 0.2232
+  Epoch 2/3 — Batch 10450/13967 — Loss: 0.0731
+  Epoch 2/3 — Batch 10500/13967 — Loss: 0.0894
+  Epoch 2/3 — Batch 10550/13967 — Loss: 0.1032
+  Epoch 2/3 — Batch 10600/13967 — Loss: 0.0120
+  Epoch 2/3 — Batch 10650/13967 — Loss: 0.1701
+  Epoch 2/3 — Batch 10700/13967 — Loss: 0.0062
+  Epoch 2/3 — Batch 10750/13967 — Loss: 0.1194
+  Epoch 2/3 — Batch 10800/13967 — Loss: 0.0030
+  Epoch 2/3 — Batch 10850/13967 — Loss: 0.0138
+  Epoch 2/3 — Batch 10900/13967 — Loss: 0.0014
+  Epoch 2/3 — Batch 10950/13967 — Loss: 0.2310
+  Epoch 2/3 — Batch 11000/13967 — Loss: 0.0072
+  Epoch 2/3 — Batch 11050/13967 — Loss: 0.0952
+  Epoch 2/3 — Batch 11100/13967 — Loss: 0.0057
+  Epoch 2/3 — Batch 11150/13967 — Loss: 0.0587
+  Epoch 2/3 — Batch 11200/13967 — Loss: 0.0829
+  Epoch 2/3 — Batch 11250/13967 — Loss: 0.0957
+  Epoch 2/3 — Batch 11300/13967 — Loss: 0.0120
+  Epoch 2/3 — Batch 11350/13967 — Loss: 0.0059
+  Epoch 2/3 — Batch 11400/13967 — Loss: 0.2285
+  Epoch 2/3 — Batch 11450/13967 — Loss: 0.0712
+  Epoch 2/3 — Batch 11500/13967 — Loss: 0.2045
+  Epoch 2/3 — Batch 11550/13967 — Loss: 0.0039
+  Epoch 2/3 — Batch 11600/13967 — Loss: 0.0028
+  Epoch 2/3 — Batch 11650/13967 — Loss: 0.0939
+  Epoch 2/3 — Batch 11700/13967 — Loss: 0.0038
+  Epoch 2/3 — Batch 11750/13967 — Loss: 0.0039
+  Epoch 2/3 — Batch 11800/13967 — Loss: 0.0736
+  Epoch 2/3 — Batch 11850/13967 — Loss: 0.0070
+  Epoch 2/3 — Batch 11900/13967 — Loss: 0.0042
+  Epoch 2/3 — Batch 11950/13967 — Loss: 0.0073
+  Epoch 2/3 — Batch 12000/13967 — Loss: 0.0210
+  Epoch 2/3 — Batch 12050/13967 — Loss: 0.0049
+  Epoch 2/3 — Batch 12100/13967 — Loss: 0.0125
+  Epoch 2/3 — Batch 12150/13967 — Loss: 0.0903
+  Epoch 2/3 — Batch 12200/13967 — Loss: 0.0033
+  Epoch 2/3 — Batch 12250/13967 — Loss: 0.1244
+  Epoch 2/3 — Batch 12300/13967 — Loss: 0.1039
+  Epoch 2/3 — Batch 12350/13967 — Loss: 0.1470
+  Epoch 2/3 — Batch 12400/13967 — Loss: 0.0040
+  Epoch 2/3 — Batch 12450/13967 — Loss: 0.2563
+  Epoch 2/3 — Batch 12500/13967 — Loss: 0.0018
+  Epoch 2/3 — Batch 12550/13967 — Loss: 0.0101
+  Epoch 2/3 — Batch 12600/13967 — Loss: 0.0460
+  Epoch 2/3 — Batch 12650/13967 — Loss: 0.0075
+  Epoch 2/3 — Batch 12700/13967 — Loss: 0.0064
+  Epoch 2/3 — Batch 12750/13967 — Loss: 0.0041
+  Epoch 2/3 — Batch 12800/13967 — Loss: 0.0780
+  Epoch 2/3 — Batch 12850/13967 — Loss: 0.1113
+  Epoch 2/3 — Batch 12900/13967 — Loss: 0.0035
+  Epoch 2/3 — Batch 12950/13967 — Loss: 0.1530
+  Epoch 2/3 — Batch 13000/13967 — Loss: 0.1102
+  Epoch 2/3 — Batch 13050/13967 — Loss: 0.0837
+  Epoch 2/3 — Batch 13100/13967 — Loss: 0.0963
+  Epoch 2/3 — Batch 13150/13967 — Loss: 0.0199
+  Epoch 2/3 — Batch 13200/13967 — Loss: 0.0613
+  Epoch 2/3 — Batch 13250/13967 — Loss: 0.0150
+  Epoch 2/3 — Batch 13300/13967 — Loss: 0.0008
+  Epoch 2/3 — Batch 13350/13967 — Loss: 0.0673
+  Epoch 2/3 — Batch 13400/13967 — Loss: 0.0085
+  Epoch 2/3 — Batch 13450/13967 — Loss: 0.0049
+  Epoch 2/3 — Batch 13500/13967 — Loss: 0.0199
+  Epoch 2/3 — Batch 13550/13967 — Loss: 0.0022
+  Epoch 2/3 — Batch 13600/13967 — Loss: 0.0014
+  Epoch 2/3 — Batch 13650/13967 — Loss: 0.0040
+  Epoch 2/3 — Batch 13700/13967 — Loss: 0.0073
+  Epoch 2/3 — Batch 13750/13967 — Loss: 0.3298
+  Epoch 2/3 — Batch 13800/13967 — Loss: 0.1112
+  Epoch 2/3 — Batch 13850/13967 — Loss: 0.0052
+  Epoch 2/3 — Batch 13900/13967 — Loss: 0.0087
+  Epoch 2/3 — Batch 13950/13967 — Loss: 0.0024
+  Epoch 2/3 — Avg Loss: 0.0628
+  Epoch 3/3 — Batch 50/13967 — Loss: 0.0325
+  Epoch 3/3 — Batch 100/13967 — Loss: 0.0031
+  Epoch 3/3 — Batch 150/13967 — Loss: 0.0034
+  Epoch 3/3 — Batch 200/13967 — Loss: 0.0067
+  Epoch 3/3 — Batch 250/13967 — Loss: 0.0004
+  Epoch 3/3 — Batch 300/13967 — Loss: 0.0015
+  Epoch 3/3 — Batch 350/13967 — Loss: 0.0245
+  Epoch 3/3 — Batch 400/13967 — Loss: 0.0306
+  Epoch 3/3 — Batch 450/13967 — Loss: 0.0011
+  Epoch 3/3 — Batch 500/13967 — Loss: 0.0912
+  Epoch 3/3 — Batch 550/13967 — Loss: 0.0013
+  Epoch 3/3 — Batch 600/13967 — Loss: 0.0019
+  Epoch 3/3 — Batch 650/13967 — Loss: 0.0289
+  Epoch 3/3 — Batch 700/13967 — Loss: 0.0014
+  Epoch 3/3 — Batch 750/13967 — Loss: 0.3491
+  Epoch 3/3 — Batch 800/13967 — Loss: 0.0023
+  Epoch 3/3 — Batch 850/13967 — Loss: 0.0843
+  Epoch 3/3 — Batch 900/13967 — Loss: 0.0006
+  Epoch 3/3 — Batch 950/13967 — Loss: 0.0015
+  Epoch 3/3 — Batch 1000/13967 — Loss: 0.1599
+  Epoch 3/3 — Batch 1050/13967 — Loss: 0.0125
+  Epoch 3/3 — Batch 1100/13967 — Loss: 0.0020
+  Epoch 3/3 — Batch 1150/13967 — Loss: 0.1276
+  Epoch 3/3 — Batch 1200/13967 — Loss: 0.1328
+  Epoch 3/3 — Batch 1250/13967 — Loss: 0.0686
+  Epoch 3/3 — Batch 1300/13967 — Loss: 0.0008
+  Epoch 3/3 — Batch 1350/13967 — Loss: 0.0081
+  Epoch 3/3 — Batch 1400/13967 — Loss: 0.0019
+  Epoch 3/3 — Batch 1450/13967 — Loss: 0.0023
+  Epoch 3/3 — Batch 1500/13967 — Loss: 0.0047
+  Epoch 3/3 — Batch 1550/13967 — Loss: 0.0031
+  Epoch 3/3 — Batch 1600/13967 — Loss: 0.0631
+  Epoch 3/3 — Batch 1650/13967 — Loss: 0.0032
+  Epoch 3/3 — Batch 1700/13967 — Loss: 0.2375
+  Epoch 3/3 — Batch 1750/13967 — Loss: 0.0059
+  Epoch 3/3 — Batch 1800/13967 — Loss: 0.0032
+  Epoch 3/3 — Batch 1850/13967 — Loss: 0.0020
+  Epoch 3/3 — Batch 1900/13967 — Loss: 0.0642
+  Epoch 3/3 — Batch 1950/13967 — Loss: 0.0010
+  Epoch 3/3 — Batch 2000/13967 — Loss: 0.0023
+  Epoch 3/3 — Batch 2050/13967 — Loss: 0.0033
+  Epoch 3/3 — Batch 2100/13967 — Loss: 0.0986
+  Epoch 3/3 — Batch 2150/13967 — Loss: 0.0009
+  Epoch 3/3 — Batch 2200/13967 — Loss: 0.1299
+  Epoch 3/3 — Batch 2250/13967 — Loss: 0.0098
+  Epoch 3/3 — Batch 2300/13967 — Loss: 0.0032
+  Epoch 3/3 — Batch 2350/13967 — Loss: 0.0252
+  Epoch 3/3 — Batch 2400/13967 — Loss: 0.0055
+  Epoch 3/3 — Batch 2450/13967 — Loss: 0.0021
+  Epoch 3/3 — Batch 2500/13967 — Loss: 0.0040
+  Epoch 3/3 — Batch 2550/13967 — Loss: 0.0061
+  Epoch 3/3 — Batch 2600/13967 — Loss: 0.1504
+  Epoch 3/3 — Batch 2650/13967 — Loss: 0.0006
+  Epoch 3/3 — Batch 2700/13967 — Loss: 0.0015
+  Epoch 3/3 — Batch 2750/13967 — Loss: 0.1321
+  Epoch 3/3 — Batch 2800/13967 — Loss: 0.0014
+  Epoch 3/3 — Batch 2850/13967 — Loss: 0.0007
+  Epoch 3/3 — Batch 2900/13967 — Loss: 0.0010
+  Epoch 3/3 — Batch 2950/13967 — Loss: 0.0005
+  Epoch 3/3 — Batch 3000/13967 — Loss: 0.0254
+  Epoch 3/3 — Batch 3050/13967 — Loss: 0.0164
+  Epoch 3/3 — Batch 3100/13967 — Loss: 0.0006
+  Epoch 3/3 — Batch 3150/13967 — Loss: 0.0008
+  Epoch 3/3 — Batch 3200/13967 — Loss: 0.0056
+  Epoch 3/3 — Batch 3250/13967 — Loss: 0.0019
+  Epoch 3/3 — Batch 3300/13967 — Loss: 0.1687
+  Epoch 3/3 — Batch 3350/13967 — Loss: 0.0011
+  Epoch 3/3 — Batch 3400/13967 — Loss: 0.0006
+  Epoch 3/3 — Batch 3450/13967 — Loss: 0.0670
+  Epoch 3/3 — Batch 3500/13967 — Loss: 0.0959
+  Epoch 3/3 — Batch 3550/13967 — Loss: 0.0121
+  Epoch 3/3 — Batch 3600/13967 — Loss: 0.0328
+  Epoch 3/3 — Batch 3650/13967 — Loss: 0.0017
+  Epoch 3/3 — Batch 3700/13967 — Loss: 0.0471
+  Epoch 3/3 — Batch 3750/13967 — Loss: 0.0007
+  Epoch 3/3 — Batch 3800/13967 — Loss: 0.0014
+  Epoch 3/3 — Batch 3850/13967 — Loss: 0.1928
+  Epoch 3/3 — Batch 3900/13967 — Loss: 0.0060
+  Epoch 3/3 — Batch 3950/13967 — Loss: 0.0012
+  Epoch 3/3 — Batch 4000/13967 — Loss: 0.5140
+  Epoch 3/3 — Batch 4050/13967 — Loss: 0.0498
+  Epoch 3/3 — Batch 4100/13967 — Loss: 0.0018
+  Epoch 3/3 — Batch 4150/13967 — Loss: 0.0023
+  Epoch 3/3 — Batch 4200/13967 — Loss: 0.0016
+  Epoch 3/3 — Batch 4250/13967 — Loss: 0.0032
+  Epoch 3/3 — Batch 4300/13967 — Loss: 0.0431
+  Epoch 3/3 — Batch 4350/13967 — Loss: 0.0462
+  Epoch 3/3 — Batch 4400/13967 — Loss: 0.0010
+  Epoch 3/3 — Batch 4450/13967 — Loss: 0.2192
+  Epoch 3/3 — Batch 4500/13967 — Loss: 0.0673
+  Epoch 3/3 — Batch 4550/13967 — Loss: 0.0027
+  Epoch 3/3 — Batch 4600/13967 — Loss: 0.0010
+  Epoch 3/3 — Batch 4650/13967 — Loss: 0.0007
+  Epoch 3/3 — Batch 4700/13967 — Loss: 0.1326
+  Epoch 3/3 — Batch 4750/13967 — Loss: 0.0026
+  Epoch 3/3 — Batch 4800/13967 — Loss: 0.0101
+  Epoch 3/3 — Batch 4850/13967 — Loss: 0.0039
+  Epoch 3/3 — Batch 4900/13967 — Loss: 0.0009
+  Epoch 3/3 — Batch 4950/13967 — Loss: 0.1013
+  Epoch 3/3 — Batch 5000/13967 — Loss: 0.0452
+  Epoch 3/3 — Batch 5050/13967 — Loss: 0.1490
+  Epoch 3/3 — Batch 5100/13967 — Loss: 0.0013
+  Epoch 3/3 — Batch 5150/13967 — Loss: 0.1028
+  Epoch 3/3 — Batch 5200/13967 — Loss: 0.0013
+  Epoch 3/3 — Batch 5250/13967 — Loss: 0.0092
+  Epoch 3/3 — Batch 5300/13967 — Loss: 0.0007
+  Epoch 3/3 — Batch 5350/13967 — Loss: 0.0090
+  Epoch 3/3 — Batch 5400/13967 — Loss: 0.0025
+  Epoch 3/3 — Batch 5450/13967 — Loss: 0.0006
+  Epoch 3/3 — Batch 5500/13967 — Loss: 0.0061
+  Epoch 3/3 — Batch 5550/13967 — Loss: 0.0019
+  Epoch 3/3 — Batch 5600/13967 — Loss: 0.0006
+  Epoch 3/3 — Batch 5650/13967 — Loss: 0.0294
+  Epoch 3/3 — Batch 5700/13967 — Loss: 0.0017
+  Epoch 3/3 — Batch 5750/13967 — Loss: 0.0098
+  Epoch 3/3 — Batch 5800/13967 — Loss: 0.0052
+  Epoch 3/3 — Batch 5850/13967 — Loss: 0.0009
+  Epoch 3/3 — Batch 5900/13967 — Loss: 0.0033
+  Epoch 3/3 — Batch 5950/13967 — Loss: 0.0011
+  Epoch 3/3 — Batch 6000/13967 — Loss: 0.1382
+  Epoch 3/3 — Batch 6050/13967 — Loss: 0.0053
+  Epoch 3/3 — Batch 6100/13967 — Loss: 0.2287
+  Epoch 3/3 — Batch 6150/13967 — Loss: 0.0121
+  Epoch 3/3 — Batch 6200/13967 — Loss: 0.1592
+  Epoch 3/3 — Batch 6250/13967 — Loss: 0.0008
+  Epoch 3/3 — Batch 6300/13967 — Loss: 0.0286
+  Epoch 3/3 — Batch 6350/13967 — Loss: 0.0040
+  Epoch 3/3 — Batch 6400/13967 — Loss: 0.0036
+  Epoch 3/3 — Batch 6450/13967 — Loss: 0.0028
+  Epoch 3/3 — Batch 6500/13967 — Loss: 0.0016
+  Epoch 3/3 — Batch 6550/13967 — Loss: 0.0380
+  Epoch 3/3 — Batch 6600/13967 — Loss: 0.0012
+  Epoch 3/3 — Batch 6650/13967 — Loss: 0.0039
+  Epoch 3/3 — Batch 6700/13967 — Loss: 0.0020
+  Epoch 3/3 — Batch 6750/13967 — Loss: 0.0059
+  Epoch 3/3 — Batch 6800/13967 — Loss: 0.0010
+  Epoch 3/3 — Batch 6850/13967 — Loss: 0.0019
+  Epoch 3/3 — Batch 6900/13967 — Loss: 0.0006
+  Epoch 3/3 — Batch 6950/13967 — Loss: 0.0010
+  Epoch 3/3 — Batch 7000/13967 — Loss: 0.0008
+  Epoch 3/3 — Batch 7050/13967 — Loss: 0.0009
+  Epoch 3/3 — Batch 7100/13967 — Loss: 0.0007
+  Epoch 3/3 — Batch 7150/13967 — Loss: 0.0042
+  Epoch 3/3 — Batch 7200/13967 — Loss: 0.1426
+  Epoch 3/3 — Batch 7250/13967 — Loss: 0.0310
+  Epoch 3/3 — Batch 7300/13967 — Loss: 0.0027
+  Epoch 3/3 — Batch 7350/13967 — Loss: 0.1409
+  Epoch 3/3 — Batch 7400/13967 — Loss: 0.0018
+  Epoch 3/3 — Batch 7450/13967 — Loss: 0.0005
+  Epoch 3/3 — Batch 7500/13967 — Loss: 0.0071
+  Epoch 3/3 — Batch 7550/13967 — Loss: 0.0015
+  Epoch 3/3 — Batch 7600/13967 — Loss: 0.0051
+  Epoch 3/3 — Batch 7650/13967 — Loss: 0.4044
+  Epoch 3/3 — Batch 7700/13967 — Loss: 0.0011
+  Epoch 3/3 — Batch 7750/13967 — Loss: 0.2400
+  Epoch 3/3 — Batch 7800/13967 — Loss: 0.0932
+  Epoch 3/3 — Batch 7850/13967 — Loss: 0.0010
+  Epoch 3/3 — Batch 7900/13967 — Loss: 0.1277
+  Epoch 3/3 — Batch 7950/13967 — Loss: 0.0024
+  Epoch 3/3 — Batch 8000/13967 — Loss: 0.0020
+  Epoch 3/3 — Batch 8050/13967 — Loss: 0.0450
+  Epoch 3/3 — Batch 8100/13967 — Loss: 0.0020
+  Epoch 3/3 — Batch 8150/13967 — Loss: 0.0021
+  Epoch 3/3 — Batch 8200/13967 — Loss: 0.0008
+  Epoch 3/3 — Batch 8250/13967 — Loss: 0.0119
+  Epoch 3/3 — Batch 8300/13967 — Loss: 0.0018
+  Epoch 3/3 — Batch 8350/13967 — Loss: 0.1722
+  Epoch 3/3 — Batch 8400/13967 — Loss: 0.0022
+  Epoch 3/3 — Batch 8450/13967 — Loss: 0.0136
+  Epoch 3/3 — Batch 8500/13967 — Loss: 0.0065
+  Epoch 3/3 — Batch 8550/13967 — Loss: 0.0888
+  Epoch 3/3 — Batch 8600/13967 — Loss: 0.2070
+  Epoch 3/3 — Batch 8650/13967 — Loss: 0.0014
+  Epoch 3/3 — Batch 8700/13967 — Loss: 0.0018
+  Epoch 3/3 — Batch 8750/13967 — Loss: 0.0053
+  Epoch 3/3 — Batch 8800/13967 — Loss: 0.0796
+  Epoch 3/3 — Batch 8850/13967 — Loss: 0.0021
+  Epoch 3/3 — Batch 8900/13967 — Loss: 0.0019
+  Epoch 3/3 — Batch 8950/13967 — Loss: 0.0008
+  Epoch 3/3 — Batch 9000/13967 — Loss: 0.0036
+  Epoch 3/3 — Batch 9050/13967 — Loss: 0.0741
+  Epoch 3/3 — Batch 9100/13967 — Loss: 0.0046
+  Epoch 3/3 — Batch 9150/13967 — Loss: 0.1268
+  Epoch 3/3 — Batch 9200/13967 — Loss: 0.0005
+  Epoch 3/3 — Batch 9250/13967 — Loss: 0.0010
+  Epoch 3/3 — Batch 9300/13967 — Loss: 0.0028
+  Epoch 3/3 — Batch 9350/13967 — Loss: 0.0390
+  Epoch 3/3 — Batch 9400/13967 — Loss: 0.0011
+  Epoch 3/3 — Batch 9450/13967 — Loss: 0.0041
+  Epoch 3/3 — Batch 9500/13967 — Loss: 0.0177
+  Epoch 3/3 — Batch 9550/13967 — Loss: 0.0033
+  Epoch 3/3 — Batch 9600/13967 — Loss: 0.1402
+  Epoch 3/3 — Batch 9650/13967 — Loss: 0.0155
+  Epoch 3/3 — Batch 9700/13967 — Loss: 0.0827
+  Epoch 3/3 — Batch 9750/13967 — Loss: 0.0024
+  Epoch 3/3 — Batch 9800/13967 — Loss: 0.2839
+  Epoch 3/3 — Batch 9850/13967 — Loss: 0.0136
+  Epoch 3/3 — Batch 9900/13967 — Loss: 0.0012
+  Epoch 3/3 — Batch 9950/13967 — Loss: 0.0023
+  Epoch 3/3 — Batch 10000/13967 — Loss: 0.0010
+  Epoch 3/3 — Batch 10050/13967 — Loss: 0.0019
+  Epoch 3/3 — Batch 10100/13967 — Loss: 0.0004
+  Epoch 3/3 — Batch 10150/13967 — Loss: 0.1443
+  Epoch 3/3 — Batch 10200/13967 — Loss: 0.0014
+  Epoch 3/3 — Batch 10250/13967 — Loss: 0.0022
+  Epoch 3/3 — Batch 10300/13967 — Loss: 0.0014
+  Epoch 3/3 — Batch 10350/13967 — Loss: 0.0119
+  Epoch 3/3 — Batch 10400/13967 — Loss: 0.0012
+  Epoch 3/3 — Batch 10450/13967 — Loss: 0.0124
+  Epoch 3/3 — Batch 10500/13967 — Loss: 0.2107
+  Epoch 3/3 — Batch 10550/13967 — Loss: 0.0015
+  Epoch 3/3 — Batch 10600/13967 — Loss: 0.0011
+  Epoch 3/3 — Batch 10650/13967 — Loss: 0.0004
+  Epoch 3/3 — Batch 10700/13967 — Loss: 0.0035
+  Epoch 3/3 — Batch 10750/13967 — Loss: 0.1829
+  Epoch 3/3 — Batch 10800/13967 — Loss: 0.0013
+  Epoch 3/3 — Batch 10850/13967 — Loss: 0.0027
+  Epoch 3/3 — Batch 10900/13967 — Loss: 0.0009
+  Epoch 3/3 — Batch 10950/13967 — Loss: 0.0004
+  Epoch 3/3 — Batch 11000/13967 — Loss: 0.0380
+  Epoch 3/3 — Batch 11050/13967 — Loss: 0.0008
+  Epoch 3/3 — Batch 11100/13967 — Loss: 0.0034
+  Epoch 3/3 — Batch 11150/13967 — Loss: 0.0006
+  Epoch 3/3 — Batch 11200/13967 — Loss: 0.0008
+  Epoch 3/3 — Batch 11250/13967 — Loss: 0.0317
+  Epoch 3/3 — Batch 11300/13967 — Loss: 0.1851
+  Epoch 3/3 — Batch 11350/13967 — Loss: 0.0012
+  Epoch 3/3 — Batch 11400/13967 — Loss: 0.0301
+  Epoch 3/3 — Batch 11450/13967 — Loss: 0.0369
+  Epoch 3/3 — Batch 11500/13967 — Loss: 0.0307
+  Epoch 3/3 — Batch 11550/13967 — Loss: 0.0015
+  Epoch 3/3 — Batch 11600/13967 — Loss: 0.1522
+  Epoch 3/3 — Batch 11650/13967 — Loss: 0.1601
+  Epoch 3/3 — Batch 11700/13967 — Loss: 0.0013
+  Epoch 3/3 — Batch 11750/13967 — Loss: 0.1184
+  Epoch 3/3 — Batch 11800/13967 — Loss: 0.1508
+  Epoch 3/3 — Batch 11850/13967 — Loss: 0.0009
+  Epoch 3/3 — Batch 11900/13967 — Loss: 0.0021
+  Epoch 3/3 — Batch 11950/13967 — Loss: 0.2462
+  Epoch 3/3 — Batch 12000/13967 — Loss: 0.0008
+  Epoch 3/3 — Batch 12050/13967 — Loss: 0.0010
+  Epoch 3/3 — Batch 12100/13967 — Loss: 0.0005
+  Epoch 3/3 — Batch 12150/13967 — Loss: 0.0181
+  Epoch 3/3 — Batch 12200/13967 — Loss: 0.0022
+  Epoch 3/3 — Batch 12250/13967 — Loss: 0.0006
+  Epoch 3/3 — Batch 12300/13967 — Loss: 0.0080
+  Epoch 3/3 — Batch 12350/13967 — Loss: 0.0016
+  Epoch 3/3 — Batch 12400/13967 — Loss: 0.3034
+  Epoch 3/3 — Batch 12450/13967 — Loss: 0.0117
+  Epoch 3/3 — Batch 12500/13967 — Loss: 0.1288
+  Epoch 3/3 — Batch 12550/13967 — Loss: 0.0008
+  Epoch 3/3 — Batch 12600/13967 — Loss: 0.0016
+  Epoch 3/3 — Batch 12650/13967 — Loss: 0.0040
+  Epoch 3/3 — Batch 12700/13967 — Loss: 0.0023
+  Epoch 3/3 — Batch 12750/13967 — Loss: 0.1339
+  Epoch 3/3 — Batch 12800/13967 — Loss: 0.1373
+  Epoch 3/3 — Batch 12850/13967 — Loss: 0.0165
+  Epoch 3/3 — Batch 12900/13967 — Loss: 0.0046
+  Epoch 3/3 — Batch 12950/13967 — Loss: 0.0009
+  Epoch 3/3 — Batch 13000/13967 — Loss: 0.1951
+  Epoch 3/3 — Batch 13050/13967 — Loss: 0.0011
+  Epoch 3/3 — Batch 13100/13967 — Loss: 0.0466
+  Epoch 3/3 — Batch 13150/13967 — Loss: 0.0027
+  Epoch 3/3 — Batch 13200/13967 — Loss: 0.0009
+  Epoch 3/3 — Batch 13250/13967 — Loss: 0.0065
+  Epoch 3/3 — Batch 13300/13967 — Loss: 0.1830
+  Epoch 3/3 — Batch 13350/13967 — Loss: 0.0022
+  Epoch 3/3 — Batch 13400/13967 — Loss: 0.1644
+  Epoch 3/3 — Batch 13450/13967 — Loss: 0.0020
+  Epoch 3/3 — Batch 13500/13967 — Loss: 0.0025
+  Epoch 3/3 — Batch 13550/13967 — Loss: 0.0034
+  Epoch 3/3 — Batch 13600/13967 — Loss: 0.0010
+  Epoch 3/3 — Batch 13650/13967 — Loss: 0.0030
+  Epoch 3/3 — Batch 13700/13967 — Loss: 0.0021
+  Epoch 3/3 — Batch 13750/13967 — Loss: 0.2590
+  Epoch 3/3 — Batch 13800/13967 — Loss: 0.0005
+  Epoch 3/3 — Batch 13850/13967 — Loss: 0.0698
+  Epoch 3/3 — Batch 13900/13967 — Loss: 0.0011
+  Epoch 3/3 — Batch 13950/13967 — Loss: 0.1556
+  Epoch 3/3 — Avg Loss: 0.0356
+
+  DistilBERT Results:
+  Accuracy: 0.9769 | Precision(macro): 0.9576 | Recall(macro): 0.9545 | F1(macro): 0.9560
+  negative: P=0.9295 R=0.9218 F1=0.9257
+  positive: P=0.9856 R=0.9871 F1=0.9863
+[viz] Saved: confusion_matrix_distilbert (pdf, png)
+Writing model shards: 100%|██████████| 1/1 [00:01<00:00,  1.07s/it]
+  [transformer] DistilBERT results saved to results\models\distilbert\artifacts
+[5] ✓ DistilBERT training complete.
+
+Press Enter to continue...
+
+╔═══════════════════════════════════════════════════════════════════╗
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline         ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║   1.  Data Loading & Preprocessing                                ║
+║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
+║   3.  Sentiment Model Training (All Classical Models)             ║
+║   4.  Sentiment Model Training (TF-IDF+LR)                        ║
+║   5.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   6.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   7.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   8.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   9.  Statistical Tests (Gini, HHI, ANOVA, t-tests)               ║
+║  10.  Integration: Reviews ↔ Sales Linkage                        ║
+║  11.  Generate Comparative Model Report                           ║
+║  12.  Run Full Pipeline (All of the above)                        ║
+║   0.  Exit                                                        ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Select an option [0-12]: 6
+[info] Data not yet loaded. Loading now...
+
+[1] DATA LOADING & PREPROCESSING
+[data_loader] Reviews loaded: (568454, 11)
+[data_loader] Preprocessed reviews saved: (525814, 13)
+[data_loader] Class distribution:
+sent_label
+positive    443777
+negative     82037
+[data_loader] Imbalance ratio: 5.41:1
+[data_loader] Detected sales files: ['amazon_sale_report.csv', 'cloud_warehouse_compersion_chart.csv', 'expense_iigf.csv', 'international_sale_report.csv', 'may-2022.csv', 'plmarch2021.csv', 'sale_report.csv']
+[data_loader] Merged sales rows: 178405
+
+============================================================
+DATASET SUMMARY
+============================================================
+
+Reviews: 525,814 rows × 13 cols
+  Labels: {'positive': 443777, 'negative': 82037}
+  Unique ASINs (ProductId): 72,005
+  Date range: 1999-10-08 00:00:00 -> 2012-10-26 00:00:00
+
+Sales: 178,405 rows × 54 cols
+  Unique ASINs: 7,190
+  Unique SKUs: 8,094
+  Amount: mean=648.56, std=281.21
+  Unique regions: 70
+============================================================
+
+[1] ✓ Data loading complete.
+
+W0613 11:29:12.953000 21312 torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+
+============================================================
+LOADING PREVIOUSLY TRAINED DISTILBERT
+============================================================
+  Device: cuda
+Loading weights: 100%|██████████| 104/104 [00:00<00:00, 2938.95it/s, Materializing param=pre_classifier.weight]
+  ✓ Model loaded from results\models\distilbert\artifacts
+  Accuracy: 0.9769 | Precision(macro): 0.9576 | Recall(macro): 0.9545 | F1(macro): 0.9560
+  ✓ DistilBERT loaded successfully (skipped retraining)
+[info] Loaded 6 previously trained model(s) from disk: ['distilbert', 'logistic_regression', 'naive_bayes', 'random_forest', 'svm', 'xgboost']
+[info] TF-IDF state reconstructed from saved vectorizer.
+[info] Regenerating predictions for logistic_regression...
+[info] Regenerating predictions for naive_bayes...
+[info] Regenerating predictions for random_forest...
+[info] Regenerating predictions for svm...
+[info] Regenerating predictions for xgboost...
+[info] All model predictions regenerated.
+[sentiment_models] XGBoost registry template: CPU (callers may override to GPU with dense matrices).
+
+[6] MODEL EVALUATION & COMPARISON
+[sentiment_models] XGBoost registry template: CPU (callers may override to GPU with dense matrices).
+[cv] Device: CUDA GPU
+
+============================================================
+STRATIFIED 10-FOLD CROSS-VALIDATION
+(TF-IDF fitted per fold — no data leakage)
+============================================================
+
+[cv] Logistic Regression: CV results already exist — loading from results\models\logistic_regression\metrics\cv_fold_scores.csv
+  accuracy: 0.9459 ± 0.0007
+  precision_macro: 0.8771 ± 0.0012
+  recall_macro: 0.9444 ± 0.0012
+  f1_macro: 0.9059 ± 0.0011
+  negative_recall: 0.9423 ± 0.0023
+  negative_f1: 0.8446 ± 0.0018
+
+[cv] SVM (LinearSVC): CV results already exist — loading from results\models\svm\metrics\cv_fold_scores.csv
+  accuracy: 0.9654 ± 0.0007
+  precision_macro: 0.9413 ± 0.0016
+  recall_macro: 0.9254 ± 0.0019
+  f1_macro: 0.9331 ± 0.0014
+  negative_recall: 0.8673 ± 0.0038
+  negative_f1: 0.8866 ± 0.0025
+
+[cv] Multinomial NB: CV results already exist — loading from results\models\naive_bayes\metrics\cv_fold_scores.csv
+  accuracy: 0.9290 ± 0.0004
+  precision_macro: 0.9141 ± 0.0015
+  recall_macro: 0.8020 ± 0.0011
+  f1_macro: 0.8450 ± 0.0009
+  negative_recall: 0.6175 ± 0.0023
+  negative_f1: 0.7308 ± 0.0017
+
+[cv] Random Forest: CV results already exist — loading from results\models\random_forest\metrics\cv_fold_scores.csv
+  accuracy: 0.9381 ± 0.0007
+  precision_macro: 0.9569 ± 0.0009
+  recall_macro: 0.8067 ± 0.0023
+  f1_macro: 0.8604 ± 0.0020
+  negative_recall: 0.6157 ± 0.0047
+  negative_f1: 0.7563 ± 0.0035
+
+[cv] XGBoost: CV results already exist — loading from results\models\xgboost\metrics\cv_fold_scores.csv
+  accuracy: 0.9238 ± 0.0006
+  precision_macro: 0.9226 ± 0.0016
+  recall_macro: 0.7753 ± 0.0023
+  f1_macro: 0.8263 ± 0.0018
+  negative_recall: 0.5594 ± 0.0049
+  negative_f1: 0.6961 ± 0.0033
+
+[cv] DistilBERT: CV results already exist — loading from results\models\distilbert\metrics\cv_fold_scores.csv
+  accuracy: 0.9377 ± 0.0050
+  precision_macro: 0.8927 ± 0.0132
+  recall_macro: 0.8669 ± 0.0121
+  f1_macro: 0.8788 ± 0.0095
+  negative_recall: 0.7636 ± 0.0265
+  negative_f1: 0.7943 ± 0.0161
+
+[cv] CV comparison saved to results\comparative\cv_comparison_table.csv
+[viz] Saved: cv_boxplot_f1_macro (pdf, png)
+[viz] Saved: cv_boxplot_accuracy (pdf, png)
+[viz] Saved: cv_boxplot_negative_recall (pdf, png)
+
+============================================================
+ROC-AUC ANALYSIS
+============================================================
+  DistilBERT: ROC-AUC = 0.9940
+  Logistic Regression: ROC-AUC = 0.9848
+  Multinomial NB: ROC-AUC = 0.9714
+  Random Forest: ROC-AUC = 0.9835
+  SVM (LinearSVC): ROC-AUC = 0.9874
+  XGBoost: ROC-AUC = 0.9594
+[viz] Saved: roc_curves_overlay (pdf, png)
+
+============================================================
+PRECISION-RECALL AUC ANALYSIS
+============================================================
+  DistilBERT: PR-AUC = 0.9988
+  Logistic Regression: PR-AUC = 0.9969
+  Multinomial NB: PR-AUC = 0.9943
+  Random Forest: PR-AUC = 0.9967
+  SVM (LinearSVC): PR-AUC = 0.9974
+  XGBoost: PR-AUC = 0.9913
+[viz] Saved: pr_curves_overlay (pdf, png)
+
+============================================================
+CALIBRATION ANALYSIS
+============================================================
+  DistilBERT: Brier = 0.0205
+  Logistic Regression: Brier = 0.0449
+  Multinomial NB: Brier = 0.0505
+  Random Forest: Brier = 0.0446
+  SVM (LinearSVC): Brier = 0.0269
+  XGBoost: Brier = 0.0563
+[viz] Saved: calibration_curves (pdf, png)
+
+============================================================
+ERROR ANALYSIS
+============================================================
+
+[error] Analyzing errors for DistilBERT...
+  Total test: 78873 | Misclassified: 1822 (2.3%)
+  Error patterns:
+true_label pred_label  count
+  negative   positive    962
+  positive   negative    860
+  Avg length — Correct: 426 chars | Errors: 604 chars
+[viz] Saved: error_analysis_distilbert (pdf, png)
+
+[error] Analyzing errors for Logistic Regression...
+  Total test: 78873 | Misclassified: 4412 (5.6%)
+  Error patterns:
+true_label pred_label  count
+  positive   negative   3706
+  negative   positive    706
+  Avg length — Correct: 423 chars | Errors: 542 chars
+[viz] Saved: error_analysis_logistic_regression (pdf, png)
+
+[error] Analyzing errors for Multinomial NB...
+  Total test: 78873 | Misclassified: 5595 (7.1%)
+  Error patterns:
+true_label pred_label  count
+  negative   positive   4690
+  positive   negative    905
+  Avg length — Correct: 425 chars | Errors: 492 chars
+[viz] Saved: error_analysis_naive_bayes (pdf, png)
+
+[error] Analyzing errors for Random Forest...
+  Total test: 78873 | Misclassified: 4940 (6.3%)
+  Error patterns:
+true_label pred_label  count
+  negative   positive   4777
+  positive   negative    163
+  Avg length — Correct: 425 chars | Errors: 499 chars
+[viz] Saved: error_analysis_random_forest (pdf, png)
+
+[error] Analyzing errors for SVM (LinearSVC)...
+  Total test: 78873 | Misclassified: 2764 (3.5%)
+  Error patterns:
+true_label pred_label  count
+  negative   positive   1662
+  positive   negative   1102
+  Avg length — Correct: 427 chars | Errors: 507 chars
+[viz] Saved: error_analysis_svm (pdf, png)
+
+[error] Analyzing errors for XGBoost...
+  Total test: 78873 | Misclassified: 6024 (7.6%)
+  Error patterns:
+true_label pred_label  count
+  negative   positive   5439
+  positive   negative    585
+  Avg length — Correct: 427 chars | Errors: 462 chars
+[viz] Saved: error_analysis_xgboost (pdf, png)
+
+============================================================
+McNEMAR'S TEST — PAIRWISE MODEL COMPARISON
+============================================================
+  DistilBERT vs Logistic Regression: p = 0.000000 (***)
+  DistilBERT vs Multinomial NB: p = 0.000000 (***)
+  DistilBERT vs Random Forest: p = 0.000000 (***)
+  DistilBERT vs SVM (LinearSVC): p = 0.000000 (***)
+  DistilBERT vs XGBoost: p = 0.000000 (***)
+  Logistic Regression vs Multinomial NB: p = 0.000000 (***)
+  Logistic Regression vs Random Forest: p = 0.000000 (***)
+  Logistic Regression vs SVM (LinearSVC): p = 0.000000 (***)
+  Logistic Regression vs XGBoost: p = 0.000000 (***)
+  Multinomial NB vs Random Forest: p = 0.000000 (***)
+  Multinomial NB vs SVM (LinearSVC): p = 0.000000 (***)
+  Multinomial NB vs XGBoost: p = 0.000000 (***)
+  Random Forest vs SVM (LinearSVC): p = 0.000000 (***)
+  Random Forest vs XGBoost: p = 0.000000 (***)
+  SVM (LinearSVC) vs XGBoost: p = 0.000000 (***)
+
+[mcnemar] p-value matrix saved to results\comparative\mcnemar_pvalues.csv
+[viz] Saved: comprehensive_comparison_heatmap (pdf, png)
+
+[evaluation] Comprehensive comparison saved
+                     holdout_accuracy  holdout_f1_macro  holdout_neg_recall  cv_accuracy_mean  cv_accuracy_std  cv_f1_macro_mean  cv_f1_macro_std  cv_neg_recall_mean  cv_neg_recall_std   roc_auc    pr_auc  brier_score
+model                                                                                                                                                                                                                    
+DistilBERT                   0.976900          0.955994            0.921827          0.937667         0.004982          0.878790         0.009451            0.763620           0.026464  0.994040  0.998778     0.020527
+Logistic Regression          0.944062          0.903155            0.942630          0.945918         0.000668          0.905950         0.001095            0.942258           0.002324  0.984757  0.996905     0.044939
+Multinomial NB               0.929063          0.845247            0.618885          0.929032         0.000418          0.844969         0.000948            0.617453           0.002289  0.971431  0.994320     0.050488
+Random Forest                0.937368          0.858556            0.611815          0.938105         0.000721          0.860436         0.001961            0.615686           0.004675  0.983529  0.996673     0.044567
+SVM (LinearSVC)              0.964956          0.932204            0.864944          0.965402         0.000729          0.933115         0.001442            0.867279           0.003791  0.987439  0.997388     0.026912
+XGBoost                      0.923624          0.825727            0.558020          0.923794         0.000563          0.826270         0.001791            0.559443           0.004948  0.959391  0.991348     0.056306
+[6] ✓ Model evaluation complete.
+
+
+Press Enter to continue...
+
+Select an option [0-12]: 6
+[info] Data not yet loaded. Loading now...
+
+[1] DATA LOADING & PREPROCESSING
+[data_loader] Reviews loaded: (568454, 11)
+[data_loader] Preprocessed reviews saved: (525814, 13)
+[data_loader] Class distribution:
+sent_label
+positive    443777
+negative     82037
+[data_loader] Imbalance ratio: 5.41:1
+[data_loader] Detected sales files: ['amazon_sale_report.csv', 'cloud_warehouse_compersion_chart.csv', 'expense_iigf.csv', 'international_sale_report.csv', 'may-2022.csv', 'plmarch2021.csv', 'sale_report.csv']
+[data_loader] Merged sales rows: 178405
+
+============================================================
+DATASET SUMMARY
+============================================================
+
+Reviews: 525,814 rows × 13 cols
+  Labels: {'positive': 443777, 'negative': 82037}
+  Unique ASINs (ProductId): 72,005
+  Date range: 1999-10-08 00:00:00 -> 2012-10-26 00:00:00
+
+Sales: 178,405 rows × 54 cols
+  Unique ASINs: 7,190
+  Unique SKUs: 8,094
+  Amount: mean=648.56, std=281.21
+  Unique regions: 70
+============================================================
+
+[1] ✓ Data loading complete.
+
+W0616 14:08:20.551000 36448 torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+
+============================================================
+LOADING PREVIOUSLY TRAINED DISTILBERT
+============================================================
+  Device: cuda
+Loading weights: 100%|██████████| 104/104 [00:00<00:00, 4114.47it/s, Materializing param=pre_classifier.weight]
+  ✓ Model loaded from results\models\distilbert\artifacts
+  Accuracy: 0.9769 | Precision(macro): 0.9576 | Recall(macro): 0.9545 | F1(macro): 0.9560
+[viz] Saved: confusion_matrix_distilbert (pdf, png, eps)
+  ✓ DistilBERT loaded successfully (skipped retraining)
+[info] Loaded 7 previously trained model(s) from disk: ['distilbert', 'logistic_regression', 'naive_bayes', 'random_forest', 'svm', 'tfidf_lr', 'xgboost']
+[info] TF-IDF state reconstructed from saved vectorizer.
+[info] Regenerating predictions for logistic_regression...
+[viz] Saved: confusion_matrix_logistic_regression (pdf, png, eps)
+[info] Regenerating predictions for naive_bayes...
+[viz] Saved: confusion_matrix_naive_bayes (pdf, png, eps)
+[info] Regenerating predictions for random_forest...
+[viz] Saved: confusion_matrix_random_forest (pdf, png, eps)
+[info] Regenerating predictions for svm...
+[viz] Saved: confusion_matrix_svm (pdf, png, eps)
+[info] Regenerating predictions for tfidf_lr...
+[viz] Saved: confusion_matrix_tfidf_lr (pdf, png, eps)
+[info] Regenerating predictions for xgboost...
+[viz] Saved: confusion_matrix_xgboost (pdf, png, eps)
+[info] All model predictions regenerated and confusion matrices plotted.
+[sentiment_models] XGBoost registry template: CPU (callers may override to GPU with dense matrices).
+
+[6] MODEL EVALUATION & COMPARISON
+[sentiment_models] XGBoost registry template: CPU (callers may override to GPU with dense matrices).
+[cv] Device: CUDA GPU
+
+============================================================
+STRATIFIED 10-FOLD CROSS-VALIDATION
+(TF-IDF fitted per fold — no data leakage)
+============================================================
+
+[cv] Logistic Regression: CV results already exist — loading details:
+  [Scores File] results\models\logistic_regression\metrics\cv_fold_scores.csv
+  [Summary File] results\models\logistic_regression\metrics\cv_summary.csv
+
+  Summary Metrics (mean ± std):
+    accuracy: 0.9529 ± 0.0012
+    precision_macro: 0.8925 ± 0.0027
+    recall_macro: 0.9464 ± 0.0010
+    f1_macro: 0.9165 ± 0.0018
+    negative_recall: 0.9370 ± 0.0022
+    negative_f1: 0.8613 ± 0.0030
+
+  Fold-by-Fold Detailed Scores:
+      accuracy  precision_macro  recall_macro  f1_macro  negative_recall  negative_f1
+fold                                                                                 
+0     0.954091         0.895264      0.946522  0.918244         0.935519     0.864107
+1     0.953729         0.894145      0.947102  0.917788         0.937470     0.863430
+2     0.952740         0.892451      0.945324  0.916046         0.934544     0.860542
+3     0.952531         0.891493      0.946492  0.915911         0.937713     0.860418
+4     0.952473         0.891878      0.945113  0.915610         0.934414     0.859835
+5     0.953595         0.894302      0.945877  0.917400         0.934658     0.862721
+6     0.950952         0.887535      0.947093  0.913662         0.941485     0.856921
+7     0.953557         0.893888      0.946702  0.917472         0.936738     0.862901
+8     0.950876         0.887976      0.945412  0.913299         0.937470     0.856220
+9     0.954603         0.895690      0.948564  0.919313         0.939785     0.865952
+
+[cv] TF-IDF+LR: CV results already exist — loading details:
+  [Scores File] results\models\tfidf_lr\metrics\cv_fold_scores.csv
+  [Summary File] results\models\tfidf_lr\metrics\cv_summary.csv
+
+  Summary Metrics (mean ± std):
+    accuracy: 0.9624 ± 0.0019
+    precision_macro: 0.9385 ± 0.0032
+    recall_macro: 0.9161 ± 0.0048
+    f1_macro: 0.9268 ± 0.0039
+    negative_recall: 0.8487 ± 0.0091
+    negative_f1: 0.8757 ± 0.0066
+
+  Fold-by-Fold Detailed Scores:
+      accuracy  precision_macro  recall_macro  f1_macro  negative_recall  negative_f1
+fold                                                                                 
+0     0.959340         0.932845      0.909540  0.920685         0.837153     0.865314
+1     0.964760         0.943008      0.920650  0.931375         0.856533     0.883510
+2     0.964360         0.941212      0.921060  0.930765         0.858118     0.882537
+3     0.959264         0.935549      0.906018  0.919972         0.828620     0.863896
+4     0.964892         0.943895      0.920174  0.931524         0.855175     0.883724
+5     0.961602         0.937823      0.913306  0.925010         0.843106     0.872626
+6     0.961830         0.936730      0.915577  0.925741         0.848348     0.873972
+7     0.963047         0.939123      0.917947  0.928123         0.852389     0.878021
+8     0.962458         0.936771      0.918244  0.927190         0.853974     0.876517
+9     0.962724         0.937792      0.918153  0.927618         0.853364     0.877208
+
+[cv] SVM (LinearSVC): CV results already exist — loading details:
+  [Scores File] results\models\svm\metrics\cv_fold_scores.csv
+  [Summary File] results\models\svm\metrics\cv_summary.csv
+
+  Summary Metrics (mean ± std):
+    accuracy: 0.9654 ± 0.0007
+    precision_macro: 0.9413 ± 0.0016
+    recall_macro: 0.9254 ± 0.0019
+    f1_macro: 0.9331 ± 0.0014
+    negative_recall: 0.8673 ± 0.0038
+    negative_f1: 0.8866 ± 0.0025
+
+  Fold-by-Fold Detailed Scores:
+      accuracy  precision_macro  recall_macro  f1_macro  negative_recall  negative_f1
+fold                                                                                 
+0     0.963923         0.938219      0.922788  0.930285         0.862994     0.881858
+1     0.965235         0.941234      0.924757  0.932748         0.865919     0.886006
+2     0.966167         0.942098      0.927694  0.934708         0.871770     0.889386
+3     0.966300         0.943250      0.926879  0.934822         0.869576     0.889526
+4     0.966147         0.943826      0.925538  0.934380         0.866512     0.888722
+5     0.964531         0.940066      0.923140  0.931341         0.862977     0.883605
+6     0.965063         0.940663      0.924697  0.932448         0.866025     0.885510
+7     0.965178         0.942226      0.923332  0.932455         0.862506     0.885441
+8     0.965691         0.941022      0.926965  0.933814         0.870673     0.887881
+9     0.965786         0.940256      0.928313  0.934155         0.873842     0.888517
+
+[cv] Multinomial NB: CV results already exist — loading details:
+  [Scores File] results\models\naive_bayes\metrics\cv_fold_scores.csv
+  [Summary File] results\models\naive_bayes\metrics\cv_summary.csv
+
+  Summary Metrics (mean ± std):
+    accuracy: 0.9290 ± 0.0004
+    precision_macro: 0.9141 ± 0.0015
+    recall_macro: 0.8020 ± 0.0011
+    f1_macro: 0.8450 ± 0.0009
+    negative_recall: 0.6175 ± 0.0023
+    negative_f1: 0.7308 ± 0.0017
+
+  Fold-by-Fold Detailed Scores:
+      accuracy  precision_macro  recall_macro  f1_macro  negative_recall  negative_f1
+fold                                                                                 
+0     0.929520         0.914889      0.803396  0.846199         0.620063     0.732997
+1     0.928778         0.913656      0.801416  0.844362         0.616285     0.729739
+2     0.929596         0.916804      0.802149  0.845837         0.616894     0.732205
+3     0.928854         0.913794      0.801610  0.844547         0.616650     0.730067
+4     0.928796         0.915319      0.800112  0.843877         0.613068     0.728735
+5     0.928853         0.914088      0.801338  0.844433         0.615994     0.729833
+6     0.929442         0.914140      0.803675  0.846183         0.620870     0.733017
+7     0.929518         0.915009      0.803296  0.846161         0.619820     0.732920
+8     0.928491         0.912641      0.801098  0.843824         0.615919     0.728833
+9     0.928472         0.911076      0.802329  0.844268         0.618966     0.729755
+
+[cv] Random Forest: CV results already exist — loading details:
+  [Scores File] results\models\random_forest\metrics\cv_fold_scores.csv
+  [Summary File] results\models\random_forest\metrics\cv_summary.csv
+
+  Summary Metrics (mean ± std):
+    accuracy: 0.9381 ± 0.0007
+    precision_macro: 0.9569 ± 0.0009
+    recall_macro: 0.8067 ± 0.0023
+    f1_macro: 0.8604 ± 0.0020
+    negative_recall: 0.6157 ± 0.0047
+    negative_f1: 0.7563 ± 0.0035
+
+  Fold-by-Fold Detailed Scores:
+      accuracy  precision_macro  recall_macro  f1_macro  negative_recall  negative_f1
+fold                                                                                 
+0     0.938724         0.956752      0.808998  0.862238         0.620429     0.759588
+1     0.937792         0.955169      0.806608  0.859919         0.615919     0.755476
+2     0.938933         0.958976      0.808426  0.862366         0.618723     0.759710
+3     0.939105         0.957321      0.810018  0.863197         0.622379     0.761294
+4     0.937088         0.956835      0.803087  0.857524         0.608314     0.751054
+5     0.938704         0.957489      0.808466  0.862010         0.619164     0.759136
+6     0.937848         0.956372      0.806071  0.859806         0.614531     0.755206
+7     0.937392         0.956174      0.804582  0.858559         0.611531     0.752964
+8     0.938362         0.956944      0.807591  0.861168         0.617504     0.757646
+9     0.937107         0.956933      0.803122  0.857576         0.608362     0.751148
+
+[cv] XGBoost: CV results already exist — loading details:
+  [Scores File] results\models\xgboost\metrics\cv_fold_scores.csv
+  [Summary File] results\models\xgboost\metrics\cv_summary.csv
+
+  Summary Metrics (mean ± std):
+    accuracy: 0.9238 ± 0.0006
+    precision_macro: 0.9226 ± 0.0016
+    recall_macro: 0.7753 ± 0.0023
+    f1_macro: 0.8263 ± 0.0018
+    negative_recall: 0.5594 ± 0.0049
+    negative_f1: 0.6961 ± 0.0033
+
+  Fold-by-Fold Detailed Scores:
+      accuracy  precision_macro  recall_macro  f1_macro  negative_recall  negative_f1
+fold                                                                                 
+0     0.924594         0.919458      0.780506  0.829742         0.571063     0.702662
+1     0.924100         0.923566      0.775842  0.826959         0.560336     0.697308
+2     0.923092         0.921569      0.773307  0.824375         0.555583     0.692705
+3     0.923339         0.923712      0.772857  0.824517         0.554120     0.692829
+4     0.923223         0.921534      0.773806  0.824781         0.556626     0.693447
+5     0.923166         0.923161      0.772530  0.824113         0.553578     0.692120
+6     0.924364         0.925332      0.775675  0.827251         0.559551     0.697727
+7     0.924098         0.923717      0.775742  0.826913         0.560093     0.697216
+8     0.923470         0.921172      0.775023  0.825697         0.559239     0.695152
+9     0.924497         0.923102      0.777668  0.828348         0.564237     0.699879
+
+[cv] DistilBERT: CV results already exist — loading details:
+  [Scores File] results\models\distilbert\metrics\cv_fold_scores.csv
+  [Summary File] results\models\distilbert\metrics\cv_summary.csv
+
+  Summary Metrics (mean ± std):
+    accuracy: 0.9377 ± 0.0050
+    precision_macro: 0.8927 ± 0.0132
+    recall_macro: 0.8669 ± 0.0121
+    f1_macro: 0.8788 ± 0.0095
+    negative_recall: 0.7636 ± 0.0265
+    negative_f1: 0.7943 ± 0.0161
+
+  Fold-by-Fold Detailed Scores:
+      accuracy  precision_macro  recall_macro  f1_macro  negative_recall  negative_f1
+fold                                                                                 
+0     0.934667         0.887887      0.857850  0.871895         0.745763     0.782222
+1     0.944000         0.899696      0.885788  0.892542         0.800847     0.818182
+2     0.933333         0.876047      0.870843  0.873415         0.779661     0.786325
+3     0.936000         0.894275      0.855195  0.873113         0.737288     0.783784
+4     0.935333         0.898874      0.846184  0.869597         0.716102     0.777011
+5     0.933333         0.875587      0.873007  0.874289         0.784810     0.788136
+6     0.937333         0.900066      0.854816  0.875291         0.734177     0.787330
+7     0.944000         0.904751      0.879341  0.891385         0.784810     0.815789
+8     0.932000         0.873934      0.868787  0.871331         0.776371     0.782979
+9     0.946667         0.915460      0.877497  0.895040         0.776371     0.821429
+
+[cv] CV comparison saved to results\comparative\cv_comparison_table.csv
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: cv_boxplot_f1_macro (pdf, png, eps)
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: cv_boxplot_accuracy (pdf, png, eps)
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: cv_boxplot_negative_recall (pdf, png, eps)
+
+============================================================
+ROC-AUC ANALYSIS
+============================================================
+  DistilBERT: ROC-AUC = 0.9940
+  Logistic Regression: ROC-AUC = 0.9869
+  Multinomial NB: ROC-AUC = 0.9716
+  Random Forest: ROC-AUC = 0.9829
+  SVM (LinearSVC): ROC-AUC = 0.9876
+  TF-IDF+LR: ROC-AUC = 0.9855
+  XGBoost: ROC-AUC = 0.9573
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: roc_curves_overlay (pdf, png, eps)
+
+============================================================
+PRECISION-RECALL AUC ANALYSIS
+============================================================
+  DistilBERT: PR-AUC = 0.9988
+  Logistic Regression: PR-AUC = 0.9973
+  Multinomial NB: PR-AUC = 0.9944
+  Random Forest: PR-AUC = 0.9965
+  SVM (LinearSVC): PR-AUC = 0.9974
+  TF-IDF+LR: PR-AUC = 0.9969
+  XGBoost: PR-AUC = 0.9909
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: pr_curves_overlay (pdf, png, eps)
+
+============================================================
+CALIBRATION ANALYSIS
+============================================================
+  DistilBERT: Brier = 0.0205
+  Logistic Regression: Brier = 0.0346
+  Multinomial NB: Brier = 0.0501
+  Random Forest: Brier = 0.0480
+  SVM (LinearSVC): Brier = 0.0267
+  TF-IDF+LR: Brier = 0.0292
+  XGBoost: Brier = 0.0576
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: calibration_curves (pdf, png, eps)
+
+============================================================
+ERROR ANALYSIS
+============================================================
+
+[error] Analyzing errors for DistilBERT...
+  Total test: 78873 | Misclassified: 1822 (2.3%)
+  Error patterns:
+true_label pred_label  count
+  negative   positive    962
+  positive   negative    860
+  Avg length — Correct: 426 chars | Errors: 604 chars
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: error_analysis_distilbert (pdf, png, eps)
+
+[error] Analyzing errors for Logistic Regression...
+  Total test: 78873 | Misclassified: 3473 (4.4%)
+  Error patterns:
+true_label pred_label  count
+  positive   negative   2687
+  negative   positive    786
+  Avg length — Correct: 426 chars | Errors: 515 chars
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: error_analysis_logistic_regression (pdf, png, eps)
+
+[error] Analyzing errors for Multinomial NB...
+  Total test: 78873 | Misclassified: 5504 (7.0%)
+  Error patterns:
+true_label pred_label  count
+  negative   positive   4583
+  positive   negative    921
+  Avg length — Correct: 426 chars | Errors: 485 chars
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: error_analysis_naive_bayes (pdf, png, eps)
+
+[error] Analyzing errors for Random Forest...
+  Total test: 78873 | Misclassified: 5031 (6.4%)
+  Error patterns:
+true_label pred_label  count
+  negative   positive   4882
+  positive   negative    149
+  Avg length — Correct: 423 chars | Errors: 534 chars
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: error_analysis_random_forest (pdf, png, eps)
+
+[error] Analyzing errors for SVM (LinearSVC)...
+  Total test: 78873 | Misclassified: 2739 (3.5%)
+  Error patterns:
+true_label pred_label  count
+  negative   positive   1643
+  positive   negative   1096
+  Avg length — Correct: 428 chars | Errors: 494 chars
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: error_analysis_svm (pdf, png, eps)
+
+[error] Analyzing errors for TF-IDF+LR...
+  Total test: 78873 | Misclassified: 3005 (3.8%)
+  Error patterns:
+true_label pred_label  count
+  negative   positive   1870
+  positive   negative   1135
+  Avg length — Correct: 427 chars | Errors: 493 chars
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: error_analysis_tfidf_lr (pdf, png, eps)
+
+[error] Analyzing errors for XGBoost...
+  Total test: 78873 | Misclassified: 6188 (7.8%)
+  Error patterns:
+true_label pred_label  count
+  negative   positive   5587
+  positive   negative    601
+  Avg length — Correct: 427 chars | Errors: 468 chars
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: error_analysis_xgboost (pdf, png, eps)
+
+============================================================
+McNEMAR'S TEST — PAIRWISE MODEL COMPARISON
+============================================================
+  DistilBERT vs Logistic Regression: p = 0.000000 (***)
+  DistilBERT vs Multinomial NB: p = 0.000000 (***)
+  DistilBERT vs Random Forest: p = 0.000000 (***)
+  DistilBERT vs SVM (LinearSVC): p = 0.000000 (***)
+  DistilBERT vs TF-IDF+LR: p = 0.000000 (***)
+  DistilBERT vs XGBoost: p = 0.000000 (***)
+  Logistic Regression vs Multinomial NB: p = 0.000000 (***)
+  Logistic Regression vs Random Forest: p = 0.000000 (***)
+  Logistic Regression vs SVM (LinearSVC): p = 0.000000 (***)
+  Logistic Regression vs TF-IDF+LR: p = 0.000000 (***)
+  Logistic Regression vs XGBoost: p = 0.000000 (***)
+  Multinomial NB vs Random Forest: p = 0.000000 (***)
+  Multinomial NB vs SVM (LinearSVC): p = 0.000000 (***)
+  Multinomial NB vs TF-IDF+LR: p = 0.000000 (***)
+  Multinomial NB vs XGBoost: p = 0.000000 (***)
+  Random Forest vs SVM (LinearSVC): p = 0.000000 (***)
+  Random Forest vs TF-IDF+LR: p = 0.000000 (***)
+  Random Forest vs XGBoost: p = 0.000000 (***)
+  SVM (LinearSVC) vs TF-IDF+LR: p = 0.000000 (***)
+  SVM (LinearSVC) vs XGBoost: p = 0.000000 (***)
+  TF-IDF+LR vs XGBoost: p = 0.000000 (***)
+
+[mcnemar] p-value matrix saved to results\comparative\mcnemar_pvalues.csv
+[viz] Saved: comprehensive_comparison_heatmap (pdf, png, eps)
+
+[evaluation] Comprehensive comparison saved
+                     holdout_accuracy  holdout_f1_macro  holdout_neg_recall  cv_accuracy_mean  cv_accuracy_std  cv_f1_macro_mean  cv_f1_macro_std  cv_neg_recall_mean  cv_neg_recall_std   roc_auc    pr_auc  brier_score
+model                                                                                                                                                                                                                    
+DistilBERT                   0.976900          0.955994            0.921827          0.937667         0.004982          0.878790         0.009451            0.763620           0.026464  0.994040  0.998778     0.020527
+Logistic Regression          0.955967          0.921272            0.936129          0.952915         0.001190          0.916474         0.001844            0.936980           0.002220  0.986946  0.997298     0.034559
+Multinomial NB               0.930217          0.848522            0.627580          0.929032         0.000418          0.844969         0.000948            0.617453           0.002289  0.971617  0.994362     0.050073
+Random Forest                0.937368          0.858556            0.611815          0.938105         0.000721          0.860436         0.001961            0.615686           0.004675  0.982937  0.996487     0.047978
+SVM (LinearSVC)              0.965273          0.932847            0.866488          0.965402         0.000729          0.933115         0.001442            0.867279           0.003791  0.987569  0.997405     0.026712
+TF-IDF+LR                    0.961901          0.925850            0.848042          0.962428         0.001905          0.926800         0.003872            0.848678           0.009073  0.985511  0.996944     0.029185
+XGBoost                      0.923624          0.825727            0.558020          0.923794         0.000563          0.826270         0.001791            0.559443           0.004948  0.957266  0.990913     0.057573
+[6] ✓ Model evaluation complete.
+
+╔═══════════════════════════════════════════════════════════════════╗
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline         ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║   1.  Data Loading & Preprocessing                                ║
+║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
+║   3.  Sentiment Model Training (All Classical Models)             ║
+║   4.  Sentiment Model Training (TF-IDF+LR)                        ║
+║   5.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   6.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   7.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   8.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   9.  Statistical Tests (Gini, HHI, ANOVA, t-tests)               ║
+║  10.  Integration: Reviews ↔ Sales Linkage                        ║
+║  11.  Generate Comparative Model Report                           ║
+║  12.  Run Full Pipeline (All of the above)                        ║
+║   0.  Exit                                                        ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Select an option [0-12]: 7
+[info] Data not yet loaded. Loading now...
+
+[1] DATA LOADING & PREPROCESSING
+[data_loader] Reviews loaded: (568454, 11)
+[data_loader] Preprocessed reviews saved: (525814, 13)
+[data_loader] Class distribution:
+sent_label
+positive    443777
+negative     82037
+[data_loader] Imbalance ratio: 5.41:1
+[data_loader] Detected sales files: ['amazon_sale_report.csv', 'cloud_warehouse_compersion_chart.csv', 'expense_iigf.csv', 'international_sale_report.csv', 'may-2022.csv', 'plmarch2021.csv', 'sale_report.csv']
+[data_loader] Merged sales rows: 178405
+
+============================================================
+DATASET SUMMARY
+============================================================
+
+Reviews: 525,814 rows × 13 cols
+  Labels: {'positive': 443777, 'negative': 82037}
+  Unique ASINs (ProductId): 72,005
+  Date range: 1999-10-08 00:00:00 -> 2012-10-26 00:00:00
+
+Sales: 178,405 rows × 54 cols
+  Unique ASINs: 7,190
+  Unique SKUs: 8,094
+  Amount: mean=648.56, std=281.21
+  Unique regions: 70
+============================================================
+
+[1] ✓ Data loading complete.
+
+W0616 14:20:20.943000 2708 torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+
+============================================================
+LOADING PREVIOUSLY TRAINED DISTILBERT
+============================================================
+  Device: cuda
+Loading weights: 100%|██████████| 104/104 [00:00<00:00, 4075.91it/s, Materializing param=pre_classifier.weight]
+  ✓ Model loaded from results\models\distilbert\artifacts
+  Accuracy: 0.9769 | Precision(macro): 0.9576 | Recall(macro): 0.9545 | F1(macro): 0.9560
+[viz] Saved: confusion_matrix_distilbert (pdf, png, eps)
+  ✓ DistilBERT loaded successfully (skipped retraining)
+[info] Loaded 7 previously trained model(s) from disk: ['distilbert', 'logistic_regression', 'naive_bayes', 'random_forest', 'svm', 'tfidf_lr', 'xgboost']
+[info] TF-IDF state reconstructed from saved vectorizer.
+[info] Regenerating predictions for logistic_regression...
+[viz] Saved: confusion_matrix_logistic_regression (pdf, png, eps)
+[info] Regenerating predictions for naive_bayes...
+[viz] Saved: confusion_matrix_naive_bayes (pdf, png, eps)
+[info] Regenerating predictions for random_forest...
+[viz] Saved: confusion_matrix_random_forest (pdf, png, eps)
+[info] Regenerating predictions for svm...
+[viz] Saved: confusion_matrix_svm (pdf, png, eps)
+[info] Regenerating predictions for tfidf_lr...
+[viz] Saved: confusion_matrix_tfidf_lr (pdf, png, eps)
+[info] Regenerating predictions for xgboost...
+[viz] Saved: confusion_matrix_xgboost (pdf, png, eps)
+[info] All model predictions regenerated and confusion matrices plotted.
+[sentiment_models] XGBoost registry template: CPU (callers may override to GPU with dense matrices).
+
+[7] CLASS IMBALANCE ANALYSIS
+
+============================================================
+CLASS IMBALANCE EXPERIMENTS
+============================================================
+
+[imbalance] Strategy: Baseline (no handling)
+  Resampled distribution: {'negative': np.int64(69731), 'positive': np.int64(377210)}
+  Accuracy: 0.9619 | F1(macro): 0.9258 | Neg Recall: 0.8480 | Neg F1: 0.8741
+
+[imbalance] Strategy: Class Weighting (balanced)
+  Resampled distribution: {'negative': np.int64(69731), 'positive': np.int64(377210)}
+  Accuracy: 0.9560 | F1(macro): 0.9213 | Neg Recall: 0.9361 | Neg F1: 0.8690
+
+[imbalance] Strategy: SMOTE
+  Resampled distribution: {'negative': np.int64(377210), 'positive': np.int64(377210)}
+  Accuracy: 0.9578 | F1(macro): 0.9231 | Neg Recall: 0.9168 | Neg F1: 0.8714
+
+[imbalance] Strategy: Random Oversampling
+  Resampled distribution: {'negative': np.int64(377210), 'positive': np.int64(377210)}
+  Accuracy: 0.9554 | F1(macro): 0.9202 | Neg Recall: 0.9347 | Neg F1: 0.8673
+
+[imbalance] Strategy: Random Undersampling
+  Resampled distribution: {'negative': np.int64(69731), 'positive': np.int64(69731)}
+  Accuracy: 0.9415 | F1(macro): 0.8996 | Neg Recall: 0.9471 | Neg F1: 0.8347
+The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.
+[viz] Saved: imbalance_recall_comparison (pdf, png, eps)
+
+[imbalance] Results saved to results\comparative\imbalance_experiment_table.csv
+
+                  strategy  accuracy  precision_macro  recall_macro  f1_macro  negative_recall  negative_f1  negative_precision  positive_recall  positive_f1
+    Baseline (no handling)  0.961901         0.937062      0.915496  0.925850         0.848042     0.874147            0.901910         0.982950     0.977553
+Class Weighting (balanced)  0.955967         0.899357      0.947882  0.921272         0.936129     0.869008            0.810868         0.959635     0.973536
+                     SMOTE  0.957793         0.907334      0.941081  0.923092         0.916789     0.871432            0.830353         0.965373     0.974752
+       Random Oversampling  0.955371         0.898255      0.946966  0.920237         0.934747     0.867300            0.808931         0.959184     0.973175
+      Random Undersampling  0.941463         0.867909      0.943760  0.899556         0.947099     0.834676            0.746111         0.940421     0.964435
+[7] ✓ Class imbalance analysis complete.
+
+
+Press Enter to continue...
+
+╔═══════════════════════════════════════════════════════════════════╗
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline         ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║   1.  Data Loading & Preprocessing                                ║
+║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
+║   3.  Sentiment Model Training (All Classical Models)             ║
+║   4.  Sentiment Model Training (TF-IDF+LR)                        ║
+║   5.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   6.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   7.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   8.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   9.  Statistical Tests (Gini, HHI, ANOVA, t-tests)               ║
+║  10.  Integration: Reviews ↔ Sales Linkage                        ║
+║  11.  Generate Comparative Model Report                           ║
+║  12.  Run Full Pipeline (All of the above)                        ║
+║   0.  Exit                                                        ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Select an option [0-12]: 8
+[info] Data not yet loaded. Loading now...
+
+[1] DATA LOADING & PREPROCESSING
+[data_loader] Reviews loaded: (568454, 11)
+[data_loader] Preprocessed reviews saved: (525814, 13)
+[data_loader] Class distribution:
+sent_label
+positive    443777
+negative     82037
+[data_loader] Imbalance ratio: 5.41:1
+[data_loader] Detected sales files: ['amazon_sale_report.csv', 'cloud_warehouse_compersion_chart.csv', 'expense_iigf.csv', 'international_sale_report.csv', 'may-2022.csv', 'plmarch2021.csv', 'sale_report.csv']
+[data_loader] Merged sales rows: 178405
+
+============================================================
+DATASET SUMMARY
+============================================================
+
+Reviews: 525,814 rows × 13 cols
+  Labels: {'positive': 443777, 'negative': 82037}
+  Unique ASINs (ProductId): 72,005
+  Date range: 1999-10-08 00:00:00 -> 2012-10-26 00:00:00
+
+Sales: 178,405 rows × 54 cols
+  Unique ASINs: 7,190
+  Unique SKUs: 8,094
+  Amount: mean=648.56, std=281.21
+  Unique regions: 70
+============================================================
+
+[1] ✓ Data loading complete.
+
+
+[8] SALES ANALYTICS
+
+============================================================
+CHANNEL PROFITABILITY ANALYSIS
+============================================================
+  Shiprocket: mean=nan ± nan, median=nan, n=0
+  INCREFF: mean=15.0700 ± 30.2220, median=5.5000, n=10
+[viz] Saved: channel_profitability (pdf, png)
+
+============================================================
+MRP DISPERSION ANALYSIS
+============================================================
+  MRP columns: ['MRP Old', 'Final MRP Old', 'Ajio MRP', 'Amazon MRP', 'Amazon FBA MRP', 'Flipkart MRP', 'Limeroad MRP', 'Myntra MRP', 'Paytm MRP', 'Snapdeal MRP']
+
+                 count         mean         std    min     25%     50%     75%     max
+MRP Old         2586.0  2207.972506  701.258117  199.0  1778.0  2038.0  2378.0  5997.0
+Final MRP Old   2586.0  2235.176682  706.000205  199.0  1795.0  2095.0  2495.0  5997.0
+Ajio MRP        2586.0  2241.264076  707.770816  199.0  1795.0  2095.0  2495.0  5997.0
+Amazon MRP      2586.0  2247.789211  703.937792  199.0  1795.0  2097.0  2495.0  5997.0
+Amazon FBA MRP  2586.0  2247.789211  703.937792  199.0  1795.0  2097.0  2495.0  5997.0
+Flipkart MRP    2586.0  2243.120224  705.171732  199.0  1795.0  2097.0  2495.0  5997.0
+Limeroad MRP    2586.0  2242.974826  700.980197  199.0  1795.0  2095.0  2495.0  5997.0
+Myntra MRP      2598.0  2232.519207  693.027066  199.0  1795.0  2097.0  2495.0  5997.0
+Paytm MRP       2586.0  2238.489134  702.683664  199.0  1795.0  2095.0  2495.0  5997.0
+Snapdeal MRP    2586.0  2239.726566  702.881196  199.0  1795.0  2095.0  2495.0  5997.0
+[viz] Saved: mrp_dispersion (pdf, png)
+
+============================================================
+TOP SKU & REGIONAL REVENUE ANALYSIS
+============================================================
+[viz] Saved: top_skus (pdf, png)
+  Top 20 SKUs saved.
+G:\PycharmProjects\PythonProject\industry5.0_ecommerce_sentimental_prediction\modules\sales_analytics.py:197: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  .apply(per_region_stats)
+[viz] Saved: sales_by_region (pdf, png)
+  Regional stats saved.
+  Overall stats: {'amount_mean': 648.5614647631622, 'amount_std': 281.2116872291525, 'amount_median': 605.0, 'qty_mean': 0.9044310912967629, 'qty_std': 0.3133535856501447}
+[8] ✓ Sales analytics complete.
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline         ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║   1.  Data Loading & Preprocessing                                ║
+║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
+║   3.  Sentiment Model Training (All Classical Models)             ║
+║   4.  Sentiment Model Training (TF-IDF+LR)                        ║
+║   5.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   6.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   7.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   8.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   9.  Statistical Tests (Gini, HHI, ANOVA, t-tests)               ║
+║  10.  Integration: Reviews ↔ Sales Linkage                        ║
+║  11.  Generate Comparative Model Report                           ║
+║  12.  Run Full Pipeline (All of the above)                        ║
+║   0.  Exit                                                        ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Select an option [0-12]: 9
+
+[9] STATISTICAL SIGNIFICANCE TESTS
+
+============================================================
+REVENUE CONCENTRATION ANALYSIS
+============================================================
+  Gini Coefficient: 0.6843
+  HHI: 0.000829 — Highly competitive (low concentration)
+  Number of SKUs: 7139
+  Top 10% revenue share: 54.3%
+[viz] Saved: lorenz_curve_sku (pdf, png)
+
+============================================================
+REVENUE CONCENTRATION ANALYSIS
+============================================================
+  Gini Coefficient: 0.8169
+  HHI: 0.082636 — Moderately concentrated
+  Number of regions: 69
+  Top 10% revenue share: 61.5%
+[viz] Saved: lorenz_curve_region (pdf, png)
+
+============================================================
+MRP DISPERSION — STATISTICAL SIGNIFICANCE TESTS
+============================================================
+  MRP columns detected: ['MRP Old', 'Final MRP Old', 'Ajio MRP', 'Amazon MRP', 'Amazon FBA MRP', 'Flipkart MRP', 'Limeroad MRP', 'Myntra MRP', 'Paytm MRP', 'Snapdeal MRP']
+
+  Normality tests:
+  Shapiro-Wilk (MRP Old): W=0.819146, p=0.000000 → Non-normal
+  Shapiro-Wilk (Final MRP Old): W=0.832695, p=0.000000 → Non-normal
+  Shapiro-Wilk (Ajio MRP): W=0.833877, p=0.000000 → Non-normal
+  Shapiro-Wilk (Amazon MRP): W=0.836393, p=0.000000 → Non-normal
+  Shapiro-Wilk (Amazon FBA MRP): W=0.836393, p=0.000000 → Non-normal
+  Shapiro-Wilk (Flipkart MRP): W=0.835357, p=0.000000 → Non-normal
+  Shapiro-Wilk (Limeroad MRP): W=0.831983, p=0.000000 → Non-normal
+  Shapiro-Wilk (Myntra MRP): W=0.831105, p=0.000000 → Non-normal
+  Shapiro-Wilk (Paytm MRP): W=0.830420, p=0.000000 → Non-normal
+  Shapiro-Wilk (Snapdeal MRP): W=0.832471, p=0.000000 → Non-normal
+
+  Variance homogeneity:
+  Levene's test: F=0.3188, p=0.969260 → Equal variance
+
+  Kruskal-Wallis H-test: H=17.1753, p=0.046040
+  Result: MRP differences are significant at α=0.05
+  Effect size (ε²): 0.0003
+
+  Post-hoc pairwise comparisons (Mann-Whitney with Bonferroni):
+    MRP Old vs Final MRP Old: U=3213324, p_corr=0.672256 (ns)
+    MRP Old vs Ajio MRP: U=3202968, p_corr=0.387436 (ns)
+    MRP Old vs Amazon MRP: U=3161460, p_corr=0.030021 (*)
+    MRP Old vs Amazon FBA MRP: U=3161460, p_corr=0.030021 (*)
+    MRP Old vs Flipkart MRP: U=3187906, p_corr=0.163431 (ns)
+    MRP Old vs Limeroad MRP: U=3171768, p_corr=0.060057 (ns)
+    MRP Old vs Myntra MRP: U=3215632, p_corr=0.340223 (ns)
+    MRP Old vs Paytm MRP: U=3196556, p_corr=0.270705 (ns)
+    MRP Old vs Snapdeal MRP: U=3194302, p_corr=0.238297 (ns)
+    Final MRP Old vs Ajio MRP: U=3333460, p_corr=1.000000 (ns)
+    Final MRP Old vs Amazon MRP: U=3292310, p_corr=1.000000 (ns)
+    Final MRP Old vs Amazon FBA MRP: U=3292310, p_corr=1.000000 (ns)
+    Final MRP Old vs Flipkart MRP: U=3316464, p_corr=1.000000 (ns)
+    Final MRP Old vs Limeroad MRP: U=3303702, p_corr=1.000000 (ns)
+    Final MRP Old vs Myntra MRP: U=3346396, p_corr=1.000000 (ns)
+    Final MRP Old vs Paytm MRP: U=3328722, p_corr=1.000000 (ns)
+    Final MRP Old vs Snapdeal MRP: U=3323226, p_corr=1.000000 (ns)
+    Ajio MRP vs Amazon MRP: U=3302430, p_corr=1.000000 (ns)
+    Ajio MRP vs Amazon FBA MRP: U=3302430, p_corr=1.000000 (ns)
+    Ajio MRP vs Flipkart MRP: U=3326966, p_corr=1.000000 (ns)
+    Ajio MRP vs Limeroad MRP: U=3313718, p_corr=1.000000 (ns)
+    Ajio MRP vs Myntra MRP: U=3358238, p_corr=1.000000 (ns)
+    Ajio MRP vs Paytm MRP: U=3339232, p_corr=1.000000 (ns)
+    Ajio MRP vs Snapdeal MRP: U=3333006, p_corr=1.000000 (ns)
+    Amazon MRP vs Amazon FBA MRP: U=3343698, p_corr=1.000000 (ns)
+    Amazon MRP vs Flipkart MRP: U=3367228, p_corr=1.000000 (ns)
+    Amazon MRP vs Limeroad MRP: U=3356190, p_corr=1.000000 (ns)
+    Amazon MRP vs Myntra MRP: U=3397792, p_corr=1.000000 (ns)
+    Amazon MRP vs Paytm MRP: U=3381114, p_corr=1.000000 (ns)
+    Amazon MRP vs Snapdeal MRP: U=3373748, p_corr=1.000000 (ns)
+    Amazon FBA MRP vs Flipkart MRP: U=3367228, p_corr=1.000000 (ns)
+    Amazon FBA MRP vs Limeroad MRP: U=3356190, p_corr=1.000000 (ns)
+    Amazon FBA MRP vs Myntra MRP: U=3397792, p_corr=1.000000 (ns)
+    Amazon FBA MRP vs Paytm MRP: U=3381114, p_corr=1.000000 (ns)
+    Amazon FBA MRP vs Snapdeal MRP: U=3373748, p_corr=1.000000 (ns)
+    Flipkart MRP vs Limeroad MRP: U=3331566, p_corr=1.000000 (ns)
+    Flipkart MRP vs Myntra MRP: U=3373436, p_corr=1.000000 (ns)
+    Flipkart MRP vs Paytm MRP: U=3356438, p_corr=1.000000 (ns)
+    Flipkart MRP vs Snapdeal MRP: U=3350354, p_corr=1.000000 (ns)
+    Limeroad MRP vs Myntra MRP: U=3386296, p_corr=1.000000 (ns)
+    Limeroad MRP vs Paytm MRP: U=3368874, p_corr=1.000000 (ns)
+    Limeroad MRP vs Snapdeal MRP: U=3363058, p_corr=1.000000 (ns)
+    Myntra MRP vs Paytm MRP: U=3357028, p_corr=1.000000 (ns)
+    Myntra MRP vs Snapdeal MRP: U=3351658, p_corr=1.000000 (ns)
+    Paytm MRP vs Snapdeal MRP: U=3337360, p_corr=1.000000 (ns)
+
+============================================================
+CHANNEL PROFITABILITY — STATISTICAL SIGNIFICANCE TESTS
+============================================================
+[stat] Insufficient data after cleaning.
+
+[stat] All statistical test results saved to results\statistical_tests
+[9] ✓ Statistical tests complete.
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline         ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║   1.  Data Loading & Preprocessing                                ║
+║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
+║   3.  Sentiment Model Training (All Classical Models)             ║
+║   4.  Sentiment Model Training (TF-IDF+LR)                        ║
+║   5.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   6.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   7.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   8.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   9.  Statistical Tests (Gini, HHI, ANOVA, t-tests)               ║
+║  10.  Integration: Reviews ↔ Sales Linkage                        ║
+║  11.  Generate Comparative Model Report                           ║
+║  12.  Run Full Pipeline (All of the above)                        ║
+║   0.  Exit                                                        ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Select an option [0-12]: 10
+[info] Data not yet loaded. Loading now...
+
+[1] DATA LOADING & PREPROCESSING
+[data_loader] Reviews loaded: (568454, 11)
+[data_loader] Preprocessed reviews saved: (525814, 13)
+[data_loader] Class distribution:
+sent_label
+positive    443777
+negative     82037
+[data_loader] Imbalance ratio: 5.41:1
+[data_loader] Detected sales files: ['amazon_sale_report.csv', 'cloud_warehouse_compersion_chart.csv', 'expense_iigf.csv', 'international_sale_report.csv', 'may-2022.csv', 'plmarch2021.csv', 'sale_report.csv']
+[data_loader] Merged sales rows: 178405
+
+============================================================
+DATASET SUMMARY
+============================================================
+
+Reviews: 525,814 rows × 13 cols
+  Labels: {'positive': 443777, 'negative': 82037}
+  Unique ASINs (ProductId): 72,005
+  Date range: 1999-10-08 00:00:00 -> 2012-10-26 00:00:00
+
+Sales: 178,405 rows × 54 cols
+  Unique ASINs: 7,190
+  Unique SKUs: 8,094
+  Amount: mean=648.56, std=281.21
+  Unique regions: 70
+============================================================
+
+[1] ✓ Data loading complete.
+
+
+[10] REVIEWS ↔ SALES INTEGRATION
+  Integrated 7200 ASIN-SKU-sentiment records.
+[10] ✓ Integration complete.
+
+╔═══════════════════════════════════════════════════════════════════╗
+║       Industry 5.0 E-Commerce Sentiment Analysis Pipeline         ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║   1.  Data Loading & Preprocessing                                ║
+║   2.  Data Quality Audit (ASIN Matching & Consistency)            ║
+║   3.  Sentiment Model Training (All Classical Models)             ║
+║   4.  Sentiment Model Training (TF-IDF+LR)                        ║
+║   5.  Sentiment Model Training (DistilBERT — Optional)            ║
+║   6.  Model Evaluation & Comparison (CV, ROC, Calibration)        ║
+║   7.  Class Imbalance Analysis (SMOTE, Weighting experiments)     ║
+║   8.  Sales Analytics (Profitability, MRP, Top SKUs, Regions)     ║
+║   9.  Statistical Tests (Gini, HHI, ANOVA, t-tests)               ║
+║  10.  Integration: Reviews ↔ Sales Linkage                        ║
+║  11.  Generate Comparative Model Report                           ║
+║  12.  Run Full Pipeline (All of the above)                        ║
+║   0.  Exit                                                        ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Select an option [0-12]: 11
+
+[11] COMPARATIVE MODEL REPORT
+  Final comparison table:
+                     accuracy  precision_macro  recall_macro  f1_macro  negative_precision  negative_recall  negative_f1  negative_support  positive_precision  positive_recall  positive_f1  positive_support
+model                                                                                                                                                                                                         
+distilbert           0.976900         0.957551      0.954454  0.955994            0.929531         0.921827     0.925663             12306            0.985571         0.987081     0.986325             66567
+logistic_regression  0.955967         0.899357      0.947882  0.921272            0.810868         0.936129     0.869008             12306            0.987845         0.959635     0.973536             66567
+naive_bayes          0.930217         0.914097      0.806872  0.848522            0.893452         0.627580     0.737279             12306            0.934742         0.986164     0.959765             66567
+random_forest        0.937368         0.955849      0.804683  0.858556            0.978809         0.611815     0.752975             12306            0.932889         0.997551     0.964137             66567
+svm                  0.965273         0.941157      0.925012  0.932847            0.906795         0.866488     0.886183             12306            0.975519         0.983535     0.979511             66567
+tfidf_lr             0.961901         0.937062      0.915496  0.925850            0.901910         0.848042     0.874147             12306            0.972215         0.982950     0.977553             66567
+xgboost              0.923624         0.922672      0.774616  0.825727            0.921498         0.558020     0.695111             12306            0.923846         0.991212     0.956344             66567
+
+  Cross-validation comparison:
+                     accuracy_mean  accuracy_std  precision_macro_mean  precision_macro_std  recall_macro_mean  recall_macro_std  f1_macro_mean  f1_macro_std  negative_recall_mean  negative_recall_std  negative_f1_mean  negative_f1_std
+model                                                                                                                                                                                                                                      
+Logistic Regression       0.952915      0.001190              0.892462             0.002687           0.946420          0.000992       0.916474      0.001844              0.936980             0.002220          0.861305         0.002951
+TF-IDF+LR                 0.962428      0.001905              0.938475             0.003239           0.916067          0.004763       0.926800      0.003872              0.848678             0.009073          0.875733         0.006634
+SVM (LinearSVC)           0.965402      0.000729              0.941286             0.001558           0.925410          0.001885       0.933115      0.001442              0.867279             0.003791          0.886645         0.002459
+Multinomial NB            0.929032      0.000418              0.914142             0.001476           0.802042          0.001089       0.844969      0.000948              0.617453             0.002289          0.730810         0.001674
+Random Forest             0.938105      0.000721              0.956896             0.000931           0.806697          0.002322       0.860436      0.001961              0.615686             0.004675          0.756322         0.003526
+XGBoost                   0.923794      0.000563              0.922632             0.001598           0.775296          0.002308       0.826270      0.001791              0.559443             0.004948          0.696104         0.003297
+DistilBERT                0.937667      0.004982              0.892658             0.013238           0.866931          0.012142       0.878790      0.009451              0.763620             0.026464          0.794319         0.016130
+
+  Imbalance experiment results:
+                  strategy  accuracy  precision_macro  recall_macro  f1_macro  negative_recall  negative_f1  negative_precision  positive_recall  positive_f1
+    Baseline (no handling)  0.961901         0.937062      0.915496  0.925850         0.848042     0.874147            0.901910         0.982950     0.977553
+Class Weighting (balanced)  0.955967         0.899357      0.947882  0.921272         0.936129     0.869008            0.810868         0.959635     0.973536
+                     SMOTE  0.957793         0.907334      0.941081  0.923092         0.916789     0.871432            0.830353         0.965373     0.974752
+       Random Oversampling  0.955371         0.898255      0.946966  0.920237         0.934747     0.867300            0.808931         0.959184     0.973175
+      Random Undersampling  0.941463         0.867909      0.943760  0.899556         0.947099     0.834676            0.746111         0.940421     0.964435
+[11] ✓ Report generation complete.
+
+
+Press Enter to continue...

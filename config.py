@@ -67,7 +67,7 @@ ENABLE_CALIBRATION = True        # Enable calibration analysis
 #  Figure settings
 # ──────────────────────────────────────────────
 FIGURE_DPI = 300
-FIGURE_FORMATS = ["pdf", "png"]  # Save in both formats
+FIGURE_FORMATS = ["pdf", "png", "eps"]  # Save in three formats
 FIGURE_STYLE = "whitegrid"
 
 # Publication-quality color palette

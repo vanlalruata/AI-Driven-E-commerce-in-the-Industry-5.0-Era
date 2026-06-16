@@ -163,6 +163,10 @@ def load_distilbert(reviews_df):
         "X_test": pd.Series(X_test),
     }
 
+    # Regenerate confusion matrix plot
+    from modules.visualization import plot_confusion_matrix
+    plot_confusion_matrix(cm, labels_list, get_model_figures_dir("distilbert"), "distilbert")
+
     print(f"  ✓ DistilBERT loaded successfully (skipped retraining)")
     return result
 

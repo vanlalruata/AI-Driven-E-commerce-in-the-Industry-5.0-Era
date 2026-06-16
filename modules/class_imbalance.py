@@ -127,8 +127,8 @@ def run_imbalance_experiments(X_train_tfidf, y_train, X_test_tfidf, y_test, labe
             dist = dict(zip(unique, counts))
         print(f"  Resampled distribution: {dict(dist) if isinstance(dist, dict) else dist.to_dict()}")
 
-        # Train model
-        clf = LogisticRegression(max_iter=1000, random_state=RANDOM_SEED, **model_kwargs)
+        # Train model (uses C=10.0 to match the optimized TF-IDF+LR configuration)
+        clf = LogisticRegression(max_iter=1000, C=10.0, random_state=RANDOM_SEED, **model_kwargs)
         clf.fit(X_res, y_res)
         preds = clf.predict(X_test_tfidf)
 

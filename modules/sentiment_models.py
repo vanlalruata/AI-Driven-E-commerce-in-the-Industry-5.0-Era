@@ -371,7 +371,10 @@ def load_tfidf_lr(reviews_df):
             "f1": float(f[0]), "support": int(s[0]),
         }
 
-    print(f"  Accuracy: {acc:.4f} | Precision(macro): {prec_macro:.4f} | Recall(macro): {rec_macro:.4f} | F1(macro): {f1_macro:.4f}")
+    # Regenerate confusion matrix plot
+    from modules.visualization import plot_confusion_matrix
+    from config import get_model_figures_dir
+    plot_confusion_matrix(cm, labels, get_model_figures_dir("tfidf_lr"), "tfidf_lr")
 
     return {
         "model_name": "tfidf_lr",
