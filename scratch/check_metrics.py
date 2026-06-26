@@ -2,7 +2,7 @@ import re
 
 files = {
     "main.tex": r"g:\PycharmProjects\PythonProject\industry5.0_ecommerce_sentimental_prediction\manuscript\main.tex",
-    "old_main.tex": r"g:\PycharmProjects\PythonProject\industry5.0_ecommerce_sentimental_prediction\manuscript\old_main.tex",
+    "main_revision.tex": r"g:\PycharmProjects\PythonProject\industry5.0_ecommerce_sentimental_prediction\manuscript\main_revision.tex",
     "supplementary.tex": r"g:\PycharmProjects\PythonProject\industry5.0_ecommerce_sentimental_prediction\manuscript\supplementary.tex",
     "response.tex": r"g:\PycharmProjects\PythonProject\industry5.0_ecommerce_sentimental_prediction\manuscript\response.tex"
 }
@@ -26,7 +26,7 @@ def verify():
         # 3. SOTA Proposed accuracy (should be 96.16% or 96.16\%, not 96.19% or 96.19\%)
         # Note: 96.19 is allowed for class imbalance baseline, so we only check the SOTA metric section or study row.
         # Let's search for "This Study" row in SOTA table
-        if name in ["main.tex", "old_main.tex"]:
+        if name in ["main.tex", "main_revision.tex"]:
             for line in content.splitlines():
                 if "This Study" in line and "96.19" in line:
                     print(f"[ERROR] {name} SOTA table row contains outdated proposed metric: 96.19%")

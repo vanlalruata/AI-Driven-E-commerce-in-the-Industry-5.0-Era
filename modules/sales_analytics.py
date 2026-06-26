@@ -59,17 +59,19 @@ def compute_channel_profitability(sales_df):
 
     # Plot
     if results:
-        plot_data = pd.DataFrame({
-            "channel": list(results.keys()),
-            "mean_profit": [v["mean"] for v in results.values()],
-        }).sort_values("mean_profit")
-        plot_horizontal_bar(
-            plot_data, "mean_profit", "channel",
-            SALES_ANALYTICS_DIR,
-            title="Channel Mean Profitability Comparison",
-            filename="channel_profitability",
-            color="#4CAF50",
-        )
+        valid_results = {k: v for k, v in results.items() if v["n"] > 0}
+        if valid_results:
+            plot_data = pd.DataFrame({
+                "channel": list(valid_results.keys()),
+                "mean_profit": [v["mean"] for v in valid_results.values()],
+            }).sort_values("mean_profit")
+            plot_horizontal_bar(
+                plot_data, "mean_profit", "channel",
+                SALES_ANALYTICS_DIR,
+                title="Channel Mean Profitability Comparison",
+                filename="channel_profitability",
+                color="#4CAF50",
+            )
 
     return results
 

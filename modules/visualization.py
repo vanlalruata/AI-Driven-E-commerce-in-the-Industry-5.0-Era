@@ -265,11 +265,39 @@ def plot_horizontal_bar(data, x_col, y_col, output_dir, title="", filename="barp
 # ──────────────────────────────────────────────
 def plot_boxplot(data, x_col, y_col, output_dir, title="", filename="boxplot"):
     """Generic grouped boxplot."""
-    fig, ax = plt.subplots(figsize=(10, 5))
-    sns.boxplot(data=data, x=x_col, y=y_col, ax=ax, palette="Set2", hue=y_col, linewidth=1.5)
-    # ax.set_title(title)
-    plt.xticks(rotation=30, ha="right")
+    # Temporarily set font family to sans-serif for this plot
+    import matplotlib
+    orig_font = matplotlib.rcParams["font.family"]
+    matplotlib.rcParams["font.family"] = "sans-serif"
+    
+    fig, ax = plt.subplots(figsize=(12, 6))
+    
+    # Use x_col for hue to get colored boxes, and remove legend to prevent clutter
+    sns.boxplot(
+        data=data, x=x_col, y=y_col, ax=ax,
+        hue=x_col, palette="pastel", linewidth=1.2,
+        fliersize=0, width=0.6,
+        boxprops={'zorder': 2},
+        showmeans=True, meanline=True, meanprops={'color': 'red', 'ls': '--'},
+        medianprops={'color': 'black', 'lw': 1.2}
+    )
+    
+    if ax.get_legend() is not None:
+        ax.get_legend().remove()
+        
+    sns.despine(left=True, bottom=True)
+    ax.set_title("MRP Dispersion Across Marketplaces", fontsize=16, fontweight="bold", pad=20)
+    ax.set_xlabel("Store / Marketplace", fontsize=12, labelpad=10)
+    ax.set_ylabel("MRP (INR)", fontsize=12, labelpad=10)
+    
+    ax.grid(True, alpha=0.3, axis="y")
+    plt.xticks(rotation=25, ha="right")
+    plt.tight_layout()
+    
     _save_fig(fig, output_dir, filename)
+    
+    # Restore original font family
+    matplotlib.rcParams["font.family"] = orig_font
 
 
 # ──────────────────────────────────────────────

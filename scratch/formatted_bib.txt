@@ -1,0 +1,122 @@
+\begin{thebibliography}{38}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem[Aayog(2026)]{nitiaayog2026dpi}
+Aayog, N. (2026). \textit{DPI@2047 for Viksit Bharat: A Strategic Roadmap to Enable Non-linear Inclusive Socio-economic Growth} (Tech. Rep.). National Institution for Transforming India (NITI Aayog), Government of India.
+
+\bibitem[Ali et al.(2024)]{ali2024analyzing}
+Ali, H., Hashmi, E., Yayilgan Yildirim, S., \& Shaikh, S. (2024). Analyzing Amazon Products Sentiment: A Comparative Study of Machine and Deep Learning, and Transformer-Based Techniques. \textit{Electronics}, \textit{13}(7), 1305. \url{https://doi.org/10.3390/electronics13071305}
+
+\bibitem[Alshehri et al.(2025)]{alshehri2025towards}
+Alshehri, A., Abdulrahman, A., Alamri, H., Miller, T., \& Vered, M. (2025). Towards Explainable Goal Recognition Using Weight of Evidence (WoE): A Human-Centered Approach. \textit{Journal of Artificial Intelligence Research}, \textit{82}, 2535–2594. \url{https://doi.org/10.1613/jair.1.17173}
+
+\bibitem[Balogun et al.(2026)]{BALOGUN2026100027}
+Balogun, O.M., Nchege, J., Okpalaoka, C., \& Augustine, O. (2026). Re-considering data strategy and incorporation for AI: Concepts, prospects, and challenges. \textit{Strategic Business Research}, \textit{2}(1), 100027. \url{https://doi.org/10.1016/j.sbr.2025.100027}
+
+\bibitem[Bansal et al.(2026)]{BANSAL2026100023}
+Bansal, S., Nangia, P., Chanaliya, N., \& Thaichon, P. (2026). The role of advanced AI in improving chatbot-driven consumer experiences. \textit{Strategic Business Research}, \textit{2}(1), 100023. \url{https://doi.org/10.1016/j.sbr.2025.100023}
+
+\bibitem[Barney(1991)]{barney1991firm}
+Barney, J. (1991). Firm resources and sustained competitive advantage. \textit{Journal of management}, \textit{17}(1), 99–120. \url{https://doi.org/10.1177/014920639101700108}
+
+\bibitem[Bawack et al.(2022)]{bawack2022artificial}
+Bawack, R.E., Wamba, S.F., \& Carillo, K.D.A. (2022). Artificial intelligence in E-Commerce: a bibliometric study and literature review. \textit{Electronic markets}, \textit{32}(1), 297–338. \url{https://doi.org/10.1007/s12525-022-00537-z}
+
+\bibitem[Bellar et al.(2024)]{bellar12152403}
+Bellar, O., Baina, A., \& Ballafkih, M. (2024). Sentiment Analysis: Predicting Product Reviews for E-Commerce Recommendations Using Deep Learning and Transformers. \textit{Mathematics}, \textit{12}(15), 2403. \url{https://doi.org/10.3390/math12152403}
+
+\bibitem[Chen & Esperan\cc(2022)]{chen2022impact}
+Chen, D. \& Esperan\cc (2022). The Impact of Artificial Intelligence on Firm Performance: An Application of the Resource-Based View to e-Commerce Firms. \textit{Frontiers in Psychology}, \textit{13}, 884830. \url{https://doi.org/10.3389/fpsyg.2022.884830}
+
+\bibitem[Daraghmi & Zyadeh(2026)]{daraghmi2026sentiment}
+Daraghmi, E. \& Zyadeh, N. (2026). Sentiment Classification of Amazon Product Reviews Based on Machine and Deep Learning Techniques: A Comparative Study. \textit{Future Internet}, \textit{18}(3), 138. \url{https://doi.org/10.3390/fi18030138}
+
+\bibitem[Davis et al.(1989)]{davis1989user}
+Davis, F.D., Bagozzi, R.P., \& Warshaw, P.R. (1989). User acceptance of computer technology: A comparison of two theoretical models. \textit{Management science}, \textit{35}(8), 982–1003. \url{https://doi.org/10.1287/mnsc.35.8.982}
+
+\bibitem[Daza & N'e(2024)]{DAZA2024100267}
+Daza, A. \& N'e (2024). Sentiment Analysis on E-Commerce Product Reviews Using Machine Learning and Deep Learning Algorithms: A Bibliometric Analysis, Systematic Literature Review, Challenges and Future Works. \textit{International Journal of Information Management Data Insights}, \textit{4}(2), 100267. \url{https://doi.org/10.1016/j.jjimei.2024.100267}
+
+\bibitem[Duru & Sunar(2025)]{duru2025transformer}
+Duru, I. \& Sunar, A. (2025). Transformer and Pre-Transformer Model-Based Sentiment Prediction with Various Embeddings: A Case Study on Amazon Reviews. \textit{Entropy}, \textit{27}(12), 1202. \url{https://doi.org/10.3390/e27121202}
+
+\bibitem[Fang & Zhan(2015)]{fang2015sentiment}
+Fang, X. \& Zhan, J. (2015). Sentiment analysis using product review data. \textit{Journal of Big Data}, \textit{2}(5), 5. \url{https://doi.org/10.1186/s40537-015-0015-2}
+
+\bibitem[He et al.(2025)]{He31122025}
+He, Y., Du, Y., \& Pu, X. (2025). Personalized Recommendation System of E-Commerce in the Digital Economy Era: Enhancing Social Connections with Graph Attention Networks. \textit{Applied Artificial Intelligence}, \textit{39}(1), 2487417. \url{https://doi.org/10.1080/08839514.2025.2487417}
+
+\bibitem[Hirsch(1975)]{hirsch1975organizational}
+Hirsch, P.M. (1975). Organizational effectiveness and the institutional environment. \textit{Administrative science quarterly}, \textit{20}(3), 327–344. \url{https://doi.org/10.2307/2391994}
+
+\bibitem[Khan et al.(2026)]{khan2026assessing}
+Khan, A.M., Afroge, S., Hosain, S.I., \& Kobir, M.T.B. (2026). Assessing Sentiment in Amazon Alexa Reviews: A Hybrid Study of ML and DL Classification Methods. In \textit{2026 5th International Conference on Electrical, Computer & Telecommunication Engineering (ICECTE)} (pp. 1–6). IEEE. \url{https://doi.org/10.1109/ICECTE69292.2026.11429286}
+
+\bibitem[Liu et al.(2020)]{liu2020sentiment}
+Liu, Y., Lu, J., Yang, J., \& Mao, F. (2020). Sentiment analysis for e-commerce product reviews by deep learning model of Bert-BiGRU-Softmax. \textit{Mathematical Biosciences and Engineering}, \textit{17}(6), 7819–7837. \url{https://doi.org/10.61336/jcm2023-5}
+
+\bibitem[Mahajan et al.(2023)]{MAHAJAN2023114104}
+Mahajan, R., Lim, W.M., Sareen, M., Kumar, S., \& Panwar, R. (2023). Stakeholder theory. \textit{Journal of Business Research}, \textit{166}, 114104. \url{https://doi.org/10.1016/j.jbusres.2023.114104}
+
+\bibitem[Mamyrbayev et al.(2026)]{mamyrbayev2026enhanced}
+Mamyrbayev, O., Mussayeva, D., \& Kurmetkan, T. (2026). Enhanced Sentiment Analysis of E-Commerce Product Reviews Using Luong Attention-Based Bi-LSTM. \textit{Information}, \textit{17}(5), 398. \url{https://doi.org/10.3390/info17050398}
+
+\bibitem[Martini et al.(2024)]{martini16135448}
+Martini, B., Bellisario, D., \& Coletti, P. (2024). Human-Centered and Sustainable Artificial Intelligence in Industry 5.0: Challenges and Perspectives. \textit{Sustainability}, \textit{16}(13), 5448. \url{https://doi.org/10.3390/su16135448}
+
+\bibitem[Mentzas et al.(2024)]{Mentzas1429186}
+Mentzas, G., Hribernik, K., Stahre, J., Romero, D., \& Soldatos, J. (2024). Editorial: Human-Centered Artificial Intelligence in Industry 5.0. \textit{Frontiers in Artificial Intelligence}, \textit{7}. \url{https://doi.org/10.3389/frai.2024.1429186}
+
+\bibitem[Naithani(2024)]{Naithani20240174}
+Naithani, P. (2024). Analysis of India’s Digital Personal Data Protection Act, 2023. \textit{International Journal of Law and Management}, \textit{67}(5), 543-553. \url{https://doi.org/10.1108/IJLMA-05-2024-0174}
+
+\bibitem[Nowak & Pawłowska-Nowak(2024)]{Nowak142411668}
+Nowak, M. \& Pawłowska-Nowak, M. (2024). Dynamic Pricing Method in the E-Commerce Industry Using Machine Learning. \textit{Applied Sciences}, \textit{14}(24), 11668. \url{https://doi.org/10.3390/app142411668}
+
+\bibitem[Patgiri & Ramakrishna(2026)]{patgiri2026artificial}
+Patgiri, R. \& Ramakrishna, G. (2026). How Artificial Intelligence-Driven Marketing Shapes Customer Satisfaction: A Systematic Review of Cognitive, Affective, and Behavioral Outcomes. \textit{Cureus Journal Of Business and Economics}, \textit{3}(1). \url{https://doi.org/10.7759/s44404-026-00067-3}
+
+\bibitem[Phan & Bui(2025)]{phan2025ai_heart}
+Phan, T.A. \& Bui, V.D. (2025). AI with a heart: How perceived authenticity and warmth shape trust in healthcare chatbots. \textit{Journal of Marketing Communications}, 1–21. \url{https://doi.org/10.1080/13527266.2025.2508887}
+
+\bibitem[Phan et al.(2025)]{phan2025ai_trust}
+Phan, T.A., Tran, H.P., \& Ninh, T.T. (2025). AI, Trust, and Risk: Decoding What Really Drives Financial Adoption. \textit{Strategic Business Research}, \textit{2}(1), 100031. \url{https://doi.org/10.1016/j.sbr.2025.100031}
+
+\bibitem[Phan et al.(2026)]{phan2026mind}
+Phan, T.A., Tran, H.P., Ninh, T.T., \& Nguyen, H.K. (2026). Mind Over Machine: A Bibliometric Journey into Investor Perceptions of AI in Stock Markets. \textit{Strategic Business Research}, \textit{2}(1), 100115. \url{https://doi.org/10.1016/j.sbr.2026.100115}
+
+\bibitem[R'e(2025)]{Chenavaz31122025}
+R'e (2025). Artificial intelligence and dynamic pricing: a systematic literature review. \textit{Journal of Applied Economics}, \textit{28}(1), 2466140. \url{https://doi.org/10.1080/15140326.2025.2466140}
+
+\bibitem[Rahman(2026)]{RAHMAN2026100020}
+Rahman, W. (2026). Ethical AI personalization in digital retail: The roles of transparency, privacy, and consumer trust. \textit{Strategic Business Research}, \textit{2}(1), 100020. \url{https://doi.org/10.1016/j.sbr.2025.100020}
+
+\bibitem[Sorour et al.(2024)]{sorour2024hybrid}
+Sorour, S.E., Alojail, A., El-Shora, A., Amin, A.E., \& Abohany, A.A. (2024). A Hybrid Deep Learning Approach for Enhanced Sentiment Classification and Consistency Analysis in Customer Reviews. \textit{Mathematics}, \textit{12}(23), 3856. \url{https://doi.org/10.3390/math12233856}
+
+\bibitem[Sundara & Narendran(2023)]{Sundara2023129141}
+Sundara, K. \& Narendran, N. (2023). The Digital Personal Data Protection Act, 2023: analysing India’s dynamic approach to data protection. \textit{Computer Law Review International}, \textit{24}(5), 129–141. \url{https://doi.org/10.9785/cri-2023-240502}
+
+\bibitem[T'o(2023)]{TOTH2023102260}
+T'o, A. (2023). The human-centric Industry 5.0 collaboration architecture. \textit{MethodsX}, \textit{11}, 102260. \url{https://doi.org/10.1016/j.mex.2023.102260}
+
+\bibitem[Tornatzky et al.(1990)]{tornatzky1990processes}
+Tornatzky, L.G., Fleischer, M., \& Chakrabarti, A.K. (1990). \textit{The processes of technological innovation}.
+
+\bibitem[Usha & Neeral(2025)]{usha2025informational}
+Usha, T. \& Neeral, G. (2025). Informational privacy in the age of artificial intelligence: A critical analysis of India’s DPDP Act, 2023. \textit{Legal Issues in the digital Age}(2), 87–117.
+
+\bibitem[Zhang et al.(2015)]{zhang2015characterlevel}
+Zhang, X., Zhao, J., \& LeCun, Y. (2015). Character-level Convolutional Networks for Text Classification. In \textit{Proceedings of the 29th International Conference on Neural Information Processing Systems} (pp. 649–657). MIT Press.
+
+\bibitem[Zhou et al.(2023)]{Zhou132011378}
+Zhou, H., Xiong, F., \& Chen, H. (2023). A Comprehensive Survey of Recommender Systems Based on Deep Learning. \textit{Applied Sciences}, \textit{13}(20), 11378. \url{https://doi.org/10.3390/app132011378}
+
+\bibitem[Zhu & Abd Rozan(2026)]{zhu2026ai}
+Zhu, T. \& Abd Rozan, M.Z. (2026). AI adoption in E-commerce enterprises: Insights into current practices and future directions from an interview study. \textit{PLOS ONE}, \textit{21}(3), e0336416. \url{https://doi.org/10.1371/journal.pone.0336416}
+
+\end{thebibliography}
