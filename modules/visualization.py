@@ -286,11 +286,11 @@ def plot_boxplot(data, x_col, y_col, output_dir, title="", filename="boxplot"):
         ax.get_legend().remove()
         
     sns.despine(left=True, bottom=True)
-    ax.set_title("MRP Dispersion Across Marketplaces", fontsize=16, fontweight="bold", pad=20)
+    # ax.set_title("MRP Dispersion Across Marketplaces", fontsize=16, fontweight="bold", pad=20)
     ax.set_xlabel("Store / Marketplace", fontsize=12, labelpad=10)
     ax.set_ylabel("MRP (INR)", fontsize=12, labelpad=10)
     
-    ax.grid(True, alpha=0.3, axis="y")
+    ax.grid(True, alpha=0.36, axis="y")
     plt.xticks(rotation=25, ha="right")
     plt.tight_layout()
     

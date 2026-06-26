@@ -23,7 +23,7 @@
     urlcolor=blue
 }
 
-\title{\update{\textbf{Supplementary Materials: AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution}}}
+\title{\textbf{Supplementary Materials: AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution}}
 % \author{\textbf{Runu Patgiri}, \textbf{Vanlalruata Hnamte}, \textbf{Gurram Ramakrishna} \\
 % \textit{Mizoram University, Aizawl, Mizoram, India}}
 \date{}
@@ -35,7 +35,7 @@
 % \newpage
 
 \section{Introduction}
-\update{This supplementary document provides extended definitions, detailed operational decision-support matrix specifications, rigorous algorithmic time complexity breakdowns, complete empirical results tables, and accompanying visual charts to accompany the primary manuscript. The study has been reframed to emphasize a parallel-empirical framework and methodological caution regarding disjoint secondary e-commerce databases in emerging markets. This document provides transparency, detailed parameters, and mathematical foundations for the models, routing rules, and statistical tests discussed in the study.}
+This supplementary document provides extended definitions, detailed operational decision-support matrix specifications, rigorous algorithmic time complexity breakdowns, complete empirical results tables, and accompanying visual charts to accompany the primary manuscript. The study has been reframed to emphasise a parallel-empirical framework and methodological caution regarding disjoint secondary e-commerce databases in emerging markets. This document provides transparency, detailed parameters, and mathematical foundations for the models, routing rules, and statistical tests discussed in the study.
 
 \section{Extended Definitions of Key Paradigms}
 To ground the research in the emerging digital landscape, this section provides detailed operational definitions of the two core pillars guiding our study: \textbf{Industry 5.0} and the \textbf{Digital Personal Data Protection (DPDP) Act of 2023}.
@@ -124,28 +124,28 @@ Let:
     \item \textbf{Explanation}: The CNN layer first extracts local n-gram features (taking $O(N \cdot L \cdot C \cdot K)$), and the subsequent LSTM layer processes these feature maps sequentially (taking $O(N \cdot L \cdot D^2)$). The combined time complexity is additive and scales linearly with sequence length but carries high model parameter overhead.
 \end{itemize}
 
-\section{\update{Operational Decision Support Matrix and Parametric Routing Rules}}
-\update{To bridge the parallel-empirical modules (sentiment classification and transactional sales analytics), the operational decision-support system routes reviews based on calibrated sentiment confidence bounds and SKU/geographical concentration indices. We define the routing rules using the primary parameters of the system ($N, L, V, D, H$).}
+\section{Operational Decision Support Matrix and Parametric Routing Rules}
+To bridge the parallel-empirical modules (sentiment classification and transactional sales analytics), the operational decision-support system routes reviews based on calibrated sentiment confidence bounds and SKU/geographical concentration indices. We define the routing rules using the primary parameters of the system ($N, L, V, D, H$).
 
-\subsection{\update{Parametric Context and Complexity Constraints}}
-\update{The selection of routing paths is constrained by the execution time and memory footprint of the models, which are functions of the following parameters:}
+\subsection{Parametric Context and Complexity Constraints}
+The selection of routing paths is constrained by the execution time and memory footprint of the models, which are functions of the following parameters:
 \begin{itemize}
-    \item \update{$N$: The number of document reviews to process ($N = 525814$).}
-    \item \update{$L$: The average sequence length of a document ($L \approx 100$ words).}
-    \item \update{$V$: The vocabulary size for classical models ($V = 50000$ unique TF-IDF terms).}
-    \item \update{$D$: The hidden state dimensionality of the deep model ($D = 768$ for DistilBERT).}
-    \item \update{$H$: The number of self-attention heads ($H = 12$ for DistilBERT).}
+    \item $N$: The number of document reviews to process ($N = 525814$).
+    \item $L$: The average sequence length of a document ($L \approx 100$ words).
+    \item $V$: The vocabulary size for classical models ($V = 50000$ unique TF-IDF terms).
+    \item $D$: The hidden state dimensionality of the deep model ($D = 768$ for DistilBERT).
+    \item $H$: The number of self-attention heads ($H = 12$ for DistilBERT).
 \end{itemize}
-\update{As derived in Section 3, the linear time complexity of classical classifiers ($O(N \cdot L)$ or $O(N \cdot V)$) allows them to serve as high-throughput, low-power frontends, whereas the quadratic complexity of transformers ($O(N \cdot L^2 \cdot D \cdot H)$) limits their real-time application on resource-constrained platforms.}
+As derived in Section 3, the linear time complexity of classical classifiers ($O(N \cdot L)$ or $O(N \cdot V)$) allows them to serve as high-throughput, low-power frontends, whereas the quadratic complexity of transformers ($O(N \cdot L^2 \cdot D \cdot H)$) limits their real-time application on resource-constrained platforms.
 
-\subsection{\update{Routing Logic and Escalation Thresholds}}
-\update{The routing logic utilizes calibrated probabilities $P(pos)$ and Gini concentration coefficients ($G_{SKU} = 0.6843$, $G_{Region} = 0.8169$) to allocate human and automated resources:}
+\subsection{Routing Logic and Escalation Thresholds}
+The routing logic utilizes calibrated probabilities $P(pos)$ and Gini concentration coefficients ($G_{SKU} = 0.6843$, $G_{Region} = 0.8169$) to allocate human and automated resources:
 \begin{enumerate}
-    \item \textbf{\update{Path A: Automated Logging}}: \update{For reviews with $P(pos) \ge 0.6$ (highly likely positive), the system logs the review to the standard batch dashboard. This requires no human intervention, conserving operational resources.}
-    \item \textbf{\update{Path B: Human-in-the-Loop Buffer}}: \update{For reviews falling in the ambiguous range $0.4 < P(pos) < 0.6$, where prediction uncertainty is highest, the review is routed to the human review pool. This prevents misclassifying minority class (negative) sentiment on critical items, preserving human agency as mandated by Industry 5.0.}
-    \item \textbf{\update{Path C: Standard CRM Ticketing}}: \update{For reviews with $P(pos) \le 0.4$ on low-concentration products ($G_{SKU} \le 0.6843$), an automated refund/CRM ticket is generated.}
-    \item \textbf{\update{Path D: Immediate Supply Escalation}}: \update{For reviews with $P(pos) \le 0.4$ on high-concentration products ($G_{SKU} > 0.6843$), the review bypasses automated CRM and triggers an immediate email alert to the supply chain manager to check for defective batches.}
-    \item \textbf{\update{Path E: Regional Inventory Reallocation}}: \update{For reviews with $P(pos) \le 0.4$ in high-revenue concentrated regions ($G_{Region} > 0.8169$), a notification is dispatched to the logistics coordinator to review regional storage and transit conditions.}
+    \item \textbf{Path A: Automated Logging}: For reviews with $P(pos) \ge 0.6$ (highly likely positive), the system logs the review to the standard batch dashboard. This requires no human intervention, conserving operational resources.
+    \item \textbf{Path B: Human-in-the-Loop Buffer}: For reviews falling in the ambiguous range $0.4 < P(pos) < 0.6$, where prediction uncertainty is highest, the review is routed to the human review pool. This prevents misclassifying minority class (negative) sentiment on critical items, preserving human agency as mandated by Industry 5.0.
+    \item \textbf{Path C: Standard CRM Ticketing}: For reviews with $P(pos) \le 0.4$ on low-concentration products ($G_{SKU} \le 0.6843$), an automated refund/CRM ticket is generated.
+    \item \textbf{Path D: Immediate Supply Escalation}: For reviews with $P(pos) \le 0.4$ on high-concentration products ($G_{SKU} > 0.6843$), the review bypasses automated CRM and triggers an immediate email alert to the supply chain manager to check for defective batches.
+    \item \textbf{Path E: Regional Inventory Reallocation}: For reviews with $P(pos) \le 0.4$ in high-revenue concentrated regions ($G_{Region} > 0.8169$), a notification is dispatched to the logistics coordinator to review regional storage and transit conditions.
 \end{enumerate}
 
 \newpage
