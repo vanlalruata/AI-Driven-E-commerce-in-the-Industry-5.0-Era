@@ -26,8 +26,6 @@
 \newcommand{\update}[1]{\textcolor{updatecolor}{#1}}
 
 \title{\textbf{Response to Reviewer Comments}}
-% \author{\textbf{Manuscript ID}: AI-Driven E-commerce in the Industry 5.0 Era \\
-% \textbf{Title}: AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution}
 \date{}
 
 \begin{document}
@@ -35,110 +33,149 @@
 \maketitle
 
 \noindent\textbf{Manuscript ID}: SBR-D-26-00443 \\
-\textbf{Title}: AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution   
+\textbf{Title}: AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution
 
-% \newpage
-\section*{Response to the Second Round of Editor's / Reviewers' Comments}
-We are deeply grateful to the editor and reviewers for their follow-up feedback on our revised manuscript. Below, we address each comment point-by-point and describe the corresponding updates we have made in this second revision. All new changes are highlighted in \update{blue} in the revised manuscript.
+\section*{Response to the Third Round of Editor's / Reviewers' Comments}
+We are deeply grateful to the editor and reviewers for their follow-up feedback on our revised manuscript. Below, we address each comment point-by-point and describe the corresponding updates we have made in this third revision. All new changes are highlighted in \update{blue} in the revised manuscript.
 
 \subsection*{Point-by-Point Responses to Reviewer \#1}
 
-\comment{\textbf{Comment 1: Reframing to Parallel-Empirical Framework}} \\
-The datasets are disjoint, with 0.00\% ASIN overlap and a 10-year temporal mismatch. The manuscript should be reframed to acknowledge this parallel structure and methodological caution, rather than claiming an integrated empirical framework.
+\comment{\textbf{Comment 1: Human-in-the-loop claim validation} \\
+The human-in-the-loop claim is not validated. The manuscript proposes routing reviews with $0.4 < P(pos) < 0.6$ to human moderators, but it does not test this workflow with human decision-makers. There is no evidence of moderator accuracy, workload, response time, decision quality, cost, user acceptance, or organisational feasibility. The proposed threshold is also arbitrary unless justified through calibration, cost-sensitive analysis, or decision-curve analysis.}
 
 \response
-We sincerely thank the reviewer for this excellent recommendation to reframe the study. We have fully accepted this recommendation. The manuscript, including the title, abstract, and introduction, has been reframed to emphasise a \update{Parallel-Empirical Framework and Methodological Caution}. We explicitly caution researchers and practitioners against assuming seamless integration of secondary digital retail streams in emerging markets. The two analytics modules—sentiment classification benchmarking on the review corpus and operational/concentration analytics on the sales dataset—are now presented as cooperative parallel components connected through a decision support matrix, preserving empirical validity without implying unsupported causal linkages.
+We sincerely thank the reviewer for highlighting the need to justify the threshold routing and clarify the lack of human factors evaluation. We agree that the routing workflow was not empirically tested with actual human moderators, and we have updated the manuscript to frame this transparently.
 
-\comment{\textbf{Comment 2: Refinement of Hypotheses}} \\
-The hypotheses should be limited strictly to tested mathematical/statistical relationships, removing conceptual hypotheses related to Industry 5.0 or DPDP compliance that are not directly tested.
+First, we have added a sentence to the new \textbf{Limitations of the Study (Section 7.1)} explaining that the study's objective was algorithm benchmarking rather than workflow engineering or human factors evaluation:
+\begin{quote}
+\update{``The objective of this study was algorithm benchmarking and methodological validation rather than workflow engineering or human factors evaluation.''}
+\end{quote}
+
+Second, we have added a mathematical justification for the $0.4 < P(pos) < 0.6$ threshold based on probability calibration: because Platt scaling maps raw SVM decision margins to empirical probabilities, the region around $0.5$ represents the point of maximum classification uncertainty (highest entropy) where the model confidence is lowest.
+
+Third, in the \textbf{Future Research Directions (Section 7.2)}, we now explicitly frame human factors evaluation as subsequent work. The exact replacement text inserted in \textbf{Section 7.1 }reads as follows:
+\begin{quote}
+\update{``Furthermore, the operational decision-support matrix and the routing thresholds in Algorithm 2 represent conceptual design proposals rather than an empirically validated system tested with actual human moderators; thus, moderator accuracy, workload, response times, decision quality, operational costs, and user acceptance remain unmeasured. The objective of this study was algorithm benchmarking and methodological validation rather than workflow engineering or human factors evaluation.''}
+\end{quote}
+
+\comment{\textbf{Comment 2: Decision-support algorithm consistency} \\
+The decision-support algorithm is internally inconsistent. Algorithm 2 requires calibrated sentiment probability, SKU concentration, and regional concentration for each incoming review. However, the empirical audit shows that the review and transaction datasets do not share product identifiers. Therefore, the study cannot retrieve the relevant SKU concentration index for a review in the analysed data. The algorithm may be a future design proposal, but it is not supported by the empirical datasets used in the manuscript.}
 
 \response
-We are grateful to the reviewer for highlighting the need to refine our hypotheses. We agree. We have removed the conceptual hypotheses from Section 1. The formal hypotheses are now limited strictly to evaluated mathematical and statistical relationships:
+We thank the reviewer for pointing out this inconsistency. Because the review corpus and transactional sales database are disjoint ($0.00\%$ ASIN overlap), the SKU concentration index indeed cannot be retrieved for reviews in our empirical data.
+
+To resolve this, we have reframed the algorithm and its discussion as a conceptual design and reference architecture. Specifically:
+\begin{enumerate}
+    \item We revised the introductory paragraph for the algorithms in the methodology section (Section 3.3) to explicitly clarify the conceptual nature of Algorithm 2:
+    \begin{quote}
+    \update{``Algorithm 2 presents a conceptual enterprise deployment workflow rather than an empirically executed algorithm. It illustrates how calibrated sentiment probabilities from the NLP pipeline could be combined with operational indicators derived from transactional databases in organisations that maintain integrated ERP and review repositories. Because the secondary datasets analysed in this study are disjoint, this routing framework was not executed during the empirical evaluation and should therefore be interpreted as a reference architecture for future implementation.''}
+    \end{quote}
+    \item We changed the title of Algorithm 2 from \textit{Operational Decision-Support Routing Framework} to \update{\textbf{Reference Architecture for Enterprise Deployment}}.
+    \item We inserted a warning sentence directly above Algorithm 2 in Section 3.3 stating that it was not executed on the disjoint datasets.
+    \item We inserted a warning sentence directly preceding the discussion of the decision-support architecture in the Results section (Section 4.6):
+    \begin{quote}
+    \update{``The decision-support architecture should be interpreted as a conceptual design rather than an evaluated operational system. Its purpose is to demonstrate how the independently validated analytical components may be integrated within enterprise environments once unified product identifiers and synchronized transactional databases become available.''}
+    \end{quote}
+    \item We revised the warning paragraph in Section 4.6 preceding the routing matrix to reinforce catalog disjointness:
+    \begin{quote}
+    \update{``Importantly, we present a critical methodological and operational warning regarding Algorithm 2. Although Algorithm 2 details a logical routing flow that combines calibrated sentiment probability with SKU and regional concentration metrics, this workflow is a conceptual design proposal rather than a system executed on the empirical datasets analysed in this study. Due to the 0.00\% ASIN overlap and temporal disjointness between the reviews and sales databases, it is impossible to retrieve the SKU concentration index ($G_{SKU}$) for any incoming review in our empirical data. In a live enterprise environment, this catalog disjointness must be resolved by integrating reviews and transaction databases (e.g., via unified ONDC registry schemas) before this decision-support routing can be operationalized.''}
+    \end{quote}
+\end{enumerate}
+
+\comment{\textbf{Comment 3: Realignment of Hypotheses} \\
+The hypotheses do not align well with the results. 
 \begin{itemize}
-    \item \update{\textit{Hypothesis H1a/H1b}: Model classification performance, stability, and calibration across architectures under class imbalance.}
-    \item \update{\textit{Hypothesis H2a/H2b}: Geographic/SKU sales concentration (Gini/HHI) and cross-marketplace pricing consistency (Kruskal-Wallis/Dunn-Bonferroni).}
-    \item \update{\textit{Hypothesis H3}: Data linkage audit disjointness (ASIN catalog overlap).}
-\end{itemize}
-Industry 5.0 and DPDP compliance implications are now framed strictly as interpretive translations and managerial guidelines rather than direct empirical findings.
-
-\comment{\textbf{Comment 3: Fulfilment Profitability and Figure 13}} \\
-Shorten the fulfilment profitability section to highlight database API limitations rather than a comparative empirical analysis, given that Shiprocket has zero valid rows ($N=0$), and update Figure 13.
+    \item H1a predicts that classical models achieve statistically equivalent performance and calibration compared with DistilBERT. However, the results indicate that McNemar's tests show highly significant differences across nearly all model pairs, with DistilBERT achieving the best holdout accuracy, macro F1 score, and Brier score. This does not support statistical equivalence. If equivalence is claimed, the authors need proper equivalence testing rather than ordinary significance testing.
+    \item H1b is also underreported. The manuscript states that balancing techniques improve negative class recall but does not provide statistical tests comparing recall across imbalance-handling strategies. Reporting higher recall after SMOTE or class weighting is descriptive unless confidence intervals or appropriate paired tests are provided. The hypothesis should be evaluated more rigorously in future studies.
+    \item H2a is descriptive rather than genuinely hypothesis-testing. Reporting Gini and HHI values shows concentration in this dataset, but the manuscript does not provide an external benchmark, expected threshold, confidence interval, or theoretical basis for what counts as "high" in this specific context. The concentration results are useful but should be framed as descriptive and operational analyses.
+    \item H2b should be interpreted more cautiously. The Kruskal-Wallis test was statistically significant at p = .046; however, the effect size was extremely small. The manuscript correctly notes the negligible effect size, but then makes strong claims about synchronised master catalogues, price fairness, prevention of price gouging, and reduced algorithmic price discrimination. However, these claims have not been directly tested. MRP similarity does not prove the absence of dynamic pricing, collusion, discrimination, or consumer harm.
+    \item H3 is not a conventional hypothesis. The data linkage audit revealed zero overlap, but this is a diagnostic result rather than a hypothesis derived from theory. This may be valuable as a methodological caution, but the authors should not present it as equivalent to a substantive research hypothesis. The paper would be stronger if H3 were reframed as a data quality audit objective.
+\end{itemize}}
 
 \response
-We thank the reviewer for this constructive suggestion regarding the fulfilment analysis. We have shortened Section 4.5 (renamed to \update{Data-Quality Audit of Multi-Channel Fulfilment Integration}) and reframed it as an empirical audit finding. We discuss how database constraints and API integration failures lead to $N=0$ for Shiprocket. Figure 13 has been updated and copied to the figures folder; it now shows only the INCREFF profit distribution, while the text and caption explain the blank comparator for Shiprocket as a data-quality warning.
+We are deeply grateful to the reviewer for this rigorous critique. We have fully updated and realigned all hypotheses in Section 1 to ensure mathematical and conceptual consistency:
+\begin{enumerate}
+    \item \textbf{Realigned H1a}: We have revised H1a to predict that \update{deep learning models (DistilBERT) achieve statistically superior classification performance and probability calibration compared to classical models (Linear SVM and TF-IDF+LR) on e-commerce reviews}. This removes the unsupported claim of statistical equivalence.
+    \item \textbf{Statistical Rigor for H1b}: To go beyond confidence intervals and provide a formal statistical test comparing imbalance strategies on the holdout negative set ($N=12304$ negative reviews), we performed a \textbf{two-proportion z-test} and a \textbf{chi-squared test of proportions} between the Baseline model (recall: $84.80\%$, $10434/12304$) and the SMOTE strategy (recall: $91.68\%$, $11280/12304$). The two-proportion z-test yielded a highly significant difference ($Z = -16.74$, $p < 0.0001$), which was further confirmed by the chi-squared test ($\chi^2(1) = 279.61$, $p < 0.0001$). This formally rejects the null hypothesis of equivalent recall and confirms the statistical significance of the class-balancing intervention. The exact text inserted in Section 4.2 reads:
+    \begin{quote}
+    \update{``To statistically evaluate the significance of these recall improvements, we report the 95\% confidence intervals (CIs) for holdout negative recall across all strategies. ... Because these confidence intervals are completely disjoint, we confirm that the recall improvements are highly significant. To provide a rigorous statistical test as required to fully support Hypothesis H1b, we performed a two-proportion z-test and a chi-squared test of independence comparing the negative-class recall rates of the baseline and SMOTE strategies on the holdout set. The two-proportion z-test yielded a highly significant difference ($Z = -16.74$, $p < 0.0001$), which was further confirmed by the chi-squared test ($\chi^2(1) = 279.61$, $p < 0.0001$). This formally rejects the null hypothesis of equivalent recall rates and confirms the statistical validity of the balancing intervention.''}
+    \end{quote}
+    \item \textbf{Benchmarks for H2a}: We have updated H2a to state: \update{``first, that e-commerce transactional sales exhibit significant concentration, exceeding established HHI concentration benchmarks while exhibiting high Gini inequality (H2a)''}. This avoids asserting that there is a DOJ benchmark for Gini. In Section 4.4, we explicitly ground this using the US Department of Justice (DOJ) / FTC HHI thresholds: HHI $< 0.15$ denotes unconcentrated markets, $0.15 - 0.25$ denotes moderate concentration, and HHI $> 0.25$ indicates high concentration. We discuss that while the product market is highly competitive (HHI $= 0.0008$), the regional sales show a moderately high concentration (HHI $= 0.0826$) and extreme geographic inequality (regional Gini $= 0.8169$, with $61.5\%$ of sales coming from the top 10\% of regions).
+    \item \textbf{Pricing Caution for H2b}: We have toned down the price synchronization and fairness claims in Section 4.3. We state that the Kruskal-Wallis test ($H=17.18, p=0.046$) has a negligible effect size ($\epsilon^2 = 0.0003$), suggesting catalogue pricing consistency across platforms but not proving the absence of dynamic pricing, price discrimination, or consumer harm. We have noted this as a study limitation in Section 7.1.
+    \item \textbf{Reframed H3 as Objective}: We have reframed H3 in Section 1 as \update{\textbf{Methodological Audit Objective 1 (MAO1)}} to reflect its diagnostic nature.
+\end{enumerate}
 
-\comment{\textbf{Comment 4: DPDP and Governance Separation}} \\
-Distinguish clearly between direct empirical results (disjoint datasets, pricing consistency) and recommended governance guidelines in the DPDP section.
+\comment{\textbf{Comment 4: Language quality improvements} \\
+The language quality requires substantial improvement. There are awkward phrases and errors such as "a DL classifiers," "fast-sentiment category," "despite having modest hardware behind it," "right to cause," "SMSMEs," "interpretable alerts," "dual-empirical framework," and "governance-friendly artefacts." These issues make the manuscript appear less polished and should be corrected before resubmission.}
 
 \response
-We appreciate the reviewer's valuable suggestion to distinguish empirical results from governance guidelines. In Section 5, we have separated our discussion into distinct subsections:
+We thank the reviewer for highlighting these stylistic and grammatical errors. We have carefully polished the prose throughout the manuscript and corrected all the noted phrases:
 \begin{itemize}
-    \item \update{\textbf{Subsection 5.1 (Empirical Constraints and Regulatory Risks)}: Details the compliance risks under the DPDP Act of 2023 that arise from disjoint catalogs (ASIN mismatches) and centralized marketplace price synchronization.}
-    \item \update{\textbf{Subsection 5.2 (Managerial Guidelines for DPDP Compliance)}: Lays out specific, normative engineering and governance controls (consent capture, PII anonymization, cryptographic logs) to address these risks.}
+    \item \update{``a DL classifiers''} has been corrected to \update{``a deep learning classifier''} (Section 7 / Conclusion).
+    \item \update{``fast-sentiment category''} has been corrected to \update{``efficient sentiment categorization''} (Section 3.3).
+    \item \update{``despite having modest hardware behind it''} has been corrected to \update{``even when deployed on modest hardware configurations''} (Section 3.3).
+    \item \update{``right to cause''} has been corrected to the proper legal term: \update{``right to explanation''} (Section 2.5).
+    \item \update{``SMSMEs''} has been corrected to the standard Indian economic acronym: \update{``MSMEs''} (Micro, Small, and Medium Enterprises) (Sections 3.3, 4.1, 5.3, 6, and Conclusion).
+    \item \update{``interpretable alerts''} has been corrected to \update{``interpretable operational alerts''} (Section 2.9).
+    \item \update{``dual-empirical framework''} has been corrected to \update{``parallel empirical framework''} (Section 4).
+    \item \update{``governance-friendly artefacts''} has been corrected to \update{``governance-supportive documentation and model parameters''} (Section 2.5).
 \end{itemize}
 
-\comment{\textbf{Comment 5: Formatting Guidelines}} \\
-I strongly recommend using APA 7th referencing style consistently and formatting the manuscript in Times New Roman, 12-point font, with consistent margins, headings, table formatting, figure captions, and reference style.
-
-\response
-We sincerely thank the reviewer for this guidance on manuscript formatting. The manuscript has been formatted using a 12-point Times font (equivalent to Times New Roman) by specifying the \update{12 pt} and \update{times} options in the document class, ensuring consistent margins, headings, table structures and reference style. \update{Additionally, we have significantly shortened all figure captions throughout the manuscript to make them concise and descriptive, while moving the detailed empirical interpretations and diagnostic discussions directly into the main body paragraphs (such as in Section 4.1, 4.3, 4.4, and 4.7) to improve readability and parity.} Furthermore, the bibliography and in-text citations have been updated to strictly and consistently follow the APA 7th edition referencing style, as recommended.
+\comment{\textbf{Additional Update: Softening Compliance and Conclusion Claims} \\
+To prevent overclaiming, we have softened all regulatory compliance and concluding assertions throughout the manuscript:}
+\begin{enumerate}
+    \item We have modified statements suggesting that our framework ``ensures'' DPDP compliance. Instead, we clarify that the framework \update{``assists organisations in supporting DPDP compliance''} or \update{``facilitates DPDP compliance''}.
+    \begin{itemize}
+        \item Section 3 (Architecture Description): \update{``...and assists organisations in supporting the DPDP Act's data quality requirements. ... illustrating how disjoint e-commerce datasets can be audited and operationalised in parallel to support managerial decision-making while facilitating data privacy (supporting DPDP Act compliance) and algorithmic explainability.''}
+        \item Section 5.2 (Managerial Guidelines): Title modified to \update{\textbf{Managerial Guidelines for Supporting DPDP Compliance}}.
+        \item Section 6 (Recommendations): \update{``Fifth, data fiduciaries must implement strict data audits to support DPDP compliance ... requiring platforms to establish clear audit logs, purpose limitations, and PII anonymisation to assist in complying with the DPDP Act of 2023.''}
+    \end{itemize}
+    \item We have softened and realigned the language in the \textbf{Conclusion (Section 7)} to emphasize the conceptual nature of the decision-support layer:
+    \begin{quote}
+    \update{``The study validates two parallel analytical components and proposes a conceptual enterprise deployment architecture. Owing to the disjoint nature of the secondary datasets, the decision-support layer should be regarded as a reference implementation for future integrated e-commerce platforms rather than an empirically validated operational workflow. We show that while DistilBERT, a deep learning classifier, achieves the highest predictive accuracy in our benchmarking, lightweight classical models (SVM and TF-IDF+LR) suggest explainable and sustainable alternatives for resource-constrained MSMEs. Furthermore, by calculating Gini concentration and Kruskal-Wallis marketplace dispersion, we provide statistical indications of digital retail operations in India.''}
+    \end{quote}
+\end{enumerate}
 
 \subsection*{Point-by-Point Responses to Reviewer \#2}
 
-\comment{\textbf{Comment 1: Empirical Integration vs. Parallel Analyses}} \\
-The study lacks genuine empirical integration between sentiment analytics and sales analytics, resulting in two parallel analyses rather than a unified framework.
+\comment{\textbf{Comment 1: Excessive use of bullet points} \\
+The manuscript contains numerous bullet-point lists, particularly in the Introduction, Literature Review, Methodology, Results, and Response sections. While bullet points are appropriate for brief summaries, their excessive use interrupts the narrative flow and gives the manuscript a report-like rather than a scholarly journal style. I recommend converting most of these bullet points into well-structured paragraphs, retaining bullets only where they genuinely improve readability such as algorithm steps or concise summaries.}
 
 \response
-We sincerely thank the reviewer for highlighting the need to clarify the empirical relationship between sentiment and sales analytics. In alignment with this concern and similar feedback from Reviewer \#1, we have fully reframed the study as a \update{Parallel-Empirical Framework and Methodological Caution}. We explicitly acknowledge that the sentiment analysis on reviews and operational/concentration analytics on transactional sales are distinct, parallel streams of analysis. Rather than claiming an integrated empirical link, we demonstrate how these parallel insights cooperatively support decision-making when mapped together in an operational decision support matrix, preserving the statistical integrity of the disjoint datasets.
+We sincerely thank the reviewer for this constructive stylistic feedback. We agree that bulleted lists can disrupt the flow of academic writing. 
 
-\comment{\textbf{Comment 2: Industry 5.0 Operationalization}} \\
-Provide a concrete operationalization table mapping Industry 5.0 pillars (human-centricity, sustainability, resilience) to empirical metrics or thresholds.
-
-\response
-We thank the reviewer for this constructive recommendation to operationalise these Industry 5.0 pillars. We have added a new subsection and table in Section 2.1: \update{Table 1 (Industry 5.0 Empirical Translation and Operationalisation Matrix)}. This table maps:
+We have converted the following bulleted lists into cohesive prose paragraphs:
 \begin{itemize}
-    \item \update{\textit{Human-Centricity} to the human-in-the-loop decision-support buffer ($0.4 < P(pos) < 0.6$).}
-    \item \update{\textit{Sustainability} to algorithmic complexity (linear $O(N \cdot L)$ vs. quadratic $O(N \cdot L^2 \cdot D \cdot H)$) and CPU vs. GPU resource demands.}
-    \item \update{\textit{Resilience} to SKU and geographical concentration indices (Gini thresholds of 0.6843 and 0.8169).}
+    \item The list of research questions and hypotheses in Section 1 (Introduction).
+    \item The list of theoretical foundations in Section 2.1 (Related Works).
+    \item The dataset preprocessing steps and general quality control steps in Section 3.1 (Methodology).
+    \item The data linkage audit results in Section 3.2 (Methodology).
+    \item The statistical formulations and indicators in Section 3.4 (Methodology).
+    \item The model benchmarking and cross-validation protocol in Section 3.4 (Methodology).
+    \item The experimental setup and system configuration details in Section 3.5 (Methodology).
+    \item The SKU and regional concentration results in Section 4.4 (Results).
+    \item The operational decision-support matrix routing zones in Section 4.6 (Results).
+    \item The ethical, regulatory, and barriers to deployment discussions in Sections 5.1, 5.2, and 5.3.
+    \item The strategic recommendations in Section 6.
 \end{itemize}
+We have retained bullet points only within Algorithm steps and where they are essential for tabular readability.
 
-\comment{\textbf{Comment 3: AI Methodological Contribution and Algorithmic Novelty}} \\
-The methodological contribution to artificial intelligence is limited because the study primarily benchmarks existing machine learning and deep learning models such as Naïve Bayes, Logistic Regression, Random Forest, SVM, and DistilBERT without proposing a novel algorithm, hybrid architecture, optimisation strategy, or innovative feature engineering approach.
-
-\response
-We sincerely thank the reviewer for this insightful comment regarding the algorithmic novelty of our sentiment classification models. We agree that our study does not introduce a completely new deep learning architecture or algorithm from scratch. However, in the context of Industry 5.0, which prioritises environmental sustainability (Green AI) and accessibility for resource-constrained small and medium-sized enterprises (SMEs) in emerging markets, developing highly complex, energy-intensive models is often counterproductive. Instead, the methodological contribution of our work lies in the \update{applied engineering pipeline} designed to make computationally lightweight models (like SVM and TF-IDF+LR) operationally reliable and robust under a severe class imbalance (5.41:1). Specifically, we introduce:
-\begin{itemize}
-    \item \update{\textbf{Platt-Scaling Probability Calibration}}: Utilizing a 3-fold cross-validation calibration (\texttt{CalibratedClassifierCV}) for SVM and logistic sigmoid fitting for Logistic Regression to map raw decision boundaries to reliable posterior probabilities $P(pos)$ (validated via Brier scores).
-    \item \update{\textbf{Human-in-the-Loop Uncertainty Routing}}: Defining a formal decision-support boundary ($0.4 < P(pos) < 0.6$) where predictively ambiguous reviews are routed to human moderators, preserving human agency as mandated by Industry 5.0.
-    \item \update{\textbf{Sublinear Term Frequency Scaling}}: Mitigating document length bias in TF-IDF by replacing raw frequencies with $1 + \log(tf)$ to stabilize decision boundaries.
-\end{itemize}
-We have expanded Section 3.3 to include a detailed pseudocode of the Sentiment NLP Pipeline (Algorithm 1) and added the proposed architecture diagram (Figure 1) to clarify these details, demonstrating how a calibrated and sustainable pipeline provides a robust engineering contribution without the computational/carbon footprint of massive transformers.
-
-\comment{\textbf{Comment 4: Concrete Decision Support System}} \\
-The manuscript lacks a concrete decision support system showing routing rules or escalation logic.
+\comment{\textbf{Comment 2: Strengthen the Limitations section} \\
+Although certain limitations are mentioned briefly throughout the manuscript, there is no dedicated "Limitations" section that clearly summarizes the study's constraints.}
 
 \response
-We sincerely thank the reviewer for highlighting this and recommending a concrete decision support matrix. We have added a new subsection, \update{Section 4.6 (Operational Decision Support Matrix and Escalation Logic)}, and formalised its routing procedures in the Operational Decision-Support Routing Framework (Algorithm 2). This section presents a concrete routing matrix (\update{Table 8}) that maps calibrated sentiment probabilities against Gini concentration thresholds to route customer reviews to automated CRM ticketing, a human-in-the-loop buffer, or immediate supply-chain manager escalation.
+We thank the reviewer for this suggestion. We have added a dedicated subsection: \update{\textbf{Section 7.1 (Limitations of the Study)}}, which summarises all the study's constraints in a single structured paragraph:
+\begin{quote}
+\update{``A primary limitation of this study is the disjointed nature of the secondary datasets. The Data Linkage Audit revealed a 0.00\% ASIN catalogue overlap and a ten-year temporal gap between the reviews and transactional files, preventing direct causal temporal forecasting at the SKU level. Furthermore, the operational decision-support matrix and the routing thresholds in Algorithm 2 represent conceptual design proposals rather than an empirically validated system tested with actual human moderators; thus, moderator accuracy, workload, response times, decision quality, operational costs, and user acceptance remain unmeasured. The objective of this study was algorithm benchmarking and methodological validation rather than workflow engineering or human factors evaluation. Additionally, the external validity and generalisability of our empirical findings are constrained by our reliance on a single product review corpus and a single transactional sales database, without replication across other major Indian platforms. Finally, the price dispersion analysis provides a cross-sectional snapshot of catalogue prices rather than a dynamic temporal view of transaction-level pricing over time.''}
+\end{quote}
 
-\comment{\textbf{Comment 5: Managerial Relevance and Real-world Validation}} \\
-The managerial relevance remains largely speculative because the proposed framework is not validated through real-world business applications such as retailer case studies, manager interviews, user experiments, or organisational implementation.
-
-\response
-We sincerely thank the reviewer for pointing out the importance of validating our findings in real-world environments. We have added a new paragraph in our conclusion section (Section 7), discussing explicitly acknowledging this limitation. We discuss that while our parallel-empirical framework provides a statistical blueprint, validating its managerial relevance through retailer case studies, qualitative manager interviews, user experiments, or live organisational implementation represents a critical next step for future work.
-
-\comment{\textbf{Comment 6: Generalisability and Multi-Platform Replication}} \\
-The external validity and generalisability of the findings are limited, as the empirical analysis relies on a single review dataset and a single transactional dataset without replication across other major Indian e-commerce platforms such as Flipkart, Myntra, Meesho, or ONDC.
+\comment{\textbf{Comment 3: Expand Future Research Directions} \\
+Similarly, the future research directions are currently scattered and relatively brief. I recommend adding a dedicated "Future Research" subsection that outlines potential avenues for extending this work.}
 
 \response
-We sincerely thank the reviewer for raising the critical issue of external validity and generalisability across Indian marketplaces. We have revised the Conclusion and future directions (Section 7) to explicitly note the limitation of relying on a single review dataset and transactional sales dataset. We detail that replicating this parallel analysis across other major Indian e-commerce networks—such as Flipkart, Myntra, Meesho, or live ONDC transaction logs—is essential to confirm the external validity and generalisability of our sales concentration and pricing findings.
-
-\comment{\textbf{Comment 7: Deployment Barriers and ONDC}} \\
-Discuss the barriers to SME implementation (API overhead, human costs) and ONDC's role in standardization and replication.
-
-\response
-We sincerely thank the reviewer for this valuable guidance regarding deployment barriers and ONDC's standardising role. We have added a new subsection, \update{Subsection 5.3 (Barriers to Deployment and ONDC's Standardising Role)}, which details the software engineering and maintenance overhead of third-party API integration, the labour cost of maintaining a human-in-the-loop buffer, and explains how ONDC's open network protocols serve as a democratising force to standardise schemas and reduce integration barriers for SMEs.
-
-\vspace{18pt}
-\noindent We believe that this thorough revision comprehensively addresses all the concerns, doubts, and questions raised by the reviewers. We are confident that these improvements have significantly strengthened the manuscript, and we hope it is now suitable for publication.
+We agree. We have added a dedicated subsection: \update{\textbf{Section 7.2 (Future Research Directions)}} outlining concrete avenues for extending this work:
+\begin{quote}
+\update{``Future research should address these limitations by validating the proposed framework in real-world retail environments and conducting replication studies across other major Indian e-commerce networks—such as Flipkart, Myntra, Meesho, or live ONDC registries—to confirm external validity. Researchers should also prioritise ONDC-style integrated data standards that link consumer feedback directly with inventory transactions. To validate the human-in-the-loop mechanism, future studies must implement user experiments to measure moderator workload, decision quality, and response times. Additionally, expanding the sentiment classifier to support India's multilingual and code-mixed comment streams (e.g., Hinglish, Benglish, or Tamil-English) would improve local applicability. Finally, evaluating privacy-preserving training protocols (such as federated learning or differential privacy) is a critical next step to build a resilient, inclusive, and DPDP-compliant e-commerce ecosystem in emerging markets.''}
+\end{quote}
 
 \end{document}
