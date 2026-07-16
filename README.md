@@ -1,4 +1,68 @@
-# E-commerce Sentiment Analysis and Sales Insights — Industry 5.0
+# AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution
+
+# Journal
+
+Strategic Business Research
+
+# Publisher
+
+Elsevier
+
+# Corresponding author
+
+Vanlalruata Hnamte
+
+# First author
+
+Runu Patgiri
+
+# Date of submission
+
+04th June 2026
+
+# 1st revision Review Complete Date
+
+16th June 2026
+
+# 2nd revision Review Complete Date
+
+26th June 2026
+
+# 3rd revision Review Complete Date
+
+16th July 2026
+
+# Accepted Date
+
+05th March 2023
+
+# DOI
+
+<https://doi.org/10.1016/j.teler.2023.100053>
+
+# ScienceDirect Link
+
+<https://www.sciencedirect.com/science/article/pii/S2772503023000130>
+
+# Abstract
+
+India's e-commerce ecosystem is rapidly evolving under the combined influence of Artificial Intelligence (AI), digital transformation, and the human-centric pillars of Industry 5.0, contributing to the Viksit Bharat@2047 agenda. However, existing research often lacks theoretical anchoring and rigorous validation. Grounded in the Resource-Based View (RBV), technology-organisation-environment (TOE), and Technology Acceptance Model (TAM), this study presents a parallel-empirical framework and methodological caution for analysing consumer sentiment and transactional sales performance. We benchmarked seven sentiment classifiers on a corpus of 525814 reviews. The deep DistilBERT model achieved the highest holdout accuracy of 97.69% and negative-class recall of 92.18%, whereas the lightweight SVM and TF-IDF+LR models (Brier scores of 0.0270 and 0.0292) provided sustainable, explainable alternatives. Crucially, a rigorous data quality and linkage audit revealed that the public review corpus and Indian transactional sales datasets were disjoint (ASIN overlap: 0.00\%), presenting a fundamental methodological warning against the assumption of seamless secondary e-commerce data integration. Rather than asserting a unified causal link, this study demonstrates parallel analytics modules, namely, sentiment-model benchmarking and transactional sales analytics. Sales analytics on the transactional dataset (178405 rows) revealed a significant concentration: a Gini coefficient of 0.6843 for Stock Keeping Units (SKUs) and 0.8169 for regional revenue. Furthermore, Kruskal-Wallis H-testing shows a statistically significant but negligible Maximum Retail Price (MRP) dispersion across ten digital marketplaces (H = 17.18, p = 0.046, effect size ϵ^2 = 0.0003). Finally, we discuss how these parallel empirical insights can be operationalised under the Digital Personal Data Protection (DPDP) Act of 2023, outlining a conceptual enterprise decision-support framework and recommending governance guidelines for emerging markets.
+
+# How to cite
+
+Runu Patgiri, Vanlalruata Hnamte, Jamal Hussain,
+AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution,
+Strategic Business Research,
+Volume 10,
+2023,
+100053,
+ISSN 2772-5030,
+<https://doi.org/10.1016/j.teler.2023.100053>.
+(<https://www.sciencedirect.com/science/article/pii/S2772503023000130>)
+
+# Note
+
+If you find this code and paper useful, kindly consider to cite from your valuable work.
 
 ## Overview
 
