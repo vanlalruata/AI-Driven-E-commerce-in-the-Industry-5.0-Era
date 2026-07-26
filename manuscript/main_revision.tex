@@ -309,7 +309,7 @@ All preprocessing steps, as shown in Tables \ref{tab:summary_datasets} and \ref{
 
 General quality control steps were applied to both datasets. Specifically, these steps involved removing exact duplicate rows, recording the count of dropped records, standardising all column names to a canonical lowercase snake-case schema, resolving duplicate names by appending suffixes and coalescing, and recording and reporting the percentage of missing values per column to apply imputation. Additionally, robust date parsing was conducted to convert date entries to time-zone-aware datetime objects, and source provenance was preserved by adding original source-file and source-row-id columns to ensure traceability.
 
-\subsection{Data Linkage and Catalog Audit}
+\subsection{Data Linkage and Catalogue Overlap Audit}
 To establish the empirical relationship between the reviews and sales files, we conducted a rigorous Data Linkage and ASIN Overlap Audit, examining unique product identifiers (ASINs) and the temporal range of both datasets. The linkage audit yielded the following results. First, in terms of unique identifiers, the review corpus contains $72005$ unique product identifiers ($ProductId$ / ASINs), while the sales transaction dataset contains $7190$ unique ASINs. Second, the ASIN catalogue overlap rate was exactly $0.00\%$, with zero matched ASINs ($N_{match} = 0$). Third, the datasets exhibit a significant temporal gap, with the review dataset spanning 8 October 1999 to 26 October 2012 (a range of 4767 days), whereas the transactional sales dataset covers only May 2022. Consequently, the audit demonstrated that the two datasets represented completely disjoint environments. Therefore, we treat them as parallel empirical testbeds—using reviews for sentiment benchmarking and sales data for operational concentration analytics—to avoid unsupported causal claims.
 
 \subsection{Sentiment Modeling Pipeline}
@@ -453,13 +453,13 @@ Second, the Herfindahl-Hirschman Index ($HHI$) is applied to measure market-shar
 \end{equation}
 where an $HHI < 0.01$ denotes highly competitive markets, and $HHI > 0.25$ indicates extremely high concentration.
 
-Third, the Kruskal-Wallis H-test was used to test the significance of price differences across digital marketplaces. As a non-parametric alternative to one-way ANOVA (selected due to Shapiro-Wilk testing confirming non-normality), the $H$ statistic is computed as:
+Third, non-parametric Friedman repeated-measures ANOVA served as the primary inferential test to evaluate price dispersion across matched SKU listings in digital marketplaces ($N = 2586$). The test statistic $Q$ is computed as:
 \begin{equation}
-    H = \frac{12}{N(N+1)} \sum_{j=1}^k \frac{R_j^2}{n_j} - 3(N+1)
+    Q = \frac{12}{N k (k+1)} \sum_{j=1}^k R_j^2 - 3 N (k+1)
 \end{equation}
-where $N$ is the total sample size across all marketplaces, $k$ is the number of marketplaces, $n_j$ is the number of observations in marketplace $j$, and $R_j$ is the sum of ranks for marketplace $j$.
+where $N$ is the number of matched SKUs ($N=2586$), $k$ is the number of marketplace channels ($k=10$), and $R_j$ is the rank sum for channel $j$. Kendall's $W$ effect size is calculated as $W = Q / [N(k-1)]$. As a complementary baseline comparison, the Kruskal-Wallis $H$-test was also reported ($H = \frac{12}{N_{total}(N_{total}+1)} \sum_{j=1}^k \frac{R_j^2}{n_j} - 3(N_{total}+1)$).
 
-Fourth, pairwise post-hoc comparisons were conducted when the Kruskal-Wallis test was significant, using pairwise Mann-Whitney U-tests with Bonferroni correction for multiple comparisons to prevent Type I errors. The adjusted p-value is calculated as $p_{corrected} = \min(1.0, p \times C)$, where $C$ is the total number of pairwise comparisons.
+Fourth, post-hoc pairwise comparisons were conducted using Dunn's test with Bonferroni correction for multiple comparisons to prevent Type I errors, where adjusted $p$-values are computed as $p_{corrected} = \min(1.0, p \times C)$.
 
 Fifth, Welch's t-test was proposed to test channel profitability differences between Shiprocket and INCREFF. The test statistic is calculated as:
 \begin{equation}
