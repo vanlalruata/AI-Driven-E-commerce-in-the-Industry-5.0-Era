@@ -190,7 +190,7 @@ To bridge these theoretical paradigms with the practical requirements of e-comme
 \textbf{Pillar} & \textbf{Conceptual Definition} & \textbf{Empirical Indicator / Measure} & \textbf{Decision Threshold \& Implementation} \\ \hline
 Human-Centricity & Preserving human agency, avoiding automated bias, and enabling human-in-the-loop oversight. & Platt-calibrated prediction confidence ($P_{pos}$) and binary entropy uncertainty. & Dual-boundary routing: Route reviews in illustrative uncertainty interval ($0.40 < P_{pos} < 0.60$; enterprise tuning required) to human moderators. \\
 Sustainability (Green AI) & Minimising environmental and carbon footprints of digital infrastructure. & Algorithmic time complexity (linear $O(N \cdot L)$ vs quadratic $O(N \cdot L^2 \cdot D \cdot H)$) and energy overhead. & Prefer linear, CPU-trainable classifiers (TF-IDF+LR) for high-frequency operational batching to reduce carbon footprint. \\
-Resilience & Protecting supply chains and platforms against localized demand and supply shocks. & SKU Revenue Percentile ($R_{SKU}$) and Regional Revenue Share ($S_{Region}$). & Dynamic logistics buffer allocation: High-volume SKUs ($R_{SKU} \ge 90\%$) and regional hubs ($S_{Region} \ge 10\%$) trigger supply alerts on negative sentiment flags ($P_{pos} \le 0.40$). \\ \hline
+Resilience & Protecting supply chains and platforms against localized demand and supply shocks. & SKU Revenue Percentile ($R_{SKU}$) and Regional Revenue Share ($S_{Region}$). & Illustrative logistics buffer allocation: High-volume SKUs ($R_{SKU} \ge 90\%$) and regional hubs ($S_{Region} \ge 10\%$) trigger supply alerts on negative sentiment flags ($P_{pos} \le 0.40$). \\ \hline
 \end{tabular}
 \end{table}
 

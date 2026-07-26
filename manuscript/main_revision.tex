@@ -191,7 +191,7 @@ To bridge these theoretical paradigms with the practical requirements of e-comme
 \textbf{Pillar} & \textbf{Conceptual Definition} & \textbf{Empirical Indicator / Measure} & \textbf{Decision Threshold \& Implementation} \\ \hline
 Human-Centricity & Preserving human agency, avoiding automated bias, and enabling human-in-the-loop oversight. & Platt-calibrated prediction confidence ($P_{pos}$) and binary entropy uncertainty. & Dual-boundary routing: Route reviews in illustrative uncertainty interval ($0.40 < P_{pos} < 0.60$; enterprise tuning required) to human moderators. \\
 Sustainability (Green AI) & Minimising environmental and carbon footprints of digital infrastructure. & Algorithmic time complexity (linear $O(N \cdot L)$ vs quadratic $O(N \cdot L^2 \cdot D \cdot H)$) and energy overhead. & Prefer linear, CPU-trainable classifiers (TF-IDF+LR) for high-frequency operational batching to reduce carbon footprint. \\
-Resilience & Protecting supply chains and platforms against localized demand and supply shocks. & SKU Revenue Percentile ($R_{SKU}$) and Regional Revenue Share ($S_{Region}$). & Dynamic logistics buffer allocation: High-volume SKUs ($R_{SKU} \ge 90\%$) and regional hubs ($S_{Region} \ge 10\%$) trigger supply alerts on negative sentiment flags ($P_{pos} \le 0.40$). \\ \hline
+Resilience & Protecting supply chains and platforms against localized demand and supply shocks. & SKU Revenue Percentile ($R_{SKU}$) and Regional Revenue Share ($S_{Region}$). & Illustrative logistics buffer allocation: High-volume SKUs ($R_{SKU} \ge 90\%$) and regional hubs ($S_{Region} \ge 10\%$) trigger supply alerts on negative sentiment flags ($P_{pos} \le 0.40$). \\ \hline
 \end{tabular}
 \end{table}
 
@@ -459,7 +459,7 @@ Third, non-parametric Friedman repeated-measures ANOVA served as the primary inf
 \end{equation}
 where $N$ is the number of matched SKUs ($N=2586$), $k$ is the number of marketplace channels ($k=10$), and $R_j$ is the rank sum for channel $j$. Kendall's $W$ effect size is calculated as $W = Q / [N(k-1)]$. As a complementary baseline comparison, the Kruskal-Wallis $H$-test was also reported ($H = \frac{12}{N_{total}(N_{total}+1)} \sum_{j=1}^k \frac{R_j^2}{n_j} - 3(N_{total}+1)$).
 
-Fourth, post-hoc pairwise comparisons were conducted using Dunn's test with Bonferroni correction for multiple comparisons to prevent Type I errors, where adjusted $p$-values are computed as $p_{corrected} = \min(1.0, p \times C)$.
+Fourth, post-hoc pairwise comparisons were conducted using Dunn's test with Bonferroni correction for multiple comparisons to prevent Type I errors, where adjusted $p$-values were computed as $p_{corrected} = \min(1.0, p \times C)$.
 
 Fifth, Welch's t-test was proposed to test channel profitability differences between Shiprocket and INCREFF. The test statistic is calculated as:
 \begin{equation}
