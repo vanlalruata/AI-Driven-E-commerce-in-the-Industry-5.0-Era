@@ -168,7 +168,7 @@ def plot_cv_boxplots(cv_scores, output_dir, metric_name="f1_macro", filename="cv
         data.append(scores)
         colors.append(_get_color(model_name))
 
-    bp = ax.boxplot(data, patch_artist=True, labels=labels, widths=0.6)
+    bp = ax.boxplot(data, patch_artist=True, labels=labels, widths=0.6, showfliers=False)
     for patch, color in zip(bp["boxes"], colors):
         patch.set_facecolor(color)
         patch.set_alpha(0.7)

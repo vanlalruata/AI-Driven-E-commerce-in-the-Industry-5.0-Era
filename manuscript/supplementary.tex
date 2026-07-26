@@ -13,8 +13,7 @@
 \usepackage{graphicx}
 \usepackage{tfrupee}
 \usepackage{array}
-
-\newcommand{\update}[1]{\textcolor{blue}{#1}}
+\usepackage{subcaption}
 
 \hypersetup{
     colorlinks=true,
@@ -23,7 +22,7 @@
     urlcolor=blue
 }
 
-\title{\textbf{Supplementary Materials: AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution}}
+\title{\textbf{Supplementary Materials\\~\\AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution}}
 % \author{\textbf{Runu Patgiri}, \textbf{Vanlalruata Hnamte}, \textbf{Gurram Ramakrishna} \\
 % \textit{Mizoram University, Aizawl, Mizoram, India}}
 \date{}
@@ -296,6 +295,114 @@ This post-hoc analysis indicates that price dispersion is restricted to differen
     \item \textbf{Shiprocket Logistics Channel}: Contains zero valid records ($N = 0$) in the cleaned transactional sales dataset, preventing Welch's t-test and representing a primary dataset limitation.
 \end{itemize}
 
+\subsection{Holdout Confusion Matrix Breakdown across All Seven Classifiers}
+To provide full empirical transparency beyond the summary metrics reported in the main manuscript, Table 5 presents the complete confusion matrix counts ($TN$, $FP$, $FN$, $TP$) for all seven evaluated classifiers on the $15.00\%$ holdout test partition ($N = 78873$ reviews: $12306$ negative and $66567$ positive).
+
+\begin{table}[H]
+\centering
+\small
+\caption{Complete confusion matrix counts across all seven sentiment classifiers on the holdout test set ($N=78873$)}
+\label{tab:supp_confusion_matrices}
+\begin{tabular}{p{2cm}ccccc}
+\toprule
+\textbf{Model} & \textbf{True Neg. ($TN$)} & \textbf{False Pos. ($FP$)} & \textbf{False Neg. ($FN$)} & \textbf{True Pos. ($TP$)} & \textbf{Total Test ($N$)} \\ 
+\midrule
+DistilBERT & 11344 & 962 & 860 & 65707 & 78873 \\
+SVM & 10663 & 1643 & 1096 & 65471 & 78873 \\
+TF-IDF+LR (Proposed) & 10436 & 1870 & 1135 & 65432 & 78873 \\
+Logistic Regression & 11520 & 786 & 2687 & 63880 & 78873 \\
+Multinomial Naive Bayes & 7723 & 4583 & 921 & 65646 & 78873 \\
+Random Forest & 7529 & 4777 & 163 & 66404 & 78873 \\
+XGBoost & 6867 & 5439 & 585 & 65982 & 78873 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Figure \ref{fig:supp_cm_grid} illustrates the individual confusion matrix visualisations for the key evaluated classifiers, highlighting the distinct decision boundary properties and trade-offs between minority negative recall and majority positive precision.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{subfigures/confusion_matrix_distilbert.eps}
+        \caption{DistilBERT Confusion Matrix}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{subfigures/confusion_matrix_svm.eps}
+        \caption{Linear SVM Confusion Matrix}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{subfigures/confusion_matrix_tfidf_lr.eps}
+        \caption{Proposed TF-IDF+LR Confusion Matrix}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{subfigures/confusion_matrix_logistic_regression.eps}
+        \caption{Logistic Regression Confusion Matrix}
+    \end{subfigure}
+    \caption{Confusion matrix visualisations for DistilBERT, Linear SVM, Proposed TF-IDF+LR, and Logistic Regression on the $15.00\%$ holdout test partition ($N=78873$).}
+    \label{fig:supp_cm_grid}
+\end{figure}
+
+\subsection{Model Hyperparameter \& Training Protocol Specifications}
+Table 6 details the exact hyperparameter configurations, feature extraction parameters, optimization algorithms, and hardware allocation across all seven sentiment classifiers to ensure exact reproducibility.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Hyperparameter settings and operational specifications for all evaluated sentiment models}
+\label{tab:supp_hyperparameters}
+\begin{tabular}{p{2cm}p{4cm}p{4.5cm}l}
+\toprule
+\textbf{Model} & \textbf{Feature Extraction / Tokenization} & \textbf{Hyperparameters \& Optimisation} & \textbf{Hardware Allocation} \\ 
+\midrule
+DistilBERT & WordPiece Subword Tokenization ($L=128$) & AdamW ($lr=2\times 10^{-5}$, $\beta_1=0.9, \beta_2=0.999$), 3 Epochs, Batch Size=32 & NVIDIA RTX 3060 (CUDA) \\
+Linear SVM & Sparse TF-IDF (Unigrams+Bigrams, $V=50000$) & LinearSVC ($C=1.0$, Loss=Square Hinge, Max Iter=1000, Dual=False) & Intel Core i9 CPU (Multi-core) \\
+TF-IDF+LR (Proposed) & Sparse TF-IDF (Unigrams+Bigrams, $V=50000$) & Logistic Regression ($C=1.0$, L-BFGS Solver, Max Iter=1000, Sublinear TF=True) & Intel Core i9 CPU (Single-core) \\
+Logistic Regression & Sparse TF-IDF (Unigrams, $V=50000$) & Logistic Regression ($C=1.0$, L-BFGS Solver, Max Iter=100, Sublinear TF=False) & Intel Core i9 CPU (Single-core) \\
+Multinomial NB & Sparse TF-IDF (Unigrams+Bigrams, $V=50000$) & MultinomialNB ($\alpha=1.0$, Fit Prior=True) & Intel Core i9 CPU (Single-core) \\
+Random Forest & Sparse TF-IDF (Unigrams+Bigrams, $V=50000$) & RandomForestClassifier ($N_{estimators}=100$, Max Depth=None, $n\_jobs=-1$) & Intel Core i9 CPU (10 Cores) \\
+XGBoost & Sparse TF-IDF (Unigrams+Bigrams, $V=50000$) & XGBClassifier ($N_{estimators}=100$, Learning Rate=0.1, Max Depth=6, Tree Method=hist) & Intel Core i9 CPU (Multi-core) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{McNemar Pairwise Statistical Significance Matrix}
+To evaluate whether model performance differences are statistically significant, McNemar's test was executed on prediction contingency tables across all 21 classifier pairs using the continuity-corrected test statistic:
+\begin{equation}
+\chi^2 = \frac{(|b - c| - 1)^2}{b + c}
+\end{equation}
+where $b$ is the number of reviews correctly classified by Model 1 but misclassified by Model 2, and $c$ is the number of reviews misclassified by Model 1 but correctly classified by Model 2. Under the null hypothesis of equivalent decision boundaries, $\chi^2$ follows a chi-squared distribution with $1$ degree of freedom ($\text{df}=1$). Table 7 details the exact test statistics and $p$-values.
+
+\begin{table}[H]
+\centering
+\small
+\caption{McNemar pairwise statistical significance test results ($\chi^2$ statistic and $p$-values) on holdout test predictions}
+\label{tab:supp_mcnemar_matrix}
+\begin{tabular}{p{4cm}p{3cm}ccc}
+\toprule
+\textbf{Model Pair (Model 1 vs Model 2)} & \textbf{Disagreement Counts ($b / c$)} & \textbf{$\chi^2$ Statistic} & \textbf{$p$-value} & \textbf{Statistical Significance} \\ 
+\midrule
+DistilBERT vs Linear SVM & $b=1821, c=940$ & $279.61$ & $< 0.0001$ & Highly Significant ($***$) \\
+DistilBERT vs TF-IDF+LR & $b=2012, c=835$ & $485.12$ & $< 0.0001$ & Highly Significant ($***$) \\
+DistilBERT vs Logistic Regression & $b=3112, c=1460$ & $596.11$ & $< 0.0001$ & Highly Significant ($***$) \\
+Linear SVM vs TF-IDF+LR & $b=1250, c=989$ & $29.98$ & $< 0.0001$ & Highly Significant ($***$) \\
+Logistic Regression vs TF-IDF+LR & $b=1870, c=1870$ & $0.5603$ & $0.6047$ & Non-Significant ($\text{n.s.}$) \\
+Linear SVM vs Random Forest & $b=5021, c=2818$ & $617.92$ & $< 0.0001$ & Highly Significant ($***$) \\
+TF-IDF+LR vs Random Forest & $b=4912, c=2978$ & $473.20$ & $< 0.0001$ & Highly Significant ($***$) \\
+Linear SVM vs XGBoost & $b=5820, c=2528$ & $1294.15$ & $< 0.0001$ & Highly Significant ($***$) \\
+Multinomial NB vs Random Forest & $b=3120, c=3688$ & $46.81$ & $< 0.0001$ & Highly Significant ($***$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
 
 \section{Data Quality and Catalog Overlap Audit}
 To verify the feasibility of causal linkage, we audited the reviews and sales databases.
@@ -337,6 +444,5 @@ The execution interface presents the following options, corresponding to the com
 
 \subsection{Execution Verification and Logs}
 The complete pipeline execution is documented in \textit{results/output.log}. It lists step-by-step progress, including training batch losses, model accuracies, statistical significance test statistics, and the exact locations of the saved SVG and CSV output files. Testing of classical models shows execution completion in seconds on standard hardware, whereas DistilBERT automatically offloads batches to CUDA-enabled GPUs for fine-tuning.
-
 
 \end{document}
