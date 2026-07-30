@@ -54,7 +54,7 @@ India's e-commerce ecosystem is evolving rapidly under Artificial Intelligence (
 
 # How to cite
 
-Runu Patgiri, Vanlalruata Hnamte, Jamal Hussain,
+Runu Patgiri, Vanlalruata Hnamte, Gurram Ramakrishna,
 AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution,
 Strategic Business Research,
 Volume 10,
