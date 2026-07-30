@@ -38,15 +38,15 @@ Runu Patgiri
 
 # Accepted Date
 
-27th July 2026
+30th July 2026
 
 # DOI
 
-<https://doi.org/10.1016/j.teler.2023.100053>
+<https://doi.org/>
 
 # ScienceDirect Link
 
-<https://www.sciencedirect.com/science/article/pii/S2772503023000130>
+<https://www.sciencedirect.com/science/article/pii/>
 
 # Abstract
 
@@ -61,8 +61,8 @@ Volume 10,
 2023,
 100053,
 ISSN 2772-5030,
-<https://doi.org/10.1016/j.teler.2023.100053>.
-(<https://www.sciencedirect.com/science/article/pii/S2772503023000130>)
+<https://doi.org/>.
+(<https://www.sciencedirect.com/science/article/pii/>)
 
 # Note
 
