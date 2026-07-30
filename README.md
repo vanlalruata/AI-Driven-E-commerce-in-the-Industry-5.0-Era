@@ -38,7 +38,7 @@ Runu Patgiri
 
 # Accepted Date
 
-30th July 2026
+29th July 2026
 
 # DOI
 
@@ -58,9 +58,9 @@ Runu Patgiri, Vanlalruata Hnamte, Jamal Hussain,
 AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution,
 Strategic Business Research,
 Volume 10,
-2023,
-100053,
-ISSN 2772-5030,
+2026,
+100275,
+ISSN 3051-0643,
 <https://doi.org/>.
 (<https://www.sciencedirect.com/science/article/pii/>)
 
