@@ -57,9 +57,10 @@ India's e-commerce ecosystem is evolving rapidly under Artificial Intelligence (
 Runu Patgiri, Vanlalruata Hnamte, Gurram Ramakrishna,
 AI-Driven E-commerce in the Industry 5.0 Era: A Parallel-Empirical Framework, Decision Support, and Methodological Caution,
 Strategic Business Research,
-Volume 10,
+Volume 2,
+Issue 1,
 2026,
-100275,
+100248,
 ISSN 3051-0643,
 <https://doi.org/>.
 (<https://www.sciencedirect.com/science/article/pii/>)
@@ -190,7 +191,7 @@ python main.py --run 9   # Run statistical tests only
 ## Command-line Arguments
 
 | Argument | Type | Default | Description |
-|----------|------|---------|-------------|
+| ---------- | ------ | --------- | ------------- |
 | `--reviews` | str | `H:/Datasets/...` | Path to Amazon `Reviews.csv` |
 | `--sales_folder` | str | `H:/Datasets/...` | Folder containing sales CSV files |
 | `--run` | int | None | Run specific menu option non-interactively |
@@ -264,7 +265,7 @@ results/
 ## Models Compared
 
 | Model | Type | Class Weight | Key Feature |
-|-------|------|-------------|-------------|
+| ------- | ------ | ------------- | ------------- |
 | TF-IDF+LR | Linear | — | Proposed model, optimized (unbalanced) |
 | Logistic Regression | Linear | Balanced | Interpretable baseline |
 | SVM (LinearSVC) | Linear | Balanced | Calibrated via CalibratedClassifierCV |
@@ -285,7 +286,7 @@ results/
 ## Class Imbalance Strategies
 
 | Strategy | Method | Expected Effect |
-|----------|--------|----------------|
+| ---------- | -------- | ---------------- |
 | Baseline | No handling | Current approach |
 | Class Weighting | `class_weight='balanced'` | Penalize majority class errors more |
 | SMOTE | Synthetic oversampling | Generate synthetic minority samples |
@@ -295,7 +296,7 @@ results/
 ## Statistical Tests
 
 | Test | Applied To | Purpose |
-|------|-----------|---------|
+| ------ | ----------- | --------- |
 | Gini Coefficient | SKU/Region revenue | Measure concentration inequality |
 | Lorenz Curve | Revenue distribution | Visualize concentration |
 | HHI | Revenue distribution | Market concentration index |
