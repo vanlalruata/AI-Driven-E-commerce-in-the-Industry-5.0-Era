@@ -16,30 +16,6 @@ Vanlalruata Hnamte
 
 Runu Patgiri
 
-# Date of submission
-
-04th June 2026
-
-# 1st revision Review Complete Date
-
-16th June 2026
-
-# 2nd revision Review Complete Date
-
-05th July 2026
-
-# 3rd revision Review Complete Date
-
-26th July 2026
-
-# 4th revision Review Complete Date
-
-27th July 2026
-
-# Accepted Date
-
-29th July 2026
-
 # DOI
 
 <https://doi.org/>
