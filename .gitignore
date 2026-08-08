@@ -35,6 +35,13 @@ reviews_preprocessed.csv
 *.safetensors
 *.bin
 
+*.tex
+*.bst
+*.bbl
+*.out
+*.dvi
+*.aux
+
 
 outputs/
 outputs_integrated_full/
