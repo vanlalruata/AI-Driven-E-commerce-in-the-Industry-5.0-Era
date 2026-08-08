@@ -202,12 +202,14 @@ def top_skus_and_region_analysis(sales_df, topn=None):
         )
         reg_stats.to_csv(SALES_ANALYTICS_DIR / "sales_region_stats.csv", index=False)
 
+        # Filter UNKNOWN for regional top 10 chart
+        region_agg_clean = region_agg[region_agg["region"] != "UNKNOWN"]
+
         plot_horizontal_bar(
-            region_agg.head(20), "revenue", "region",
+            region_agg_clean.head(10), "revenue", "region",
             SALES_ANALYTICS_DIR,
-            title="Top 20 Regions by Revenue",
+            title="Top Ten Indian States by Revenue",
             filename="sales_by_region",
-            color="#FF9800",
         )
         print(f"  Regional stats saved.")
 

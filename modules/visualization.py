@@ -249,15 +249,78 @@ def plot_asin_overlap(reviews_only, sales_only, both, output_dir, filename="asin
 
 
 # ──────────────────────────────────────────────
-#  Bar charts (generic, for top SKUs, regions, etc.)
+#  Bar charts (green gradient for Top 10 SKUs, regions, etc.)
 # ──────────────────────────────────────────────
+def _get_green_gradient_palette(n=10):
+    """Generate smooth green gradient palette from light green (#1 bar) to dark green (#10 bar)."""
+    import matplotlib.colors as mcolors
+    c_start = np.array(mcolors.to_rgb("#95d595"))  # Soft light green for #1 bar
+    c_end = np.array(mcolors.to_rgb("#004d1a"))    # Dark green for #10 bar
+    colors = [mcolors.to_hex((1 - t) * c_start + t * c_end) for t in np.linspace(0, 1, n)]
+    return colors
+
+
 def plot_horizontal_bar(data, x_col, y_col, output_dir, title="", filename="barplot", color="#2196F3"):
-    """Generic horizontal bar chart."""
-    fig, ax = plt.subplots(figsize=(8, max(4, len(data) * 0.35)))
-    sns.barplot(data=data, x=x_col, y=y_col, ax=ax, color=color)
-    # ax.set_title(title)
-    ax.grid(True, alpha=0.3, axis="x")
+    """
+    Plots top 10 items in a horizontal bar chart with a green gradient palette,
+    thick bars, formatted integer labels near the end of each bar, and clean dotted grid.
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Filter to top 10 items only
+    df10 = data.head(10).copy()
+
+    # Sort so top item is at the top of the chart
+    df10 = df10.sort_values(x_col, ascending=True).reset_index(drop=True)
+
+    fig, ax = plt.subplots(figsize=(10, 5.5))
+
+    n_items = len(df10)
+    palette = _get_green_gradient_palette(n_items)[::-1]
+
+    y_positions = np.arange(n_items)
+    x_values = df10[x_col].values
+    y_labels = df10[y_col].astype(str).values
+
+    bars = ax.barh(y_positions, x_values, height=0.68, color=palette, edgecolor="none")
+
+    ax.set_yticks(y_positions)
+    ax.set_yticklabels(y_labels, fontsize=10, fontweight="bold", color="#333333")
+
+    max_x = x_values.max() if len(x_values) > 0 else 1.0
+    ax.set_xlim(0, max_x * 1.14)
+
+    # Add formatted text labels right next to the right edge of each bar
+    for y_pos, x_val in zip(y_positions, x_values):
+        label_str = f"{int(round(x_val)):,}"
+        ax.text(
+            x_val + max_x * 0.012,
+            y_pos,
+            label_str,
+            va="center",
+            ha="left",
+            fontsize=9.5,
+            color="#222222"
+        )
+
+    ax.set_xlabel("Revenue", fontsize=11, labelpad=8, color="#333333")
+    axis_y_title = "Region" if "region" in y_col.lower() or "state" in y_col.lower() else ("SKU" if "sku" in y_col.lower() else y_col.capitalize())
+    ax.set_ylabel(axis_y_title, fontsize=11, labelpad=8, color="#333333")
+
+    # Dotted horizontal and vertical gridlines as in reference image
+    ax.grid(True, linestyle=":", alpha=0.4, color="gray", axis="x")
+    ax.set_axisbelow(True)
+
+    # Clean grey border frame around plot
+    for spine in ax.spines.values():
+        spine.set_visible(True)
+        spine.set_color("#cccccc")
+        spine.set_linewidth(1.0)
+
+    plt.tight_layout()
     _save_fig(fig, output_dir, filename)
+
 
 
 # ──────────────────────────────────────────────

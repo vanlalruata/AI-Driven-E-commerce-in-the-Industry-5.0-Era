@@ -31,10 +31,7 @@ MANIFEST
 *.joblib
 *.safetensors
 *.bin
-*.pdf
-*.eps
-*.png
-*.svg
+
 
 outputs/
 outputs_integrated_full/

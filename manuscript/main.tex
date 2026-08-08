@@ -155,7 +155,7 @@ To understand how AI-driven sentiment and operations analytics influence e-comme
 
 To bridge these theoretical paradigms with the practical requirements of e-commerce operations, we explicitly operationalised the three core pillars of Industry 5.0 through specific empirical indicators and decision thresholds evaluated in this study, as summarised in Table \ref{tab:industry5_operationalisation}.
 
-\begin{table}[htbp]
+\begin{table}
 \centering
 \small
 \renewcommand{\arraystretch}{1.2}
@@ -263,7 +263,7 @@ Top SKU Summary                      & SKU-level   aggregates                   
 
 \textbf{E-commerce Sales Files}: The transactional dataset is a concatenation of seven CSV files: Amazon\_Sale\_Report.csv, Cloud\_Warehouse\_Compersion\_Chart.csv, Expense\_IIGF.csv, International\_sale\_Report.csv, May-2022.csv, PLMarch2021.csv and Sale\_Report.csv. These contain transactional rows, $SKU \leftrightarrow ASIN$ mappings, MRPs across channels (Amazon MRP, Flipkart MRP, Myntra MRP, Ajio MRP, etc.), ship-state/country, amounts, and channel cost comparators (Shiprocket, INCREFF). The files were merged into a canonical transactional table for feature engineering and analysis. The sales files preprocessing steps involved concatenating the seven CSV files, mapping them to a canonical schema (including SKU, ASIN, Amount, Quantity, Date, and region), executing robust date parsing, and cleaning numeric entries by stripping currency symbols and coercing values to float. Additionally, duplicate column names were resolved and per-row coalesced values were calculated for amounts where multiple amount fields existed.
 
-\begin{table}[htbp]
+\begin{table}
 \centering
 \renewcommand{\arraystretch}{1.15}
 \caption{Text preprocessing and sentiment label construction}
@@ -300,7 +300,7 @@ Figure \ref{fig:proposed_architecture} illustrates the conceptual parallel-empir
 
 Algorithms \ref{alg:sentiment_pipeline} and \ref{alg:decision_support} depict the computational workflows of our parallel framework, corresponding to the NLP and operation streams shown in the proposed architecture diagram (Figure \ref{fig:proposed_architecture}). Algorithm \ref{alg:sentiment_pipeline} formalises the Sentiment NLP Pipeline (Parallel Stream 1), which preprocesses the review text, builds TF-IDF representations using sublinear scaling, trains a classifier (Logistic Regression or Linear SVM), calibrates predictions via Platt scaling, and validates output confidence using Brier scores. This generates well-calibrated probabilities $P_{pos}$ that represent the prediction confidence. Algorithm \ref{alg:decision_support} presents a conceptual enterprise deployment workflow rather than an empirically executed algorithm. This illustrates how calibrated sentiment probabilities from the NLP pipeline can be combined with operational indicators derived from transactional databases in organisations that maintain integrated ERP and review repositories. Because the secondary datasets analysed in this study are disjoint, this routing framework was not executed during the empirical evaluation and should be interpreted as a reference architecture for future implementation.
 
-\begin{algorithm}[htbp]
+\begin{algorithm}
 \caption{Sentiment NLP Pipeline}
 \label{alg:sentiment_pipeline}
 \begin{algorithmic}[1]
@@ -363,7 +363,7 @@ Prediction probabilities
 
 Algorithm \ref{alg:decision_support} illustrates how the proposed analytics can be operationalised in an enterprise environment with integrated review and ERP databases. However, this was not performed using the current datasets.
 
-\begin{algorithm}[htbp]
+\begin{algorithm}
 \caption{Reference Architecture for Enterprise Deployment}
 \label{alg:decision_support}
 \begin{algorithmic}[1]
@@ -458,7 +458,7 @@ In this section, we present the empirical findings from our parallel empirical f
 We evaluated seven sentiment models on the 15.00\% holdout set ($N = 78873$ reviews). The comparative results—including holdout metrics, Brier scores for calibration, and 10-fold cross-validation scores—are summarised in Table \ref{tab:model_benchmarking}.
 
 \begin{landscape}
-\begin{table*}[htbp]
+\begin{table*}
 \centering
 \renewcommand{\arraystretch}{1.15}
 \caption{Comprehensive performance benchmarking of sentiment classifiers}
@@ -575,14 +575,14 @@ In terms of computational complexity, deep neural networks (CNNs, LSTMs) and tra
 
 To further evaluate the model performance and probability calibrations, the confusion matrix for the proposed TF-IDF+LR model is shown in Figure \ref{fig:tfidflr_confusion_matrix}. The confusion matrix highlights the classifier's performance in detail, showing that the baseline model is highly accurate in the dominant positive class but exhibits misclassifications in the minority negative class. This imbalance is critical because misclassifying customer complaints as positive reviews prevents early warning detection, necessitating the balancing techniques analysed in Section \ref{sec:class_imbalance}. The receiver operating characteristic (ROC) and precision-recall (PR) curves for all seven classifiers are plotted in Figure \ref{fig:model_roc_pr}, illustrating the superior discriminative capability of DistilBERT and SVM. The ROC and PR curves compare the trade-offs between sensitivity and specificity; given the class imbalance, the PR-AUC curves are more representative of model utility than the ROC-AUC, confirming that DistilBERT and SVM are highly robust, whereas XGBoost and Naive Bayes suffer significant precision drops at higher recall thresholds. Figure \ref{fig:calibration_curves} shows the probability calibration curves (reliability diagrams) for the classifiers, demonstrating the high calibration of SVM and DistilBERT relative to other classifiers. The calibration curves measure the reliability of the predicted probabilities, validating their use in risk-based routing, where uncertain reviews (confidence near 0.5) are escalated to human moderators. The stability of the classifiers was validated using the ten-fold cross-validation boxplots presented in Figure \ref{fig:cv_boxplots}, supporting Hypothesis H1a. The cross-validation boxplots show that classical models are highly stable across folds, whereas DistilBERT exhibits a wider variance due to training constraints. The tight distributions for SVM and TF-IDF+LR confirm their stability across folds, whereas DistilBERT displays wider variance (due to subsampling limits and single-epoch training in CV), highlighting the sensitivity of transformers to training scale and convergence limits. Furthermore, a comprehensive performance metrics heatmap across all seven sentiment classifiers on the holdout test set is shown in Figure \ref{fig:mcnemar_heatmap}, visually summarising holdout accuracy, macro F1-score, negative recall, cross-validation score, ROC-AUC, PR-AUC, and Brier score calibration. McNemar's pairwise significance test executed on holdout predictions confirmed that classifier decision boundaries differ significantly ($p < 0.001$), except for default Logistic Regression and our proposed TF-IDF+LR ($p = 0.6047$), which share equivalent decision boundaries under default parameterisations. Finally, a diagnostic error analysis for the proposed TF-IDF+LR classifier is illustrated in Figure \ref{fig:error_analysis_tfidf_lr}, detailing the prediction confidence and string lengths of misclassifications. The error analysis diagnostics show that document length is not a primary driver of error, while the concentration of errors near the 0.5 probability threshold justifies a human-in-the-loop buffer region.
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{figures/confusion_matrix_tfidf_lr.eps}
     \caption{Confusion matrix for the proposed TF-IDF+LR sentiment model on the 15.00\% holdout test set ($N=78873$).}
     \label{fig:tfidflr_confusion_matrix}
 \end{figure}
 
-\begin{figure*}[htbp]
+\begin{figure*}
     \centering
     \begin{subfigure}{0.49\linewidth}
         \centering
@@ -601,28 +601,28 @@ To further evaluate the model performance and probability calibrations, the conf
     \label{fig:model_roc_pr}
 \end{figure*}
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{figures/calibration_curves.eps}
     \caption{Probability calibration curves (reliability diagram) for the seven classifiers.}
     \label{fig:calibration_curves}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{figures/comprehensive_comparison_heatmap.eps}
     \caption{Comprehensive performance metrics heatmap across seven sentiment classifiers on the holdout test set ($N=78873$).}
     \label{fig:mcnemar_heatmap}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{figures/error_analysis_tfidf_lr.eps}
     \caption{Error analysis diagnostics for the proposed TF-IDF+LR classifier.}
     \label{fig:error_analysis_tfidf_lr}
 \end{figure}
 
-\begin{figure*}[htbp]
+\begin{figure*}
     \centering
     \begin{subfigure}{0.49\linewidth}
         \centering
@@ -646,7 +646,7 @@ To further evaluate the model performance and probability calibrations, the conf
 Because negative sentiment is the primary signal for early warning detection, a classifier that underperforms on the minority class (negative sentiment represents only 15.60\% of reviews) will fail to trigger human reviews. We benchmarked five class-balancing techniques using the TF-IDF+LR model to analyse these trade-offs, as reported in Table \ref{tab:class_imbalance_results}.
 
 \begin{landscape}
-    \begin{table}[htbp]
+    \begin{table}
     \centering
     \renewcommand{\arraystretch}{1.15}
     \caption{Class imbalance experiments on TF-IDF+LR sentiment model}
@@ -665,7 +665,7 @@ Because negative sentiment is the primary signal for early warning detection, a 
 
 Class balancing experiments demonstrated that while the baseline model achieved high accuracy ($96.20\%$), it suffered from a lower negative-class recall ($84.80\%$). Implementing synthetic oversampling (SMOTE) or class weighting significantly improved the negative-class recall to $91.68\%$ and $93.61\%$ respectively, with only a minor decline in overall accuracy. To statistically evaluate the significance of these recall improvements, we report the 95\% confidence intervals (CIs) for holdout negative recall across all strategies. Given that the holdout test partition contains $12306$ negative reviews, the 95\% confidence intervals are: $[84.17\%, 85.43\%]$ for the baseline, $[91.19\%, 92.17\%]$ for SMOTE, and $[93.18\%, 94.04\%]$ for class weighting. Because these confidence intervals are completely disjoint, we confirm that the recall improvements were highly significant. To provide a rigorous statistical test as required to fully support Hypothesis H1b, we performed a two-proportion z-test and chi-squared test of independence comparing the negative-class recall rates of the baseline ($10436/12306$) and SMOTE ($11280/12306$) strategies on the holdout set. The two-proportion z-test yielded a highly significant difference ($Z = -16.74$, $p < 0.0001$), which was further confirmed by the chi-squared test ($\chi^2(1) = 279.61$, $p < 0.0001$). This formally rejects the null hypothesis of equivalent recall rates and confirms the statistical validity of the balancing intervention. For Industry 5.0 systems, SMOTE represents the optimal balance, yielding a negative-class F1-score of $87.14\%$ and ensuring that customer dissatisfaction signals are not overlooked. The trade-offs between overall accuracy, negative-class recall, and macro F1-score across different balancing strategies are visually summarised in Figure \ref{fig:imbalance_comparison}, supporting Hypothesis H1b. The imbalance recall comparison (Figure \ref{fig:imbalance_comparison}) illustrates the operational tradeoff of class balancing, mapping negative recall in Panel A and macro F1-score in Panel B across strategies.
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{figures/imbalance_recall_comparison.eps}
     \caption{Imbalance recall comparison plot, mapping negative-class recall (Panel A) and macro F1-score (Panel B) across five balancing strategies on the holdout test set.}
@@ -678,26 +678,26 @@ First, in terms of SKU revenue concentration, the Gini coefficient for revenue a
 
 These findings align with prior research in retail analytics and operations management, indicating that regional sales concentrations can lead to supply chain vulnerabilities. Figure \ref{fig:sales_distributions} illustrates the top ten Indian regions (states) and Stock Keeping Units (SKUs) by revenue. The geographical and product sales distributions reveal the skewness of e-commerce revenue, showing that a small number of states and SKUs generate most platform income. The steep decline in both distributions visually demonstrates the high Pareto skewness of transactional revenue, highlighting the dominance of key hubs and individual high-demand items. This concentration is significant because it indicates that fulfilment networks and regional warehousing should be optimised specifically for these high-volume hubs to minimise transit time and cost. To formally visualise this concentration inequality, Figure \ref{fig:lorenz_curves} presents the Lorenz curves at the SKU and regional levels, showing high skewness, which supports Hypothesis H2a. The Gini coefficients of 0.6843 (SKU) and 0.8169 (State) confirm a high concentration, particularly at the geographical level. This inequality has important supply chain implications: it shows that minor disruptions in key states (such as Maharashtra or Karnataka) or supply issues for top SKUs can cause severe revenue drops, highlighting the need for dual sourcing and regional inventory redundancy. For Industry 5.0, these indicators should guide stocking and logistics planning, allowing platforms to build resilience against regional supply chain shocks.
 
-\begin{figure*}[htbp]
-    \centering
-    \begin{subfigure}{0.49\linewidth}
+\begin{figure*}
+    % \centering
+    \begin{subfigure}{0.47\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{figures/top_10_regions_green_gradient.png}
+        \includegraphics[width=\linewidth]{figures/sales_by_region.eps}
         \caption{Top ten Indian states by revenue, highlighting the dominant market share of Maharashtra, Karnataka, and Uttar Pradesh in digital commerce demand.}
         \label{fig:regions_revenue}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.49\linewidth}
+    \begin{subfigure}{0.47\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{figures/top_10_skus_green_gradient.png}
+        \includegraphics[width=\linewidth]{figures/top_skus.eps}
         \caption{Top ten Stock Keeping Units (SKUs) by revenue, showing a steep sales volume drop-off after the top-ranked products.}
         \label{fig:skus_revenue}
-    \end{subfigure}
+    \end{subfigure}    
     \caption{E-commerce transactional distributions, showing revenue concentration across top Indian regions (States) and individual products (SKUs).}
     \label{fig:sales_distributions}
 \end{figure*}
 
-\begin{figure*}[htbp]
+\begin{figure*}
     \centering
     \begin{subfigure}{0.49\linewidth}
         \centering
@@ -721,7 +721,7 @@ To analyze pricing variations across channels, we evaluated Maximum Retail Price
 
 To account for the matched structure of SKU listings across channels ($N = 2586$), the primary Friedman repeated-measures ANOVA demonstrated that while minor channel-specific catalogue variations exist ($Q = 2707.83$, $\text{df} = 9$, $p < 0.0001$), Kendall's $W$ ($0.1163$) reflects high overall rank concordance across platforms. The complementary Kruskal-Wallis analysis produced a consistent conclusion ($H = 17.1753$, $p = 0.0460$, $\epsilon^2 = 0.0003$), confirming that the list prices remain highly synchronised across marketplaces. Post-hoc pairwise comparisons with Bonferroni correction showed that only the comparisons between `MRP Old' and `Amazon MRP' ($p_{corr} = 0.0300$) and `MRP Old' and `Amazon FBA MRP' ($p_{corr} = 0.0300$) were statistically significant. All other pairwise differences were not significant ($p_{corr} = 1.0000$). This catalogue pricing dispersion is visually presented in Figure \ref{fig:mrp_dispersion}, which demonstrates overlapping distributions that support H2b. The MRP dispersion plot (Figure \ref{fig:mrp_dispersion}) shows overlapping boxplot distributions across all ten digital retail channels, confirming that prices are highly synchronised across the platforms. This pricing consistency is significant because it reflects highly synchronised catalogue pricing across marketplaces (which may stem from manufacturer MSRP policies, competitive price matching, or unified seller distribution), preventing platforms from engaging in regional price gouging or channel-specific pricing anomalies, thus promoting a fair and transparent market for consumers to purchase products. 
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{figures/mrp_dispersion.eps}
     \caption{Boxplots of Maximum Retail Price (MRP) dispersion across ten digital marketplaces in India ($N=2586$).}
@@ -733,7 +733,7 @@ This statistical validation confirms that e-commerce prices in India are highly 
 \subsection{Data-Quality Audit of Multi-Channel Fulfilment Integration}
 Rather than an empirical comparison of alternative fulfilment channels, the profitability analysis serves as a data-quality audit finding that highlights the structural siloing of e-commerce databases. While the INCREFF channel records yield unit profitability metrics (mean: \rupee~15.07 $\pm$ \rupee~30.22 per unit, $N = 10$, median: \rupee~5.50), the transactional logs for the Shiprocket channel contain zero valid rows ($N = 0$) due to missing database records and API integration failures. Consequently, standard comparative statistical tests (e.g., Welch's t-test) cannot be performed. This missing data is represented in Figure \ref{fig:channel_profitability} as a blank comparator, demonstrating how the absence of standardised application programming interfaces (APIs) and unified data logging restricts multi-channel operational visibility. In an Industry 5.0 framework, this finding highlights the need for robust, standardised data governance (such as through ONDC-compatible schemas) to enable transparent, automated fulfilment auditing.
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{figures/channel_profitability.eps}
     \caption{Mean unit profitability for the INCREFF channel ($N=10$, mean: \rupee~15.07 $\pm$ \rupee~30.22).}
@@ -748,7 +748,7 @@ We defined three sentiment routing zones based on the calibrated prediction conf
 We present a critical methodological and operational warning regarding Algorithm \ref{alg:decision_support}. Although Algorithm \ref{alg:decision_support} details a logical routing flow that combines calibrated sentiment probability with SKU percentile and regional share metrics, this workflow is a conceptual design proposal rather than a system executed on the empirical datasets analysed in this study. Due to the 0.00\% ASIN overlap and temporal disjointness between the reviews and sales databases, it is impossible to retrieve sales performance metrics for any incoming review in our empirical data. In a live enterprise environment, this catalogue disjointness must be resolved by integrating reviews and transaction databases (e.g., via unified ONDC registry schemas) before this decision-support routing can be operationalised.
 
 \begin{landscape}
-\begin{table}[htbp]
+\begin{table}
 \centering
 \renewcommand{\arraystretch}{1.15}
 \caption{Operational Decision Support Matrix and Escalation Logic}
@@ -771,7 +771,7 @@ As detailed in Section \ref{sec:method}, the Data Linkage Audit revealed a $0.00
 
 Rather than asserting direct integration, we present these datasets as parallel and complementary components of our e-commerce framework. This framing preserves the methodological validity of the study and highlights a major operational challenge for digital commerce: the need for integrated, ONDC-style data standards that unify customer feedback and inventory transactions across all platforms. This parallel framework allows platforms to run sentiment diagnostic engines and geographic inventory optimisers as standalone, cooperative microservices, avoiding invalid causal inferences while still supporting a human-centric decision-making workflow.
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{figures/asin_overlap.eps}
     \caption{Bar chart of the catalogue overlap audit of Unique ASINs.}

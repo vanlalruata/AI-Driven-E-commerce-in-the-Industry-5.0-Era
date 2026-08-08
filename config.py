@@ -48,7 +48,7 @@ TEST_SIZE = 0.15
 MAX_TFIDF_FEATURES = 50000
 TFIDF_NGRAM_RANGE = (1, 2)
 SENTIMENT_RUNS = 5  # legacy repeated hold-out runs
-TOPN_SKUS = 20
+TOPN_SKUS = 10
 
 # ──────────────────────────────────────────────
 #  Feature Flags
