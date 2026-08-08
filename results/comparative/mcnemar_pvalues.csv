@@ -1,0 +1,8 @@
+,distilbert,logistic_regression,naive_bayes,random_forest,svm,tfidf_lr,xgboost
+distilbert,1.0,0.0,0.0,0.0,0.0,0.0,0.0
+logistic_regression,0.0,1.0,0.0,0.0,0.0,0.0,0.0
+naive_bayes,0.0,0.0,1.0,9.342526752220692e-12,0.0,0.0,0.0
+random_forest,0.0,0.0,9.342526752220692e-12,1.0,0.0,0.0,0.0
+svm,0.0,0.0,0.0,0.0,1.0,2.4220625505222415e-12,0.0
+tfidf_lr,0.0,0.0,0.0,0.0,2.4220625505222415e-12,1.0,0.0
+xgboost,0.0,0.0,0.0,0.0,0.0,0.0,1.0

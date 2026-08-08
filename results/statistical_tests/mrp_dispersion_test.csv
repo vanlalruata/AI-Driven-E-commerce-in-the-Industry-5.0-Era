@@ -1,0 +1,2 @@
+levene_F,levene_p,equal_variance,test,H_statistic,p_value,significant,epsilon_squared
+0.31876202628764766,0.9692596282772087,True,Kruskal-Wallis H-test,17.175309995500452,0.04604037896730819,True,0.00031611282946022935

@@ -1,0 +1,2 @@
+model,roc_auc
+naive_bayes,0.971617

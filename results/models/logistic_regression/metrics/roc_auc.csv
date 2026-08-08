@@ -1,0 +1,2 @@
+model,roc_auc
+logistic_regression,0.986946
